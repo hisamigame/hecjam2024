@@ -27,10 +27,10 @@ const baseBombDMG = 50
 const bomb_duration = 0.5
 
 var spl = [1.0, 1.0, 1.0]
-var atk = [1.0, 1.0, 1.0]
+var atk = [10, 10, 10]
 var maxhp = [20, 20, 20]
 var hp = [20, 20, 20]
-var bombs = 0
+var bombs = 1
 var canbomb = false
 var canchat = true
 
@@ -45,6 +45,9 @@ var canchat = true
 const saveFile = 'file://save.json'
 
 var allWorldState = {} # we build the world-state dictionary as we traverse game
+
+func set_bombs(newbombs):
+	bombs = newbombs
 
 func set_hp(t, newhp):
 	if newhp < 0:
@@ -134,7 +137,7 @@ func _unhandled_input(event):
 	#		#pause()
 	#		$dialogBox.activate(['message 1 long long long long log', 'message 2', 'junko is good'])
 	
-	if event.is_action_pressed("bomb") and canbomb:
+	if event.is_action_pressed("bomb") and canbomb and global.bombs > 0:
 		pause()
 		print("boom incoming...")
 		global.canbomb = false

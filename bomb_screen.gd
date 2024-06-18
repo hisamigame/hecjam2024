@@ -42,19 +42,28 @@ func _process(delta):
 	$LabelEarth.text = ''
 	$LabelMoon.text = ''
 	
-	for k in global.actives:
-		if global.actives[k]:
-			any_active = true
-			hecSprites[i].modulate.a = 1.0
-			if k == 'hell':
-				$LabelHell.text = hell_messages[level]
-			elif k == 'earth':
-				$LabelEarth.text = earth_messages[level]
-			elif k == 'moon':
-				$LabelMoon.text =  moon_messages[level]
-		else:
-			hecSprites[i].modulate.a = default_alpha
-		i = i + 1
+	if level > global.bombs:
+		# TODO:
+		# cannot bomb this hard. Notify player
+		hecSprites[0].modulate.a = 0.5
+		hecSprites[1].modulate.a = 0.5
+		hecSprites[2].modulate.a = 0.5
+		$Label.text='NOT ENOUGH BOMBS'
+	else:
+		$Label.text='POWER YOUR BOMB'
+		for k in global.actives:
+			if global.actives[k]:
+				any_active = true
+				hecSprites[i].modulate.a = 1.0
+				if k == 'hell':
+					$LabelHell.text = hell_messages[level]
+				elif k == 'earth':
+					$LabelEarth.text = earth_messages[level]
+				elif k == 'moon':
+					$LabelMoon.text =  moon_messages[level]
+			else:
+				hecSprites[i].modulate.a = default_alpha
+			i = i + 1
 		
 	if any_active:
 		held_time = held_time + delta
@@ -65,4 +74,5 @@ func _process(delta):
 		held_time = 0.0
 		deactivate()
 		global.unpause()
+		global.set_bombs(global.bombs - level)
 		global.world_node().bomb(global.actives, level)

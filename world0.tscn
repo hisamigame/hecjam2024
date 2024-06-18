@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsg8bgj32b0ex"]
+[gd_scene load_steps=15 format=3 uid="uid://bsg8bgj32b0ex"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_6qb3l"]
 [ext_resource type="Material" uid="uid://rvv6l3x4rll5" path="res://circleTransitionMaterial.tres" id="1_8s2bp"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d2ornjltc3aa8" path="res://stair.tscn" id="8_2ob0c"]
 [ext_resource type="PackedScene" uid="uid://b17n4m3n6jv0m" path="res://spawn_point.tscn" id="12_83niq"]
 [ext_resource type="PackedScene" uid="uid://cc5udx6ecletp" path="res://junko.tscn" id="13_yaxwq"]
+[ext_resource type="PackedScene" uid="uid://6b4m1yao42jo" path="res://powerup.tscn" id="14_ngnkr"]
 
 [node name="world" type="Node2D"]
 process_mode = 1
@@ -79,3 +80,22 @@ position = Vector2(72, 152)
 
 [node name="spawnPoint1" parent="." instance=ExtResource("12_83niq")]
 position = Vector2(8, 168)
+
+[node name="powerup" parent="." instance=ExtResource("14_ngnkr")]
+position = Vector2(-8, 200)
+kind = 1
+
+[node name="powerup2" parent="." instance=ExtResource("14_ngnkr")]
+position = Vector2(24, 184)
+
+[node name="powerup3" parent="." instance=ExtResource("14_ngnkr")]
+position = Vector2(72, 184)
+kind = 2
+
+[node name="powerup4" parent="." instance=ExtResource("14_ngnkr")]
+position = Vector2(56, 216)
+kind = 3
+
+[node name="powerup5" parent="." instance=ExtResource("14_ngnkr")]
+position = Vector2(24, 232)
+cycle = true

@@ -92,8 +92,8 @@ label_settings = ExtResource("5_yb0lf")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 25.0
-offset_right = 231.0
+offset_right = 256.0
 offset_bottom = 26.0
 text = "POWER YOUR BOMB"
 label_settings = SubResource("LabelSettings_1f004")
+horizontal_alignment = 1
