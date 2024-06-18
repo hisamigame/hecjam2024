@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciierxv4i1th8"]
+
+[ext_resource type="PackedScene" uid="uid://0ry5r18r4nm3" path="res://bomb_effect.tscn" id="1_plk6g"]
+[ext_resource type="Script" path="res://bomb_effect_moon.gd" id="2_25gt6"]
+[ext_resource type="Material" uid="uid://cpi8ekb0r6leq" path="res://bomb_effect_moon.tres" id="2_a5c0i"]
+[ext_resource type="PackedScene" uid="uid://blcuqqe7uvqij" path="res://hurtbox.tscn" id="3_m6bxd"]
+
+[node name="bombEffectMoon" instance=ExtResource("1_plk6g")]
+material = ExtResource("2_a5c0i")
+script = ExtResource("2_25gt6")
+mystery = true
+damage = 0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+use_parent_material = true
+
+[node name="hurtbox" parent="." index="1" instance=ExtResource("3_m6bxd")]
+scale = Vector2(32, 32)
+collision_mask = 0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbvk1tdieovwp"]
+
+[ext_resource type="Script" path="res://trigger_holder.gd" id="1_av22f"]
+
+[node name="triggerHolder" type="Node2D"]
+script = ExtResource("1_av22f")

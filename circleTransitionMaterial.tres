@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://rvv6l3x4rll5"]
+
+[ext_resource type="Shader" path="res://levelTransition.gdshader" id="1_f01yu"]
+
+[resource]
+shader = ExtResource("1_f01yu")
+shader_parameter/circle_size = 0.0
+shader_parameter/screen_width = 224.0
+shader_parameter/screen_height = 176.0

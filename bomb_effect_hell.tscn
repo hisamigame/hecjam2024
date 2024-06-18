@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://diulnfvdbio72"]
+
+[ext_resource type="PackedScene" uid="uid://0ry5r18r4nm3" path="res://bomb_effect.tscn" id="1_6p1me"]
+[ext_resource type="Script" path="res://bomb_effect_hell.gd" id="1_mhxh4"]
+[ext_resource type="PackedScene" uid="uid://blcuqqe7uvqij" path="res://hurtbox.tscn" id="2_ijsvq"]
+
+[node name="bombEffectHell" instance=ExtResource("1_6p1me")]
+script = ExtResource("1_mhxh4")
+damage = 10
+instakill = false
+
+[node name="hurtbox" parent="." index="0" instance=ExtResource("2_ijsvq")]
+scale = Vector2(32, 32)
+collision_mask = 0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgxvmmkwegg1"]
+
+[ext_resource type="Script" path="res://hecCamera.gd" id="1_r08nh"]
+
+[node name="hecCamera" type="Node2D"]
+script = ExtResource("1_r08nh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3

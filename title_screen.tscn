@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://djksq1vmj73kx"]
+
+[ext_resource type="Script" path="res://title_screen.gd" id="1_t7ryb"]
+
+[node name="titleScreen" type="Node2D"]
+script = ExtResource("1_t7ryb")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 34.0
+offset_top = 24.0
+offset_right = 231.0
+offset_bottom = 132.0
+text = "Title screen placeholder
+press space to continue"

@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dt56xoefo3wq2"]
+
+[ext_resource type="FontFile" uid="uid://n7l06mg1ypm6" path="res://x12y16pxMaruMonica.ttf" id="1_e2iq0"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_e2iq0")
+shadow_size = 0

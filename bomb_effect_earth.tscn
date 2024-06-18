@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdtqwgo16p6la"]
+
+[ext_resource type="PackedScene" uid="uid://0ry5r18r4nm3" path="res://bomb_effect.tscn" id="1_01idm"]
+[ext_resource type="Script" path="res://bombEffectEarth.gd" id="2_xgiwn"]
+
+[node name="bombEffectEarth" instance=ExtResource("1_01idm")]
+script = ExtResource("2_xgiwn")

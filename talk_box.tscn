@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://4llmyh5qy3do"]
+
+[ext_resource type="Script" path="res://talk_box.gd" id="1_wl1xx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4b5l1"]
+size = Vector2(16, 16)
+
+[node name="talkBox" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_wl1xx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4b5l1")

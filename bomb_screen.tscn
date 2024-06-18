@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8gdc1dstca1p"]
+
+[ext_resource type="Texture2D" uid="uid://bsbmpo1frwpey" path="res://hellface.png" id="1_lte7m"]
+[ext_resource type="Script" path="res://bomb_screen.gd" id="1_ngyt5"]
+[ext_resource type="Texture2D" uid="uid://yfkyv21mqb3w" path="res://earthface.png" id="2_w8a27"]
+[ext_resource type="Texture2D" uid="uid://8jeik4yd7yjf" path="res://moonface.png" id="3_ejw3r"]
+[ext_resource type="LabelSettings" uid="uid://dt56xoefo3wq2" path="res://dialogText.tres" id="5_yb0lf"]
+[ext_resource type="FontFile" uid="uid://7g8ueqruyfci" path="res://mago3.ttf" id="6_siull"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1f004"]
+line_spacing = -3.0
+font = ExtResource("6_siull")
+font_size = 32
+shadow_size = 0
+
+[node name="bombScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ngyt5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 224.0
+color = Color(0, 0, 0, 0.498039)
+
+[node name="Hell" type="Sprite2D" parent="."]
+position = Vector2(70, 58)
+scale = Vector2(4, 4)
+texture = ExtResource("1_lte7m")
+
+[node name="Earth" type="Sprite2D" parent="."]
+position = Vector2(130, 58)
+scale = Vector2(4, 4)
+texture = ExtResource("2_w8a27")
+
+[node name="Moon" type="Sprite2D" parent="."]
+position = Vector2(190, 58)
+scale = Vector2(4, 4)
+texture = ExtResource("3_ejw3r")
+
+[node name="progressBarBG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 102.0
+offset_right = 208.0
+offset_bottom = 122.0
+color = Color(0.133196, 0.133196, 0.133196, 1)
+
+[node name="progressBar" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 104.0
+offset_right = 48.0
+offset_bottom = 120.0
+
+[node name="LabelHell" type="Label" parent="."]
+modulate = Color(0.705882, 0.12549, 0.164706, 1)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 122.0
+offset_right = 182.0
+offset_bottom = 138.0
+text = "dam"
+label_settings = ExtResource("5_yb0lf")
+
+[node name="LabelEarth" type="Label" parent="."]
+modulate = Color(0.156863, 0.360784, 0.768627, 1)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 138.0
+offset_right = 182.0
+offset_bottom = 154.0
+text = "heal"
+label_settings = ExtResource("5_yb0lf")
+
+[node name="LabelMoon" type="Label" parent="."]
+modulate = Color(0.996078, 0.952941, 0.752941, 1)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 154.0
+offset_right = 182.0
+offset_bottom = 169.0
+theme_override_colors/font_color = Color(0.996078, 0.952941, 0.752941, 1)
+text = "mystery"
+label_settings = ExtResource("5_yb0lf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_right = 231.0
+offset_bottom = 26.0
+text = "POWER YOUR BOMB"
+label_settings = SubResource("LabelSettings_1f004")

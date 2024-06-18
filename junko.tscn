@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cc5udx6ecletp"]
+
+[ext_resource type="Texture2D" uid="uid://cyi2n26qk7fft" path="res://Sprite_Junko-Sheet.png" id="1_dosr0"]
+[ext_resource type="Script" path="res://junko.gd" id="1_w3ttm"]
+[ext_resource type="PackedScene" uid="uid://4llmyh5qy3do" path="res://talk_box.tscn" id="3_lxw7u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ff3e"]
+atlas = ExtResource("1_dosr0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mniv"]
+atlas = ExtResource("1_dosr0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hkqi0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ff3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mniv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxdnl"]
+size = Vector2(16, 16)
+
+[node name="junko" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 4
+script = ExtResource("1_w3ttm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+y_sort_enabled = true
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_hkqi0")
+frame_progress = 0.804945
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+shape = SubResource("RectangleShape2D_pxdnl")
+
+[node name="talkBox" parent="." instance=ExtResource("3_lxw7u")]

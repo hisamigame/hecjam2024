@@ -1,0 +1,187 @@
+[gd_scene load_steps=15 format=3 uid="uid://dkxlg7evifv0b"]
+
+[ext_resource type="Script" path="res://global.gd" id="1_f3538"]
+[ext_resource type="PackedScene" uid="uid://c0ah0pwd3jm1y" path="res://transition.tscn" id="2_tqwpl"]
+[ext_resource type="Texture2D" uid="uid://dfpdkvurjc22x" path="res://UI.png" id="3_ao8d1"]
+[ext_resource type="Texture2D" uid="uid://dwcfvhre5v6fy" path="res://z.png" id="3_l2nsd"]
+[ext_resource type="Script" path="res://prompt.gd" id="4_cq4ox"]
+[ext_resource type="Texture2D" uid="uid://gx8akkshjifa" path="res://x.png" id="4_ftbwk"]
+[ext_resource type="Texture2D" uid="uid://da2gmkuwppvu8" path="res://c.png" id="5_m336x"]
+[ext_resource type="Texture2D" uid="uid://cjw4dntpipiq2" path="res://z_pressed.png" id="5_suq63"]
+[ext_resource type="Texture2D" uid="uid://3xepemymxfm5" path="res://x_pressed.png" id="7_d4dnk"]
+[ext_resource type="Texture2D" uid="uid://cnwejc270bglq" path="res://c_pressed.png" id="9_v2ejs"]
+[ext_resource type="LabelSettings" uid="uid://dmy26wml6xfg8" path="res://statText.tres" id="10_664ww"]
+[ext_resource type="PackedScene" uid="uid://c8gdc1dstca1p" path="res://bomb_screen.tscn" id="12_uue4g"]
+[ext_resource type="PackedScene" uid="uid://c0kkjklsv2me8" path="res://dialog_box.tscn" id="12_wf25t"]
+[ext_resource type="AudioStream" uid="uid://dkiewooobn406" path="res://planet_something_something.ogg" id="14_o2pbb"]
+
+[node name="global" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_f3538")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 256.0
+offset_bottom = 224.0
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(256, 176)
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(256, 176)
+render_target_update_mode = 4
+
+[node name="UI" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="UIgfx" type="Sprite2D" parent="VBoxContainer/UI"]
+modulate = Color(0.733005, 0.733005, 0.733005, 1)
+texture = ExtResource("3_ao8d1")
+centered = false
+
+[node name="Z" type="Sprite2D" parent="VBoxContainer/UI"]
+process_mode = 3
+position = Vector2(28, 28)
+texture = ExtResource("3_l2nsd")
+script = ExtResource("4_cq4ox")
+default_texture = ExtResource("3_l2nsd")
+pressed_texture = ExtResource("5_suq63")
+
+[node name="X" type="Sprite2D" parent="VBoxContainer/UI"]
+process_mode = 3
+position = Vector2(110, 28)
+texture = ExtResource("4_ftbwk")
+script = ExtResource("4_cq4ox")
+default_texture = ExtResource("4_ftbwk")
+pressed_texture = ExtResource("7_d4dnk")
+
+[node name="C" type="Sprite2D" parent="VBoxContainer/UI"]
+process_mode = 3
+position = Vector2(193, 28)
+texture = ExtResource("5_m336x")
+script = ExtResource("4_cq4ox")
+default_texture = ExtResource("5_m336x")
+pressed_texture = ExtResource("9_v2ejs")
+
+[node name="hp0" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 81.0
+offset_bottom = 18.0
+text = "99/99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="atk0" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 15.0
+offset_right = 81.0
+offset_bottom = 28.0
+text = "99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="spl0" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 26.0
+offset_right = 81.0
+offset_bottom = 39.0
+text = "99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="hp1" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 5.0
+offset_right = 163.0
+offset_bottom = 18.0
+text = "99/99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="atk1" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 15.0
+offset_right = 163.0
+offset_bottom = 28.0
+text = "99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="spl1" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 26.0
+offset_right = 163.0
+offset_bottom = 39.0
+text = "99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="hp2" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 5.0
+offset_right = 246.0
+offset_bottom = 18.0
+text = "99/99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="atk2" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 15.0
+offset_right = 246.0
+offset_bottom = 28.0
+text = "99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="spl2" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 26.0
+offset_right = 246.0
+offset_bottom = 39.0
+text = "99"
+label_settings = ExtResource("10_664ww")
+horizontal_alignment = 2
+
+[node name="transition" parent="." instance=ExtResource("2_tqwpl")]
+custom_minimum_size = Vector2(256, 176)
+layout_mode = 1
+
+[node name="bombScreen" parent="." instance=ExtResource("12_uue4g")]
+layout_mode = 1
+
+[node name="dialogBox" parent="." instance=ExtResource("12_wf25t")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 256.0
+offset_bottom = 224.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_o2pbb")
+volume_db = -20.0
+autoplay = true

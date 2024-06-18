@@ -1,0 +1,107 @@
+[gd_scene load_steps=16 format=3 uid="uid://0ry5r18r4nm3"]
+
+[ext_resource type="Script" path="res://bombEffect.gd" id="1_xt8ji"]
+[ext_resource type="Texture2D" uid="uid://ckwxu45pcd33x" path="res://Water_sheet.png" id="2_1aefo"]
+[ext_resource type="Texture2D" uid="uid://bd4weccuhvllh" path="res://fireWrath.png" id="2_u6ca1"]
+[ext_resource type="Texture2D" uid="uid://4mqxm7idjtt3" path="res://pixel_moon.png" id="4_gpasd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1eypd"]
+atlas = ExtResource("2_1aefo")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kodq3"]
+atlas = ExtResource("2_1aefo")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1dy8"]
+atlas = ExtResource("2_1aefo")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2ekm"]
+atlas = ExtResource("2_1aefo")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n04e"]
+atlas = ExtResource("2_1aefo")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1qgg"]
+atlas = ExtResource("2_u6ca1")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydorb"]
+atlas = ExtResource("2_u6ca1")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njrii"]
+atlas = ExtResource("2_u6ca1")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcx8n"]
+atlas = ExtResource("2_u6ca1")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uwdr"]
+atlas = ExtResource("2_u6ca1")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u00ln"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1eypd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kodq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1dy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2ekm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n04e")
+}],
+"loop": false,
+"name": &"earth",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1qgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydorb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njrii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcx8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uwdr")
+}],
+"loop": false,
+"name": &"hell",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gpasd")
+}],
+"loop": false,
+"name": &"moon",
+"speed": 2.0
+}]
+
+[node name="bombEffect" type="Node2D"]
+z_index = 6
+script = ExtResource("1_xt8ji")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_u00ln")
+animation = &"moon"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
