@@ -28,7 +28,7 @@ var color_tween: Tween = null
 ## Dictionary[Color]
 var colors: Dictionary
 
-@onready var hecSprites = [$Hell, $Earth, $Moon]
+@onready var hecSprites = [$Sprites/Hell, $Sprites/Earth, $Sprites/Moon]
 @onready var progress_bar := $TextureProgressBarBorder/TextureProgressBar
 
 const hell_messages = ['\n', 'DAMAGE to ALL\n', 'DAMAGE+ to ALL\n', 'DEATH+++ to ALL\n']
@@ -40,9 +40,9 @@ const moon_messages = ['\n','MYSTERIOUS POWERS\n', 'MYSTERIOUS POWERS+\n', 'MYST
 func _ready():
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED
-	$Hell.modulate.a = default_alpha
-	$Earth.modulate.a = default_alpha
-	$Moon.modulate.a = default_alpha
+	
+	for sprite in hecSprites:
+		sprite.modulate.a = default_alpha
 	
 	colors['hell'] = hell_color
 	colors['earth'] = earth_color
@@ -50,9 +50,24 @@ func _ready():
 
 
 func activate():
-	visible = true
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Reset values
+	progress_bar.value = 0
+	_reset_label_text()
 	
+	visible = true
+	
+	$AnimationPlayer.play("fade_in")
+	
+	# Enable process to allow animation to play, but only enable process for this node
+	# after the animation finishes
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	set_process(false)
+	
+	await $AnimationPlayer.animation_finished
+	
+	set_process(true)
+
+
 func deactivate():
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -64,9 +79,8 @@ func _process(delta):
 	var level = 0
 	for n in global.actives.values():
 		level = level + int(n)
-	$LabelHell.text = ''
-	$LabelEarth.text = ''
-	$LabelMoon.text = ''
+	
+	_reset_label_text()
 	
 	var can_bomb := true
 	
@@ -128,6 +142,12 @@ func _process(delta):
 		global.unpause()
 		global.set_bombs(global.bombs - level)
 		global.world_node().bomb(global.actives, level)
+
+
+func _reset_label_text() -> void:
+	$LabelHell.text = ''
+	$LabelEarth.text = ''
+	$LabelMoon.text = ''
 
 
 ## Gets the color of the progress bar depending on the currently active Hecatias.
