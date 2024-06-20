@@ -35,6 +35,7 @@ const hell_messages = ['\n', 'DAMAGE to ALL\n', 'DAMAGE+ to ALL\n', 'DEATH+++ to
 const earth_messages = ['\n','HEAL', 'HEAL+\n', 'OVERHEAL\n']
 const moon_messages = ['\n','MYSTERIOUS POWERS\n', 'MYSTERIOUS POWERS+\n', 'MYSTERIOUS POWERS++\n']
 
+var moonglow = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -109,8 +110,17 @@ func _process(delta):
 				hecSprites[i].deactivate()
 			i = i + 1
 	
+	if global.actives['moon']:
+		moonglow = true
+		global.glow_moongates()
+	elif moonglow:
+		global.unglow_moongates()
+		moonglow = false
+		
 	if any_active:
 		held_time = held_time + delta
+		
+		
 	elif can_bomb:
 		# No one active, but can bomb. Lower the progress gradually and clamp to 0
 		held_time = max(held_time - delta * held_time_substraction_factor, 0)
@@ -139,6 +149,7 @@ func _process(delta):
 	if held_time > max_held_time:
 		held_time = 0.0
 		deactivate()
+		global.unglow_moongates()
 		global.unpause()
 		global.set_bombs(global.bombs - level)
 		global.world_node().bomb(global.actives, level)

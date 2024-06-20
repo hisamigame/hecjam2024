@@ -22,6 +22,7 @@ const defaultHP = 20
 const defaultMaxHP = 20
 const defaultAtk = 10
 const defaultSpl = 1
+const defaultBmb = 0
 
 const baseBombDMG = 50
 const bomb_duration = 0.5
@@ -30,10 +31,11 @@ var spl = [1.0, 1.0, 1.0]
 var atk = [10, 10, 10]
 var maxhp = [20, 20, 20]
 var hp = [20, 20, 20]
-var bombs = 1000
+var bombs = 0
 var canbomb = false
 var canchat = true
 
+@onready var bomblabel = $VBoxContainer/UI/bmb
 @onready var hplabels = [$VBoxContainer/UI/hp0, $VBoxContainer/UI/hp1, $VBoxContainer/UI/hp2]
 @onready var spllabels = [$VBoxContainer/UI/spl0, $VBoxContainer/UI/spl1, $VBoxContainer/UI/spl2]
 @onready var atklabels = [$VBoxContainer/UI/atk0, $VBoxContainer/UI/atk1, $VBoxContainer/UI/atk2]
@@ -46,8 +48,15 @@ const saveFile = 'file://save.json'
 
 var allWorldState = {} # we build the world-state dictionary as we traverse game
 
+func glow_moongates():
+	world_node().glow_moongates()
+	
+func unglow_moongates():
+	world_node().unglow_moongates()
+
 func set_bombs(newbombs):
 	bombs = newbombs
+	bomblabel.text = str(bombs)
 
 func set_hp(t, newhp):
 	if newhp < 0:
@@ -105,6 +114,7 @@ func start_game():
 	set_spl(HECTYPE.HELL, defaultSpl)
 	set_spl(HECTYPE.EARTH, defaultSpl)
 	set_spl(HECTYPE.MOON, defaultSpl)
+	set_bombs(defaultBmb)
 	global.show_ui()
 	get_tree().current_scene.call_deferred('free')
 	canbomb = true

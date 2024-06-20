@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkxlg7evifv0b"]
+[gd_scene load_steps=16 format=3 uid="uid://dkxlg7evifv0b"]
 
 [ext_resource type="Script" path="res://global.gd" id="1_f3538"]
 [ext_resource type="PackedScene" uid="uid://c0ah0pwd3jm1y" path="res://transition.tscn" id="2_tqwpl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://3xepemymxfm5" path="res://x_pressed.png" id="7_d4dnk"]
 [ext_resource type="Texture2D" uid="uid://cnwejc270bglq" path="res://c_pressed.png" id="9_v2ejs"]
 [ext_resource type="LabelSettings" uid="uid://dvfxsm4rdmx3p" path="res://slashes.tres" id="10_8kyi3"]
+[ext_resource type="LabelSettings" uid="uid://b6qex0hmgcj01" path="res://bomb_label_setting.tres" id="11_7wx65"]
 [ext_resource type="PackedScene" uid="uid://c8gdc1dstca1p" path="res://bomb_screen.tscn" id="12_uue4g"]
 [ext_resource type="PackedScene" uid="uid://c0kkjklsv2me8" path="res://dialog_box.tscn" id="12_wf25t"]
 [ext_resource type="AudioStream" uid="uid://dkiewooobn406" path="res://planet_something_something.ogg" id="14_o2pbb"]
@@ -165,6 +166,16 @@ offset_bottom = 39.0
 text = "99"
 label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
+
+[node name="bmb" type="Label" parent="VBoxContainer/UI"]
+layout_mode = 0
+offset_left = 122.0
+offset_right = 144.0
+offset_bottom = 7.0
+text = "99"
+label_settings = ExtResource("11_7wx65")
+horizontal_alignment = 2
+clip_text = true
 
 [node name="transition" parent="." instance=ExtResource("2_tqwpl")]
 custom_minimum_size = Vector2(256, 176)

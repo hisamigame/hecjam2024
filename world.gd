@@ -59,6 +59,20 @@ func _ready():
 		chat.n_message_list = 1
 		global.dialogBox.activate(chat)
 
+func unglow_moongates():
+	var moongates = get_tree().get_nodes_in_group('moongate')
+	for gate in moongates:
+		print('unglow')
+		gate.material = null
+	
+func glow_moongates():
+	var moongates = get_tree().get_nodes_in_group('moongate')
+	for gate in moongates:
+		# TODO: for some reason,
+		# this has the same color as progress bar?
+		# might be fine?
+		gate.material = preload('res://moongate_material.tres')
+
 func bomb(actives, level):
 	print("booom")
 	print(actives)
