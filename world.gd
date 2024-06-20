@@ -7,6 +7,7 @@ extends Node2D
 
 @export var initial_dialog : Array[String] = []
 @export var state = 0
+@export var peace = false
 
 @onready var camera = $hecCamera
 
@@ -16,7 +17,7 @@ extends Node2D
 
 @onready var chatbox_class = preload("res://talk_box.tscn")
 
-enum HEC {HELL, EARTH, MOON}
+enum HEC {EARTH, HELL, MOON}
 
 var worldID : String
 
@@ -27,13 +28,19 @@ func _ready():
 	$hecCamera.limit_top = camera_limit_top
 	$hecCamera.limit_bottom = camera_limit_bottom
 	
+	if peace:
+		$hecCamera/hecatia1.peace = true
+		$hecCamera/hecatia2.peace = true
+		$hecCamera/hecatia3.peace = true
+		
+	
 	worldID = scene_file_path.split('res://')[1].split('.tscn')[0]
 	print(worldID)
 	var world_state = global.get_world_state(worldID)
 	global.set_world_state(worldID, world_state)
 	print(global.allWorldState)
 	set_instance_state(world_state)
-	connect_fairy_spawners()
+	connect_persistent_nodes()
 	
 	# dead characters get revived with 1 hp
 	if global.hp[HEC.HELL] <= 0:
@@ -113,10 +120,13 @@ func moon_bomb(level):
 func _physics_process(_delta):
 	camera.update_camera_position()
 
-func set_hecatias_position(pos : Vector2):
+func set_hecatias_position(pos : Vector2, rot : Vector2):
 	$hecCamera/hecatia1.position = pos - Vector2(16,0)
 	$hecCamera/hecatia2.position = pos
 	$hecCamera/hecatia3.position = pos + Vector2(16,0)
+	$hecCamera/hecatia1.init_direction(rot)
+	$hecCamera/hecatia2.init_direction(rot)
+	$hecCamera/hecatia3.init_direction(rot)
 	$hecCamera.set_cam_position(pos)
 	
 func get_alive_hec_positions():
@@ -128,23 +138,28 @@ func get_alive_hec_positions():
 				hecposlist.append(child.position)
 	return hecposlist
 	
-func connect_fairy_spawners():
-	for child in get_children():
-		if child is FairySpawner:
-			child.connect('spawner_state_update', _update_world_state)
+func connect_persistent_nodes():
+	for node in get_tree().get_nodes_in_group('fairySpawner'):
+		node.connect('obj_state_update', _update_world_state)
+	for node in get_tree().get_nodes_in_group('powerup'):
+		node.connect('obj_state_update', _update_world_state)
+
 
 func get_default_world_state():
 	var world_state = {'state' : 0}
-	for child in get_children():
-		if child is FairySpawner:
-			world_state[child.name] = child.STATE.ALIVE
+	for node in get_tree().get_nodes_in_group('fairySpawner'):
+		world_state[node.name] =node.STATE.ALIVE
+	for node in get_tree().get_nodes_in_group('powerup'):
+		world_state[node.name] =node.STATE.ALIVE
 	return world_state
 	
 func set_instance_state(world_state):
 	state = world_state['state']
-	for child in get_children():
-		if child is FairySpawner:
-			child.set_initial_state(world_state[child.name])
+	for node in get_tree().get_nodes_in_group('fairySpawner'):
+		node.set_initial_state(world_state[node.name])
+	for node in get_tree().get_nodes_in_group('powerup'):
+		node.set_initial_state(world_state[node.name])
+
 
 func get_camera_pos():
 	return camera.cam_position()

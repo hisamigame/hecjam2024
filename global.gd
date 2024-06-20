@@ -12,7 +12,7 @@ var hell_active = false
 var earth_active = false
 var moon_active = false
 
-enum HECTYPE {HELL, EARTH, MOON}
+enum HECTYPE {EARTH, HELL, MOON}
 
 var inputstring = {'hell' : HECTYPE.HELL, 'earth' : HECTYPE.EARTH, 'moon' : HECTYPE.MOON}
 
@@ -30,7 +30,7 @@ var spl = [1.0, 1.0, 1.0]
 var atk = [10, 10, 10]
 var maxhp = [20, 20, 20]
 var hp = [20, 20, 20]
-var bombs = 1
+var bombs = 1000
 var canbomb = false
 var canchat = true
 
@@ -143,8 +143,6 @@ func _unhandled_input(event):
 		global.canbomb = false
 		$bombScreen.activate()
 
-# Called when the node enters the scene tree for the first time.
-
 func get_subviewport():
 	return get_node("/root/global/VBoxContainer/SubViewportContainer/SubViewport")
 
@@ -178,7 +176,6 @@ func _change_level(scene_name, spawnID):
 	var newWorld = scene.instantiate()
 	old_world = current_world
 	current_world = scene_name
-	
 	old_world_scene = old_world_node()
 	old_world_scene.free()
 	#viewport().call_deferred('remove_child', old_world_scene)
@@ -189,10 +186,12 @@ func _change_level(scene_name, spawnID):
 	
 func set_hecatia_to_spawn(newWorld, spawnID):
 	var pos = Vector2.ZERO
+	var rot = Vector2.DOWN
 	var spawnPoint = newWorld.get_node_or_null('spawnPoint' + str(spawnID))
 	if spawnPoint:
 		pos = spawnPoint.position
-	newWorld.set_hecatias_position(pos)
+		rot = spawnPoint.direction
+	newWorld.set_hecatias_position(pos,rot)
 	
 func transition_done():
 	if not dialogBox.active:

@@ -66,14 +66,14 @@ track_object = NodePath("../hecCamera/hecatia3")
 sprite = ExtResource("7_3f16x")
 
 [node name="stair" parent="." instance=ExtResource("8_2ob0c")]
-position = Vector2(72, 136)
+position = Vector2(56, 56)
 stairtype = 0
 toScene = "world1"
 
 [node name="stair2" parent="." instance=ExtResource("8_2ob0c")]
-position = Vector2(8, 152)
+position = Vector2(24, 120)
 stairtype = 1
-toScene = "world2"
+toScene = "worldBoss"
 
 [node name="spawnPoint0" parent="." instance=ExtResource("12_83niq")]
 position = Vector2(72, 152)
@@ -81,21 +81,21 @@ position = Vector2(72, 152)
 [node name="spawnPoint1" parent="." instance=ExtResource("12_83niq")]
 position = Vector2(8, 168)
 
-[node name="powerup" parent="." instance=ExtResource("14_ngnkr")]
+[node name="powerup0" parent="." instance=ExtResource("14_ngnkr")]
 position = Vector2(-8, 200)
 kind = 1
 
-[node name="powerup2" parent="." instance=ExtResource("14_ngnkr")]
+[node name="powerup1" parent="." instance=ExtResource("14_ngnkr")]
 position = Vector2(24, 184)
 
-[node name="powerup3" parent="." instance=ExtResource("14_ngnkr")]
+[node name="powerup2" parent="." instance=ExtResource("14_ngnkr")]
 position = Vector2(72, 184)
 kind = 2
 
-[node name="powerup4" parent="." instance=ExtResource("14_ngnkr")]
+[node name="powerup3" parent="." instance=ExtResource("14_ngnkr")]
 position = Vector2(56, 216)
 kind = 3
 
-[node name="powerup5" parent="." instance=ExtResource("14_ngnkr")]
+[node name="powerup4" parent="." instance=ExtResource("14_ngnkr")]
 position = Vector2(24, 232)
 cycle = true

@@ -20,7 +20,3 @@ func _ready():
 func bossDefeated():
 	set_state(1)
 	$triggerHolder.switch()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

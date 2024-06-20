@@ -7,7 +7,7 @@
 size = Vector2(8, 8)
 
 [node name="stair" type="Node2D"]
-z_index = 2
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_7yo73")
 stairtype = null
@@ -21,6 +21,7 @@ collision_layer = 0
 shape = SubResource("RectangleShape2D_hy0r2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -8)
 texture = ExtResource("2_c4nhy")
 

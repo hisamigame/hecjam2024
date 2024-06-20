@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Hecatia
 
-enum HEC {HELL, EARTH, MOON}
+enum HEC {EARTH, HELL, MOON}
 enum STATE {NORMAL, DEAD, KNOCKBACK}
 var state = STATE.NORMAL
 
@@ -29,6 +29,11 @@ var knockback_direction : Vector2 = Vector2.ZERO
 var invincible = false
 var nodoublechat = false
 
+@export var peace  = false:
+	set(v):
+		if v:
+			$bulletTimer.stop()
+
 var dead:
 	get:
 		return state == STATE.DEAD
@@ -52,20 +57,25 @@ func just_pressed_any_direction():
 	else:
 		return false
 		
+func init_direction(dir):
+	$AnimationTree.set("parameters/walk/blend_position", dir)
+	$AnimationTree.set("parameters/idle/blend_position", dir)
+	fire_direction = dir
+	last_direction = dir
+	direction = dir
+		
 func _ready():
 	setup_type()
 	$AnimatedSprite2D.animation='down'
 	$AnimatedSprite2D.frame=1
 	$bulletTimer.wait_time = bullet_dt
 	#$AnimationPlayer.play('down_idle')
-	$AnimationTree.set("parameters/walk/blend_position", direction)
-	$AnimationTree.set("parameters/idle/blend_position", direction)
-	fire_direction = direction
-	last_direction = direction
+	init_direction(direction)
+	if peace:
+		$bulletTimer.stop()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
 	match state:
 		STATE.NORMAL:
 			var input_vector = get_input_direction()
@@ -91,6 +101,7 @@ func _physics_process(delta):
 				if !nodoublechat or just_pressed_any_direction():
 					nodoublechat = true
 					var chatbox = $RayCast2D.get_collider()
+					animationState.travel('idle')
 					global.dialogBox.activate(chatbox)
 					#chatbox.call_deferred('next_message')
 					#chatbox.next_message()

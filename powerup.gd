@@ -1,5 +1,6 @@
 extends Node2D
 
+enum STATE {ALIVE, DEAD}
 enum KIND {HP, ATK, SPL, BMB}
 @export var kind = KIND.HP
 @export var cycle = false
@@ -10,6 +11,9 @@ enum KIND {HP, ATK, SPL, BMB}
 @export var spl_plus = 1
 @export var bmb_plus = 1
 
+@export var state = STATE.ALIVE
+
+signal obj_state_update(idstr, state)
 
 func set_kind(k : KIND):
 	kind = k
@@ -25,15 +29,22 @@ func set_kind(k : KIND):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if cycle:
-		$Timer.start(cycle_time)
-	set_kind(kind)
-
+	$AnimationPlayer.play('bob')
+	set_initial_state(state)
+	
+func set_initial_state(s):
+	state = s
+	match state:
+		STATE.ALIVE:
+			if cycle:
+				$Timer.start(cycle_time)
+			set_kind(kind)
+		STATE.DEAD:
+			queue_free()
 
 func _on_timer_timeout():
 	var new_kind = (kind+1) % KIND.BMB
 	set_kind(new_kind)
-
 
 func _on_area_2d_body_entered(body):
 	if body is Hecatia:
@@ -47,4 +58,6 @@ func _on_area_2d_body_entered(body):
 				global.set_spl(body.hectype, global.spl[body.hectype] +spl_plus) 
 			KIND.BMB:
 				global.set_bombs(global.bombs + 1)
+		state = STATE.DEAD
+		emit_signal('obj_state_update', name, state)
 		queue_free()

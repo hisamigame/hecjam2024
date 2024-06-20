@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dvfxsm4rdmx3p"]
+
+[ext_resource type="FontFile" uid="uid://7g8ueqruyfci" path="res://mago3.ttf" id="1_tn7dy"]
+
+[resource]
+line_spacing = -3.0
+font = ExtResource("1_tn7dy")
+shadow_size = 0

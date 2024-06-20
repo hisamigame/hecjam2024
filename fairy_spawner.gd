@@ -9,7 +9,7 @@ enum STATE {ALIVE, DEAD, REMOVED}
 
 @export var state : STATE = STATE.ALIVE
 # Called when the node enters the scene tree for the first time.
-signal spawner_state_update(idstr, state)
+signal obj_state_update(idstr, state)
 
 @export var hp = 100
 
@@ -55,7 +55,7 @@ func set_initial_state(_state : STATE):
 
 func die():
 	state = STATE.DEAD
-	emit_signal('spawner_state_update', idstr, state)
+	emit_signal('obj_state_update', idstr, state)
 	spawnTimer.stop()
 	$StaticBody2D.queue_free()
 	$AnimatedSprite2D.play('dead')

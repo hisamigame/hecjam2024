@@ -1,6 +1,6 @@
 extends Shot
 
-enum HEC {HELL, EARTH, MOON}
+enum HEC {EARTH, HELL, MOON}
 
 @export var hectype : HEC = HEC.HELL
 

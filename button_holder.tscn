@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ork6pri6dmxx"]
+
+[ext_resource type="Script" path="res://button_holder.gd" id="1_26o2x"]
+
+[node name="buttonHolder" type="Node"]
+script = ExtResource("1_26o2x")

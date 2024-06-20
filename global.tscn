@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cjw4dntpipiq2" path="res://z_pressed.png" id="5_suq63"]
 [ext_resource type="Texture2D" uid="uid://3xepemymxfm5" path="res://x_pressed.png" id="7_d4dnk"]
 [ext_resource type="Texture2D" uid="uid://cnwejc270bglq" path="res://c_pressed.png" id="9_v2ejs"]
-[ext_resource type="LabelSettings" uid="uid://dmy26wml6xfg8" path="res://statText.tres" id="10_664ww"]
+[ext_resource type="LabelSettings" uid="uid://dvfxsm4rdmx3p" path="res://slashes.tres" id="10_8kyi3"]
 [ext_resource type="PackedScene" uid="uid://c8gdc1dstca1p" path="res://bomb_screen.tscn" id="12_uue4g"]
 [ext_resource type="PackedScene" uid="uid://c0kkjklsv2me8" path="res://dialog_box.tscn" id="12_wf25t"]
 [ext_resource type="AudioStream" uid="uid://dkiewooobn406" path="res://planet_something_something.ogg" id="14_o2pbb"]
@@ -83,7 +83,7 @@ offset_top = 5.0
 offset_right = 81.0
 offset_bottom = 18.0
 text = "99/99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="atk0" type="Label" parent="VBoxContainer/UI"]
@@ -93,7 +93,7 @@ offset_top = 15.0
 offset_right = 81.0
 offset_bottom = 28.0
 text = "99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="spl0" type="Label" parent="VBoxContainer/UI"]
@@ -103,7 +103,7 @@ offset_top = 26.0
 offset_right = 81.0
 offset_bottom = 39.0
 text = "99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="hp1" type="Label" parent="VBoxContainer/UI"]
@@ -113,7 +113,7 @@ offset_top = 5.0
 offset_right = 163.0
 offset_bottom = 18.0
 text = "99/99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="atk1" type="Label" parent="VBoxContainer/UI"]
@@ -123,7 +123,7 @@ offset_top = 15.0
 offset_right = 163.0
 offset_bottom = 28.0
 text = "99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="spl1" type="Label" parent="VBoxContainer/UI"]
@@ -133,7 +133,7 @@ offset_top = 26.0
 offset_right = 163.0
 offset_bottom = 39.0
 text = "99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="hp2" type="Label" parent="VBoxContainer/UI"]
@@ -143,7 +143,7 @@ offset_top = 5.0
 offset_right = 246.0
 offset_bottom = 18.0
 text = "99/99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="atk2" type="Label" parent="VBoxContainer/UI"]
@@ -153,7 +153,7 @@ offset_top = 15.0
 offset_right = 246.0
 offset_bottom = 28.0
 text = "99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="spl2" type="Label" parent="VBoxContainer/UI"]
@@ -163,7 +163,7 @@ offset_top = 26.0
 offset_right = 246.0
 offset_bottom = 39.0
 text = "99"
-label_settings = ExtResource("10_664ww")
+label_settings = ExtResource("10_8kyi3")
 horizontal_alignment = 2
 
 [node name="transition" parent="." instance=ExtResource("2_tqwpl")]
@@ -184,4 +184,3 @@ offset_bottom = 224.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_o2pbb")
 volume_db = -20.0
-autoplay = true
