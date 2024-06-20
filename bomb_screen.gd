@@ -41,8 +41,7 @@ func _ready():
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED
 	
-	for sprite in hecSprites:
-		sprite.modulate.a = default_alpha
+	_deactivate_sprites()
 	
 	colors['hell'] = hell_color
 	colors['earth'] = earth_color
@@ -53,6 +52,7 @@ func activate():
 	# Reset values
 	progress_bar.value = 0
 	_reset_label_text()
+	_deactivate_sprites()
 	
 	visible = true
 	
@@ -87,9 +87,9 @@ func _process(delta):
 	if level > global.bombs:
 		# TODO:
 		# cannot bomb this hard. Notify player
-		hecSprites[0].modulate.a = 0.5
-		hecSprites[1].modulate.a = 0.5
-		hecSprites[2].modulate.a = 0.5
+		
+		_deactivate_sprites()
+		
 		$Label.text='NOT ENOUGH BOMBS'
 		
 		can_bomb = false
@@ -98,7 +98,7 @@ func _process(delta):
 		for k in global.actives:
 			if global.actives[k]:
 				any_active = true
-				hecSprites[i].modulate.a = 1.0
+				hecSprites[i].activate()
 				if k == 'hell':
 					$LabelHell.text = hell_messages[level]
 				elif k == 'earth':
@@ -106,13 +106,13 @@ func _process(delta):
 				elif k == 'moon':
 					$LabelMoon.text =  moon_messages[level]
 			else:
-				hecSprites[i].modulate.a = default_alpha
+				hecSprites[i].deactivate()
 			i = i + 1
 	
 	if any_active:
 		held_time = held_time + delta
 	elif can_bomb:
-		# No active, but can bomb, lower the progress gradually and clamp to 0
+		# No one active, but can bomb. Lower the progress gradually and clamp to 0
 		held_time = max(held_time - delta * held_time_substraction_factor, 0)
 		
 		# If you can't bomb then held time will not change
@@ -142,6 +142,13 @@ func _process(delta):
 		global.unpause()
 		global.set_bombs(global.bombs - level)
 		global.world_node().bomb(global.actives, level)
+		
+		# TODO: Notify camera to shake the screen
+
+
+func _deactivate_sprites() -> void:
+	for sprite in hecSprites:
+		sprite.deactivate()
 
 
 func _reset_label_text() -> void:

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsg0bgfd4yclb"]
+
+[ext_resource type="Script" path="res://bomb_screen/bomb_screen_sprite.gd" id="1_sq1my"]
+
+[node name="BombScreenSprite" type="Sprite2D"]
+centered = false
+script = ExtResource("1_sq1my")

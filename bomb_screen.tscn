@@ -1,14 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8gdc1dstca1p"]
+[gd_scene load_steps=17 format=3 uid="uid://c8gdc1dstca1p"]
 
 [ext_resource type="Script" path="res://bomb_screen.gd" id="1_ngyt5"]
 [ext_resource type="Texture2D" uid="uid://oc1o0v05d24d" path="res://bomb_screen/Bomb_selection_screen_Earth.png" id="2_pheky"]
+[ext_resource type="PackedScene" uid="uid://bsg0bgfd4yclb" path="res://bomb_screen/bomb_screen_sprite.tscn" id="2_ycm6v"]
 [ext_resource type="Texture2D" uid="uid://yuk7cgeft1oi" path="res://bomb_screen/Bomb_selection_screen_Hell.png" id="3_0gh3l"]
 [ext_resource type="Texture2D" uid="uid://cx2j4j0prxl82" path="res://bomb_screen/Bomb_selection_screen_Moon.png" id="4_2t3kp"]
+[ext_resource type="Texture2D" uid="uid://0vgcddwegwg1" path="res://bomb_screen/Bomb_selection_screen_Earth2.png" id="4_w1dvp"]
 [ext_resource type="Material" uid="uid://c1hxykuwxtk6q" path="res://bomb_screen/bomb_progress_bar_material.tres" id="5_t2800"]
 [ext_resource type="Texture2D" uid="uid://jmlcmsgv3o7g" path="res://bomb_screen/bomb_progress_bar.png" id="5_xtt0k"]
 [ext_resource type="LabelSettings" uid="uid://dt56xoefo3wq2" path="res://dialogText.tres" id="5_yb0lf"]
+[ext_resource type="Texture2D" uid="uid://bk7r1qhalhw6j" path="res://bomb_screen/Bomb_selection_screen_Hell2.png" id="6_2lell"]
 [ext_resource type="Texture2D" uid="uid://felxuxtgu6sg" path="res://bomb_screen/bomb_progress.png" id="6_63yq0"]
 [ext_resource type="FontFile" uid="uid://7g8ueqruyfci" path="res://mago3.ttf" id="6_siull"]
+[ext_resource type="Texture2D" uid="uid://dc6fwhso0oe36" path="res://bomb_screen/Bomb_selection_screen_Moon2.png" id="8_t3twi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1f004"]
 line_spacing = -3.0
@@ -29,7 +33,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 0.366021, 1),
 "update": 0,
-"values": [Vector2(0, 174), Vector2(0, 174), Vector2(0, 0)]
+"values": [Vector2(0, 222), Vector2(0, 222), Vector2(0, 48)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -86,24 +90,19 @@ offset_bottom = 224.0
 color = Color(0, 0, 0, 0.498039)
 
 [node name="Sprites" type="Node2D" parent="."]
-
-[node name="Earth" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, 48)
+
+[node name="Earth" parent="Sprites" instance=ExtResource("2_ycm6v")]
 texture = ExtResource("2_pheky")
-centered = false
-metadata/_edit_lock_ = true
+inactive_texture = ExtResource("4_w1dvp")
 
-[node name="Hell" type="Sprite2D" parent="Sprites"]
-position = Vector2(0, 48)
+[node name="Hell" parent="Sprites" instance=ExtResource("2_ycm6v")]
 texture = ExtResource("3_0gh3l")
-centered = false
-metadata/_edit_lock_ = true
+inactive_texture = ExtResource("6_2lell")
 
-[node name="Moon" type="Sprite2D" parent="Sprites"]
-position = Vector2(0, 48)
+[node name="Moon" parent="Sprites" instance=ExtResource("2_ycm6v")]
 texture = ExtResource("4_2t3kp")
-centered = false
-metadata/_edit_lock_ = true
+inactive_texture = ExtResource("8_t3twi")
 
 [node name="TextureProgressBarBorder" type="TextureProgressBar" parent="."]
 layout_mode = 1
