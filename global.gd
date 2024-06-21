@@ -151,7 +151,7 @@ func _unhandled_input(event):
 		pause()
 		print("boom incoming...")
 		global.canbomb = false
-		$bombScreen.activate()
+		$VBoxContainer/UI/bombScreen.activate()
 
 func get_subviewport():
 	return get_node("/root/global/VBoxContainer/SubViewportContainer/SubViewport")

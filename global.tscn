@@ -48,6 +48,11 @@ render_target_update_mode = 4
 [node name="UI" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="bombScreen" parent="VBoxContainer/UI" instance=ExtResource("12_uue4g")]
+layout_mode = 1
+offset_top = -176.0
+offset_bottom = -176.0
+
 [node name="UIgfx" type="Sprite2D" parent="VBoxContainer/UI"]
 modulate = Color(0.733005, 0.733005, 0.733005, 1)
 texture = ExtResource("3_ao8d1")
@@ -179,9 +184,6 @@ clip_text = true
 
 [node name="transition" parent="." instance=ExtResource("2_tqwpl")]
 custom_minimum_size = Vector2(256, 176)
-layout_mode = 1
-
-[node name="bombScreen" parent="." instance=ExtResource("12_uue4g")]
 layout_mode = 1
 
 [node name="dialogBox" parent="." instance=ExtResource("12_wf25t")]
