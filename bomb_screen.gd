@@ -54,7 +54,7 @@ func activate():
 	progress_bar.value = 0
 	_reset_label_text()
 	_deactivate_sprites()
-	$Label.visible = false
+	$NotEnoughBombsLabel.visible = false
 	
 	visible = true
 	
@@ -92,11 +92,11 @@ func _process(delta):
 		
 		_deactivate_sprites()
 		
-		$Label.visible = true
+		$NotEnoughBombsLabel.visible = true
 		
 		can_bomb = false
 	else:
-		$Label.visible = false
+		$NotEnoughBombsLabel.visible = false
 		
 		for k in global.actives:
 			if global.actives[k]:
