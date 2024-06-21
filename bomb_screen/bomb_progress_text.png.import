@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jmlcmsgv3o7g"
-path="res://.godot/imported/bomb_progress_bar.png-bb77f6fedd4d4f391723ef8f7361ce7d.ctex"
+uid="uid://d16cl8ln6tnpd"
+path="res://.godot/imported/bomb_progress_text.png-db6209a5eecd7f90c3a1a9c3f754ca3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bomb_screen/bomb_progress_bar.png"
-dest_files=["res://.godot/imported/bomb_progress_bar.png-bb77f6fedd4d4f391723ef8f7361ce7d.ctex"]
+source_file="res://bomb_screen/bomb_progress_text.png"
+dest_files=["res://.godot/imported/bomb_progress_text.png-db6209a5eecd7f90c3a1a9c3f754ca3d.ctex"]
 
 [params]
 

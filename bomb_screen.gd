@@ -54,6 +54,7 @@ func activate():
 	progress_bar.value = 0
 	_reset_label_text()
 	_deactivate_sprites()
+	$Label.visible = false
 	
 	visible = true
 	
@@ -91,11 +92,12 @@ func _process(delta):
 		
 		_deactivate_sprites()
 		
-		$Label.text='NOT ENOUGH BOMBS'
+		$Label.visible = true
 		
 		can_bomb = false
 	else:
-		$Label.text='POWER YOUR BOMB'
+		$Label.visible = false
+		
 		for k in global.actives:
 			if global.actives[k]:
 				any_active = true
@@ -119,7 +121,6 @@ func _process(delta):
 		
 	if any_active:
 		held_time = held_time + delta
-		
 		
 	elif can_bomb:
 		# No one active, but can bomb. Lower the progress gradually and clamp to 0
