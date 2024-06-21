@@ -9,6 +9,7 @@ uniform sampler2D mask : source_color, filter_nearest;
 // the sprite. Lower means darker.
 // When multiplying colors, COLOR * 1.0 results in the same color, and COLOR * 0.0 results in black color.
 uniform float multiply_factor;
+uniform float modulate_factor;
 
 // Enables or disables the effect.
 uniform bool can_apply;
@@ -23,5 +24,8 @@ void fragment() {
 	else
 	{
 		COLOR = texture(TEXTURE, UV);
+	}
+	if(COLOR.a>0.0){
+		COLOR.a = modulate_factor;
 	}
 }

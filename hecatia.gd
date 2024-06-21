@@ -157,6 +157,7 @@ func enter_knockback(dir):
 	invincible = true
 	$hitbox.set_deferred('monitoring', false)
 	modulate.a = 0.5
+	$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",0.5)
 	await get_tree().create_timer(knockback_duration).timeout
 	state = STATE.NORMAL
 	await get_tree().create_timer(invinc_duration).timeout
@@ -164,6 +165,7 @@ func enter_knockback(dir):
 	#$hitbox.monitoring = true
 	$hitbox.set_deferred('monitoring', true)
 	modulate.a = 1.0
+	$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",1.0)
 
 func _on_bullet_timer_timeout():
 	var obj = bullet.instantiate()

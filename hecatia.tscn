@@ -10,6 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("3_tuctl")
 shader_parameter/multiply_factor = 0.5
+shader_parameter/modulate_factor = 1.0
 shader_parameter/can_apply = true
 shader_parameter/mask = ExtResource("4_3avci")
 

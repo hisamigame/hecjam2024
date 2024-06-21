@@ -14,7 +14,7 @@ func _ready():
 	$hurtbox.position.x = len * tilesize/2
 	$hurtbox.scale.x = 2 * len
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(delta): 
 	position = position + direction * speed * global.TARGET_FPS * delta
 	check_camera_limits()
 
