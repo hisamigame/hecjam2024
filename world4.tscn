@@ -217,3 +217,6 @@ layer_0/tile_data = PackedInt32Array(65535, 196608, 2, -1, 458752, 1, -65537, 13
 [node name="fairySpawner16" parent="." instance=ExtResource("13_wgung")]
 position = Vector2(-16, 288)
 layer_0/tile_data = PackedInt32Array(65535, 393216, 1, -1, 65536, 1, -65536, 327680, 1, -65535, 131072, 2, -131071, 131072, 0, 0, 131072, 1, 131071, 262144, 1, 196607, 196608, 2, 65536, 131072, 2, -65537, 393216, 2, -131072, 327680, 2, -2, 0, 1, 65534, 0, 2, -65538, 0, 0, -131073, 0, 0, -196608, 131072, 0)
+
+[node name="spawnPoint3" parent="." instance=ExtResource("11_1s2aj")]
+position = Vector2(-72, -8)

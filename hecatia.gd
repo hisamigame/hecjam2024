@@ -193,12 +193,21 @@ func healing_animation():
 
 func _on_hitbox_body_entered(body):
 	if state == STATE.NORMAL:
-		if true:
-			global.set_hp(hectype, global.hp[hectype] - body.damage)
-			if global.hp[hectype] > 0:
-				var dir = body.position.direction_to(position)
-				enter_knockback(dir)
-			else:
-				die()
+		global.set_hp(hectype, global.hp[hectype] - body.damage)
+		if global.hp[hectype] > 0:
+			var dir = body.position.direction_to(position)
+			enter_knockback(dir)
+		else:
+			die()
 		
 			
+
+
+func _on_hitbox_area_entered(area):
+	if state == STATE.NORMAL:
+		global.set_hp(hectype, global.hp[hectype] - area.damage)
+		if global.hp[hectype] > 0:
+			var dir = area.position.direction_to(position)
+			enter_knockback(dir)
+		else:
+			die()

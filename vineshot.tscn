@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4g320p7puod3"]
+
+[ext_resource type="Script" path="res://vineshot.gd" id="1_n1elx"]
+[ext_resource type="Texture2D" uid="uid://b6h2102o0v0ls" path="res://vine_sheet1.png" id="2_1xdgy"]
+[ext_resource type="Texture2D" uid="uid://cxlery5h403ue" path="res://vine_sheet2.png" id="3_ga1o0"]
+[ext_resource type="Texture2D" uid="uid://hurialmoabaq" path="res://vine_sheet3.png" id="4_8s27p"]
+[ext_resource type="Texture2D" uid="uid://dan80oqnmcv8k" path="res://vinetip.png" id="5_s57lg"]
+[ext_resource type="PackedScene" uid="uid://blcuqqe7uvqij" path="res://hurtbox.tscn" id="6_yglld"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_kw0w8"]
+frames = 3
+frame_0/texture = ExtResource("2_1xdgy")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("3_ga1o0")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("4_8s27p")
+frame_2/duration = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip33l"]
+atlas = ExtResource("5_s57lg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qafo8"]
+atlas = ExtResource("5_s57lg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anbl1"]
+atlas = ExtResource("5_s57lg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_new2c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip33l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qafo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anbl1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="vineshot" type="Node2D"]
+script = ExtResource("1_n1elx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -8.0
+offset_right = 48.0
+offset_bottom = 8.0
+texture = SubResource("AnimatedTexture_kw0w8")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(56, 0)
+sprite_frames = SubResource("SpriteFrames_new2c")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-8, 0)
+sprite_frames = SubResource("SpriteFrames_new2c")
+flip_h = true
+
+[node name="hurtbox" parent="." instance=ExtResource("6_yglld")]
+position = Vector2(8, 0)
+scale = Vector2(2, 0.5)
+collision_layer = 128
+collision_mask = 0

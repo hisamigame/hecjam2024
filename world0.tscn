@@ -41,7 +41,6 @@ position = Vector2(8, 72)
 
 [node name="hecatia2" parent="hecCamera" instance=ExtResource("3_6kyl5")]
 position = Vector2(24, 72)
-hectype = 1
 
 [node name="hecatia3" parent="hecCamera" instance=ExtResource("3_6kyl5")]
 position = Vector2(40, 72)
