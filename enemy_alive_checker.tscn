@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://t8sw8yr0c6pc"]
+
+[ext_resource type="Script" path="res://enemy_alive_checker.gd" id="1_00wib"]
+
+[node name="enemyAliveChecker" type="Node"]
+script = ExtResource("1_00wib")

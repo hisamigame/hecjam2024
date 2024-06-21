@@ -13,6 +13,10 @@ var dying_direction = Vector2.ZERO
 enum STATE {NORMAL, DYING}
 var state = STATE.NORMAL
 
+var dead:
+	get:
+		return state != STATE.NORMAL
+
 func get_nearest_hec_pos():
 	var hecspos = global.world_node().get_alive_hec_positions()
 	var mindist = INF

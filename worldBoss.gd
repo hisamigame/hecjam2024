@@ -19,4 +19,5 @@ func _ready():
 
 func bossDefeated():
 	set_state(1)
-	$triggerHolder.switch()
+	$multitrigger.switch_children()
+

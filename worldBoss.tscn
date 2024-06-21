@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cj3mxowmrpn6m"]
+[gd_scene load_steps=18 format=3 uid="uid://cj3mxowmrpn6m"]
 
 [ext_resource type="Script" path="res://worldBoss.gd" id="1_ethc0"]
+[ext_resource type="PackedScene" uid="uid://cisxf7vpsmec4" path="res://multitrigger.tscn" id="2_3h3wl"]
 [ext_resource type="PackedScene" uid="uid://cbvk1tdieovwp" path="res://trigger_holder.tscn" id="2_aj0bl"]
 [ext_resource type="PackedScene" uid="uid://d2ornjltc3aa8" path="res://stair.tscn" id="3_3moh7"]
 [ext_resource type="PackedScene" uid="uid://6b4m1yao42jo" path="res://powerup.tscn" id="4_8fd0w"]
@@ -26,21 +27,23 @@ camera_limit_right = 280
 camera_limit_bottom = 328
 initial_dialog = Array[String](["I am a placeholder boss. Die!"])
 
-[node name="triggerHolder" parent="." instance=ExtResource("2_aj0bl")]
+[node name="multitrigger" parent="." instance=ExtResource("2_3h3wl")]
 
-[node name="stair" parent="triggerHolder" instance=ExtResource("3_3moh7")]
+[node name="triggerHolder" parent="multitrigger" instance=ExtResource("2_aj0bl")]
+
+[node name="stair" parent="multitrigger/triggerHolder" instance=ExtResource("3_3moh7")]
 position = Vector2(72, 104)
 stairtype = 0
 toScene = "world0"
 spawnID = 1
 
-[node name="powerup0" parent="triggerHolder" instance=ExtResource("4_8fd0w")]
+[node name="powerup0" parent="multitrigger/triggerHolder" instance=ExtResource("4_8fd0w")]
 position = Vector2(72, 248)
 
-[node name="powerup1" parent="triggerHolder" instance=ExtResource("4_8fd0w")]
+[node name="powerup1" parent="multitrigger/triggerHolder" instance=ExtResource("4_8fd0w")]
 position = Vector2(120, 248)
 
-[node name="powerup2" parent="triggerHolder" instance=ExtResource("4_8fd0w")]
+[node name="powerup2" parent="multitrigger/triggerHolder" instance=ExtResource("4_8fd0w")]
 position = Vector2(168, 248)
 
 [node name="hecCamera" parent="." instance=ExtResource("5_ry1bo")]
@@ -52,7 +55,6 @@ position = Vector2(56, 120)
 
 [node name="hecatia2" parent="hecCamera" instance=ExtResource("6_krqqp")]
 position = Vector2(72, 120)
-hectype = 1
 
 [node name="hecatia3" parent="hecCamera" instance=ExtResource("6_krqqp")]
 position = Vector2(88, 120)

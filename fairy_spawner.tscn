@@ -751,7 +751,7 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orn5v"]
 size = Vector2(16, 16)
 
-[node name="fairySpawner0" type="TileMap" groups=["fairySpawner"]]
+[node name="fairySpawner0" type="TileMap" groups=["enemy", "fairySpawner"]]
 tile_set = SubResource("TileSet_kf0hd")
 format = 2
 script = ExtResource("1_8madj")

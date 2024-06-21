@@ -11,6 +11,10 @@ enum STATE {ALIVE, DEAD, REMOVED}
 # Called when the node enters the scene tree for the first time.
 signal obj_state_update(idstr, state)
 
+var dead:
+	get:
+		return state !=STATE.ALIVE
+
 @export var hp = 100
 
 @export var spawnTime = 2.0
