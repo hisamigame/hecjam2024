@@ -64,6 +64,7 @@ bomb={
 2d_physics/layer_5="blockenemy"
 2d_physics/layer_6="enemy"
 2d_physics/layer_7="talkable"
+2d_physics/layer_8="hurts_hec"
 
 [rendering]
 
