@@ -79,11 +79,15 @@ func _physics_process(delta):
 	match state:
 		STATE.NORMAL:
 			var input_vector = get_input_direction()
+			
+			# If the character is not active, apply the effect and darken the sprite
+			$AnimatedSprite2D.material.set_shader_parameter("can_apply", not global.actives[press_event])
+			
 			if global.actives[press_event] and input_vector != Vector2.ZERO:
-				direction = input_vector
-				velocity = input_vector * speed * global.TARGET_FPS
-				animationState.travel("walk")
-				#update_fire_direction = true
+					direction = input_vector
+					velocity = input_vector * speed * global.TARGET_FPS
+					animationState.travel("walk")
+					#update_fire_direction = true
 			else:
 				animationState.travel("idle")
 				t_same_direction = 0.0
@@ -187,9 +191,16 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 func healing_animation():
 	#modulate = Color(0.5, 0.5, 1.0)
 	material = preload("res://waterheal.tres")
-	await get_tree().create_timer(0.5).timeout
-	material = null
 	
+	# Set flag to override the mask shader with the parent material
+	$AnimatedSprite2D.use_parent_material = true
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	$AnimatedSprite2D.use_parent_material = false
+	
+	material = null
+
 
 func _on_hitbox_body_entered(body):
 	if state == STATE.NORMAL:

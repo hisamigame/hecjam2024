@@ -1,8 +1,17 @@
-[gd_scene load_steps=46 format=3 uid="uid://b0d5xty6ahvuq"]
+[gd_scene load_steps=49 format=3 uid="uid://b0d5xty6ahvuq"]
 
 [ext_resource type="Script" path="res://hecatia.gd" id="1_r73bk"]
 [ext_resource type="SpriteFrames" uid="uid://xvukukkadyh2" path="res://hell_spriteframes.tres" id="2_m6sjr"]
 [ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_ow7sw"]
+[ext_resource type="Shader" path="res://hecatia_mask.gdshader" id="3_tuctl"]
+[ext_resource type="Texture2D" uid="uid://cabxm8dnqevdk" path="res://hecatia_mask.png" id="4_3avci"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c20hx"]
+resource_local_to_scene = true
+shader = ExtResource("3_tuctl")
+shader_parameter/multiply_factor = 0.7
+shader_parameter/can_apply = true
+shader_parameter/mask = ExtResource("4_3avci")
 
 [sub_resource type="Animation" id="Animation_vrq1u"]
 length = 0.001
@@ -840,7 +849,7 @@ texture = ExtResource("2_ow7sw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-use_parent_material = true
+material = SubResource("ShaderMaterial_c20hx")
 sprite_frames = ExtResource("2_m6sjr")
 animation = &"down"
 offset = Vector2(0, -8)
