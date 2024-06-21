@@ -84,10 +84,10 @@ func _physics_process(delta):
 			$AnimatedSprite2D.material.set_shader_parameter("can_apply", not global.actives[press_event])
 			
 			if global.actives[press_event] and input_vector != Vector2.ZERO:
-					direction = input_vector
-					velocity = input_vector * speed * global.TARGET_FPS
-					animationState.travel("walk")
-					#update_fire_direction = true
+				direction = input_vector
+				velocity = input_vector * speed * global.TARGET_FPS
+				animationState.travel("walk")
+				#update_fire_direction = true
 			else:
 				animationState.travel("idle")
 				t_same_direction = 0.0
