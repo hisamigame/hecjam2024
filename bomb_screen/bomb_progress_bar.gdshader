@@ -13,7 +13,7 @@ vec4 overlay(vec4 base, vec4 blend) {
 
 void fragment() {
 	// Read the colormap and use the greyscale value
-	float noise_value = clamp(texture(noise_tex, UV - vec2(TIME/2.0, 0.0)).x, 0.0, 1.0);
+	float noise_value = texture(noise_tex, UV - vec2(TIME/2.0, 0.0)).x;
 	
 	COLOR =  vec4(overlay(color, vec4(noise_value)).rgb, COLOR.w);
 }
