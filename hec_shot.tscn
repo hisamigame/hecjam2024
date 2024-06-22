@@ -1,7 +1,8 @@
-[gd_scene load_steps=50 format=3 uid="uid://c1wnlh2o0t77v"]
+[gd_scene load_steps=65 format=3 uid="uid://c1wnlh2o0t77v"]
 
 [ext_resource type="Script" path="res://hec_shot.gd" id="1_3l82m"]
 [ext_resource type="Texture2D" uid="uid://bqh2me7xwe758" path="res://Hecatia_Bullets-Sheet.png" id="2_p0mm3"]
+[ext_resource type="Texture2D" uid="uid://7v4r68wmhore" path="res://bullet_explosion.png" id="3_kuqy2"]
 [ext_resource type="PackedScene" uid="uid://blcuqqe7uvqij" path="res://hurtbox.tscn" id="3_laeey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3ouq"]
@@ -35,6 +36,26 @@ region = Rect2(16, 96, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_firae"]
 atlas = ExtResource("2_p0mm3")
 region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5g4k"]
+atlas = ExtResource("3_kuqy2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc6w7"]
+atlas = ExtResource("3_kuqy2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0k1p"]
+atlas = ExtResource("3_kuqy2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggp30"]
+atlas = ExtResource("3_kuqy2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c58n"]
+atlas = ExtResource("3_kuqy2")
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dwj6"]
 atlas = ExtResource("2_p0mm3")
@@ -133,6 +154,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_n5g4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc6w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0k1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggp30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c58n")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0dwj6")
 }, {
 "duration": 1.0,
@@ -203,6 +244,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"earth"]
 }
 
 [sub_resource type="Animation" id="Animation_l4rh5"]
@@ -325,18 +378,156 @@ tracks/0/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_j1q17"]
+resource_name = "explode_earth"
+length = 0.24
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 1, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.24),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["explode_animation_finished"],
+"method": &"emit_signal"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1aa88"]
+resource_name = "explode_moon"
+length = 0.24
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 1, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.24),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["explode_animation_finished"],
+"method": &"emit_signal"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xebto"]
+resource_name = "explode_hell"
+length = 0.24
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.24),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["explode_animation_finished"],
+"method": &"emit_signal"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3uq8m"]
 _data = {
 "RESET": SubResource("Animation_3krmn"),
 "down": SubResource("Animation_l4rh5"),
 "down_left": SubResource("Animation_vgslp"),
 "down_right": SubResource("Animation_odb5w"),
+"explode_earth": SubResource("Animation_j1q17"),
+"explode_hell": SubResource("Animation_xebto"),
+"explode_moon": SubResource("Animation_1aa88"),
 "left": SubResource("Animation_aa6w3"),
 "right": SubResource("Animation_t5jxo"),
 "up": SubResource("Animation_mnv5g"),
 "up_left": SubResource("Animation_5m4b2"),
 "up_right": SubResource("Animation_b17lc")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_npmqe"]
+animation = &"explode_earth"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqlpe"]
+animation = &"explode_hell"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s2ing"]
+animation = &"explode_moon"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6pael"]
 animation = &"down"
@@ -385,11 +576,28 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7ckqb"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y67qj"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x646p"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0j1kn"]
+advance_mode = 0
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m2v10"]
+states/End/position = Vector2(723, 105)
 states/Start/position = Vector2(193, 100)
+states/explode_earth/node = SubResource("AnimationNodeAnimation_npmqe")
+states/explode_earth/position = Vector2(482, 23)
+states/explode_hell/node = SubResource("AnimationNodeAnimation_hqlpe")
+states/explode_hell/position = Vector2(482, 100)
+states/explode_moon/node = SubResource("AnimationNodeAnimation_s2ing")
+states/explode_moon/position = Vector2(482, 168)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_txiyk")
-states/idle/position = Vector2(328, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7ckqb")]
+states/idle/position = Vector2(329, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7ckqb"), "idle", "explode_earth", SubResource("AnimationNodeStateMachineTransition_y67qj"), "idle", "explode_hell", SubResource("AnimationNodeStateMachineTransition_x646p"), "idle", "explode_moon", SubResource("AnimationNodeStateMachineTransition_0j1kn")]
+graph_offset = Vector2(-134, -5)
 
 [node name="hec_shot" type="Node2D"]
 modulate = Color(1, 1, 1, 0.498039)
@@ -398,7 +606,7 @@ script = ExtResource("1_3l82m")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ijquu")
-animation = &"moon"
+animation = &"earth"
 
 [node name="hurtbox" parent="." instance=ExtResource("3_laeey")]
 collision_mask = 34
@@ -411,7 +619,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_m2v10")
 anim_player = NodePath("../AnimationPlayer")
-parameters/idle/blend_position = Vector2(0.0163132, 0.920705)
+parameters/idle/blend_position = Vector2(0.232143, 0.587302)
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

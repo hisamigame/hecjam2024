@@ -4,6 +4,11 @@ enum HEC {EARTH, HELL, MOON}
 
 @export var hectype : HEC = HEC.HELL
 
+@export var on_hit_speed_multiplier: float = 0.1
+
+signal explode_animation_finished
+
+
 func _ready():
 	$hurtbox.damage = damage
 	$hurtbox.direction = direction
@@ -14,16 +19,37 @@ func _ready():
 			$sprite.animation = 'earth'
 		HEC.MOON:
 			$sprite.animation = 'moon'
-			
+	
 	$AnimationTree.set("parameters/idle/blend_position", direction)
 
 
 func _on_hurtbox_body_entered(_body):
-	remove()
+	_explode()
+
 
 func _on_hurtbox_area_entered(_area):
-	remove()
+	_explode()
 
 
 func _on_hurtbox_tree_exiting():
+	_explode()
+
+
+func _explode() -> void:
+	speed *= on_hit_speed_multiplier
+	
+	$AnimationTree.get('parameters/playback').travel(_get_explosion_animation_name()) 
+	
+	await explode_animation_finished
+	
 	queue_free()
+
+
+func _get_explosion_animation_name() -> String:
+	match hectype:
+		HEC.HELL:
+			return 'explode_hell'
+		HEC.EARTH:
+			return 'explode_earth'
+		_:
+			return 'explode_moon'
