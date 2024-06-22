@@ -194,6 +194,10 @@ anchor_bottom = 0.0
 offset_right = 256.0
 offset_bottom = 224.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_o2pbb")
+volume_db = -20.0
+
+[node name="BGMPlayerNext" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_o2pbb")
 volume_db = -20.0

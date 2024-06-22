@@ -7,7 +7,7 @@ func _ready():
 	if 'world5' in global.allWorldState:
 		state = global.allWorldState['world5']['state']
 	if state == 1:
-		initial_dialog = []
+		initial_dialog = null
 	super()
 	print(state)
 	#if state == 1:

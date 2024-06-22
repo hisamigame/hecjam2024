@@ -40,7 +40,7 @@ func get_nearest_hec_pos():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$AnimationPlayer.speed_scale = speed/2.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

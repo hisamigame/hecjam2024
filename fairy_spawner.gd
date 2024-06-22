@@ -32,6 +32,10 @@ var overlapping_bodies = 0
 		for cell in cells:
 			var ac = get_cell_atlas_coords(0,cell)
 			set_cell(0, cell,v+1, ac)
+		cells = get_used_cells(1)
+		for cell in cells:
+			var ac = get_cell_atlas_coords(1,cell)
+			set_cell(1, cell,v+4, ac)
 			
 			#print(data.get_terrain())
 	get:
@@ -78,7 +82,6 @@ func _on_hitbox_area_entered(area):
 
 
 func spawn_fairy():
-	print("spawn")
 	var fairy = fairyType.instantiate()
 	fairy.position = position - Vector2(8,8)
 	global.world_node().add_child(fairy)

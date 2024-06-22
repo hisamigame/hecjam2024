@@ -38,6 +38,7 @@ y_sort_enabled = true
 
 [node name="hecatia1" parent="hecCamera" instance=ExtResource("3_6kyl5")]
 position = Vector2(8, 72)
+hectype = 0
 
 [node name="hecatia2" parent="hecCamera" instance=ExtResource("3_6kyl5")]
 position = Vector2(24, 72)
@@ -67,7 +68,7 @@ sprite = ExtResource("7_3f16x")
 [node name="stair" parent="." instance=ExtResource("8_2ob0c")]
 position = Vector2(56, 56)
 stairtype = 0
-toScene = "world1"
+toScene = "world10"
 
 [node name="stair2" parent="." instance=ExtResource("8_2ob0c")]
 position = Vector2(24, 120)

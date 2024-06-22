@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0kkjklsv2me8"]
+[gd_scene load_steps=5 format=3 uid="uid://c0kkjklsv2me8"]
 
 [ext_resource type="Texture2D" uid="uid://6hmod2brmdyy" path="res://dialogBox.png" id="1_708l3"]
 [ext_resource type="Script" path="res://dialog_box.gd" id="1_n06kt"]
 [ext_resource type="LabelSettings" uid="uid://dt56xoefo3wq2" path="res://dialogText.tres" id="2_koiey"]
+[ext_resource type="PackedScene" uid="uid://cj01qh7wygc47" path="res://portrait.tscn" id="4_7sigq"]
 
 [node name="dialogBox" type="Control"]
 layout_mode = 3
@@ -30,3 +31,10 @@ label_settings = ExtResource("2_koiey")
 autowrap_mode = 3
 clip_text = true
 uppercase = true
+
+[node name="portrait1" parent="." instance=ExtResource("4_7sigq")]
+position = Vector2(56, 120)
+portrait = 14
+
+[node name="portrait2" parent="." instance=ExtResource("4_7sigq")]
+position = Vector2(200, 120)

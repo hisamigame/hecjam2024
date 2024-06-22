@@ -27,6 +27,8 @@ const defaultBmb = 0
 const baseBombDMG = 50
 const bomb_duration = 0.5
 
+var current_music : String = 'NO TITLE THEME YET'
+
 var spl = [1.0, 1.0, 1.0]
 var atk = [10, 10, 10]
 var maxhp = [20, 20, 20]
@@ -184,6 +186,16 @@ func _change_level(scene_name, spawnID):
 	canbomb = false
 	transition()
 	var newWorld = scene.instantiate()
+	print('change level')
+	print(newWorld.music)
+	if newWorld.music != current_music:
+		current_music = newWorld.music
+		# TODO:
+		# there should be a cross fade here
+		print(current_music)
+		$BGMPlayer.stream = load(current_music)
+		$BGMPlayer.play()
+	
 	old_world = current_world
 	current_world = scene_name
 	old_world_scene = old_world_node()

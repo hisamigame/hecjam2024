@@ -1,9 +1,16 @@
 extends Control
 @onready var label = $Label
-var messages
 
-var nmessage = 0
-var Nmessages = 0
+
+var Nmessages = 0 # total messages
+var nmessage = 0 # current message
+var messages
+var portraits1
+var status1
+var portraits2
+var status2
+
+
 var lapsed = 0
 var maxchar = 1
 var active = false
@@ -25,6 +32,7 @@ func _ready():
 
 func activate(chatbox : TalkBox):
 	current_chatbox = chatbox
+	current_chatbox.update_dict()
 	global.pause()
 	active = true
 	oldcanbomb = global.canbomb
@@ -32,8 +40,11 @@ func activate(chatbox : TalkBox):
 	nmessage = 0
 	visible = true
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	messages = chatbox.messages
-	#grab_focus()
+	messages = current_chatbox.messages
+	status1 = current_chatbox.status1
+	status2 = current_chatbox.status2
+	portraits1 = current_chatbox.portraits1
+	portraits2 = current_chatbox.portraits2
 	Nmessages = len(messages)
 	next_message(nmessage)
 	
@@ -44,12 +55,20 @@ func next_message(n):
 	else:
 		lapsed = 0.0
 		label.text = tr(messages[n])
+		$portrait1.set_portrait(current_chatbox.expression_dict[portraits1[n]])
+		$portrait2.set_portrait(current_chatbox.expression_dict[portraits2[n]])
+		$portrait1.set_status(current_chatbox.status_dict[status1[n]])
+		$portrait2.set_status(current_chatbox.status_dict[status2[n]])
 		maxchar = len(label.text)
 		label.visible_characters = 1
 	
 func deactivate():
 	active = false
-	global.canbomb = oldcanbomb
+	#oldcanbomb seems to not work properly for dialogs
+	# at start of level. Probably fine to just set to true
+	# you should always be able to bomb after dialog
+	# (game checks for number of bombs separately)
+	global.canbomb = true 
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED
 	global.unpause()

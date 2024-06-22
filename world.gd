@@ -5,9 +5,11 @@ extends Node2D
 @export var camera_limit_right = 10000000
 @export var camera_limit_bottom = 10000000
 
-@export var initial_dialog : Array[String] = []
+@export var initial_dialog : TalkBox  = null
 @export var state = 0
 @export var peace = false
+
+@export var music : String = 'res://planet_something_something.ogg'
 
 @onready var camera = $hecCamera
 
@@ -52,12 +54,8 @@ func _ready():
 		
 	#camera.update_camera_position()
 	# initial dialog if applicable
-	if len(initial_dialog) > 0:
-		var chat = chatbox_class.instantiate()
-		chat.messages = initial_dialog
-		chat.loopmode = 3
-		chat.n_message_list = 1
-		global.dialogBox.activate(chat)
+	if initial_dialog != null:
+		global.dialogBox.activate(initial_dialog)
 
 func unglow_moongates():
 	var moongates = get_tree().get_nodes_in_group('moongate')

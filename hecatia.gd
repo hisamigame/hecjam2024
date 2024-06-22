@@ -100,12 +100,16 @@ func _physics_process(delta):
 			move_and_slide()
 			
 			# check if we chat
-			$RayCast2D.target_position = fire_direction * 10.0
+			$RayCast2D.target_position = direction * 10.0
+			#$RayCast2D.target_position = fire_direction * 10.0
+			# TODO: this logic is misfiring slightly
+			# can chat even if input is not towards
 			if $RayCast2D.is_colliding() and !global.dialogBox.active and fire_direction == input_vector and global.actives[press_event]:
 				if !nodoublechat or just_pressed_any_direction():
 					nodoublechat = true
 					var chatbox = $RayCast2D.get_collider()
 					animationState.travel('idle')
+					chatbox.initiator = hectype
 					global.dialogBox.activate(chatbox)
 					#chatbox.call_deferred('next_message')
 					#chatbox.next_message()

@@ -25,7 +25,7 @@ camera_limit_left = -40
 camera_limit_top = 0
 camera_limit_right = 280
 camera_limit_bottom = 328
-initial_dialog = Array[String](["Welcome to OUR hell!"])
+music = "res://pat_h_to_yumi.ogg"
 
 [node name="enemyAliveChecker" parent="." instance=ExtResource("2_sh8ur")]
 

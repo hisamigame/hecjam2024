@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://01q5sw2m18r2"]
+[gd_scene load_steps=19 format=3 uid="uid://01q5sw2m18r2"]
 
 [ext_resource type="Script" path="res://worldBoss.gd" id="1_p0ju7"]
 [ext_resource type="PackedScene" uid="uid://cbvk1tdieovwp" path="res://trigger_holder.tscn" id="2_d8qbb"]
@@ -16,16 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://cnnxenb02x3p5" path="res://fairy_spawner.tscn" id="14_nvef8"]
 [ext_resource type="PackedScene" uid="uid://cisxf7vpsmec4" path="res://multitrigger.tscn" id="14_rvrxm"]
 [ext_resource type="PackedScene" uid="uid://dlvgdvoyrtdhw" path="res://wall_segment.tscn" id="17_n6o4h"]
+[ext_resource type="PackedScene" uid="uid://4llmyh5qy3do" path="res://talk_box.tscn" id="18_sybm6"]
 [ext_resource type="PackedScene" uid="uid://bxx3v0juso65m" path="res://level_transition.tscn" id="19_ilhxw"]
 
-[node name="world" type="Node2D"]
+[node name="world" type="Node2D" node_paths=PackedStringArray("initial_dialog")]
 y_sort_enabled = true
 script = ExtResource("1_p0ju7")
 camera_limit_left = -40
 camera_limit_top = 0
 camera_limit_right = 280
 camera_limit_bottom = 328
-initial_dialog = Array[String](["Welcome to OUR hell!"])
+initial_dialog = NodePath("talkBox")
 
 [node name="enemyAliveChecker" parent="." instance=ExtResource("2_ul3hm")]
 
@@ -141,6 +142,14 @@ z_index = 1
 position = Vector2(104, -8)
 scale = Vector2(20, 1)
 toScene = "world6"
+
+[node name="talkBox" parent="." instance=ExtResource("18_sybm6")]
+position = Vector2(-32, 320)
+message_list_list = Array[String](["Welcome to OUR hell!"])
+portrait1_list_list = Array[String](["hen"])
+status1_list_list = Array[String](["0"])
+portrait2_list_list = Array[String](["hen"])
+status2_list_list = Array[String](["0"])
 
 [connection signal="all_enemies_dead" from="enemyAliveChecker" to="." method="bossDefeated"]
 [connection signal="timeout" from="Timer" to="multitrigger/triggerHolder2" method="switch"]

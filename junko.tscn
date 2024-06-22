@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cc5udx6ecletp"]
+[gd_scene load_steps=7 format=3 uid="uid://cc5udx6ecletp"]
 
 [ext_resource type="Texture2D" uid="uid://cyi2n26qk7fft" path="res://Sprite_Junko-Sheet.png" id="1_dosr0"]
 [ext_resource type="Script" path="res://junko.gd" id="1_w3ttm"]
-[ext_resource type="PackedScene" uid="uid://4llmyh5qy3do" path="res://talk_box.tscn" id="3_lxw7u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ff3e"]
 atlas = ExtResource("1_dosr0")
@@ -44,5 +43,3 @@ frame_progress = 0.804945
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
 shape = SubResource("RectangleShape2D_pxdnl")
-
-[node name="talkBox" parent="." instance=ExtResource("3_lxw7u")]
