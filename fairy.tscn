@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bdcow2b23evpq"]
+[gd_scene load_steps=43 format=3 uid="uid://bdcow2b23evpq"]
 
 [ext_resource type="Script" path="res://fairy.gd" id="1_o25xi"]
 [ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_2ic1x"]
@@ -152,7 +152,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_q2awp"]
 resource_name = "spawn"
-length = 0.2
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -161,10 +161,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 4]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -319,6 +319,10 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("4_koln8")
 region = Rect2(48, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_evqdt"]
+atlas = ExtResource("4_koln8")
+region = Rect2(64, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsj8"]
 atlas = ExtResource("2_56pig")
 region = Rect2(0, 32, 16, 16)
@@ -385,6 +389,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1ufol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evqdt")
 }],
 "loop": true,
 "name": &"spawn",
