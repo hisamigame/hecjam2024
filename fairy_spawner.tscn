@@ -812,14 +812,19 @@ size = Vector2(10, 10)
 size = Vector2(16, 16)
 
 [node name="fairySpawner0" type="TileMap" groups=["enemy", "fairySpawner"]]
+z_index = -1
+y_sort_enabled = true
 tile_set = SubResource("TileSet_kf0hd")
 format = 2
 layer_0/name = "base"
+layer_0/y_sort_enabled = true
 layer_1/name = "clutter"
+layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("1_8madj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
 position = Vector2(-8, -8)
 sprite_frames = SubResource("SpriteFrames_nocmk")
 animation = &"dead"

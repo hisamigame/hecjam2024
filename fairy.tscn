@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://bdcow2b23evpq"]
+[gd_scene load_steps=42 format=3 uid="uid://bdcow2b23evpq"]
 
 [ext_resource type="Script" path="res://fairy.gd" id="1_o25xi"]
 [ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_2ic1x"]
 [ext_resource type="Texture2D" uid="uid://bqhs8sivsy0tr" path="res://Fairy-Sheet.png" id="2_56pig"]
+[ext_resource type="Texture2D" uid="uid://d24nwk5hjp04r" path="res://fairy_spawn.png" id="4_koln8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5i4b"]
 size = Vector2(12, 12)
@@ -178,6 +179,35 @@ tracks/1/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_q2awp"]
+resource_name = "spawn"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"spawn"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cba3f"]
 _data = {
 "RESET": SubResource("Animation_o7p8r"),
@@ -185,11 +215,15 @@ _data = {
 "down": SubResource("Animation_4nj74"),
 "left": SubResource("Animation_t4dib"),
 "right": SubResource("Animation_77365"),
+"spawn": SubResource("Animation_q2awp"),
 "up": SubResource("Animation_381ss")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ie1ma"]
 animation = &"die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uikbe"]
+animation = &"spawn"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_245ei"]
 animation = &"down"
@@ -215,21 +249,27 @@ blend_point_3/pos = Vector2(-1, 0)
 snap = Vector2(1, 1)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bqvwi"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5pptb"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qemck"]
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_286q0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2w470"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nu0dl"]
 states/die/node = SubResource("AnimationNodeAnimation_ie1ma")
 states/die/position = Vector2(559, 96)
+states/spawn/node = SubResource("AnimationNodeAnimation_uikbe")
+states/spawn/position = Vector2(318, 196)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_wtctx")
 states/walk/position = Vector2(421, 118)
-transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_bqvwi"), "walk", "die", SubResource("AnimationNodeStateMachineTransition_5pptb"), "die", "End", SubResource("AnimationNodeStateMachineTransition_qemck")]
+transitions = ["walk", "die", SubResource("AnimationNodeStateMachineTransition_5pptb"), "die", "End", SubResource("AnimationNodeStateMachineTransition_qemck"), "Start", "spawn", SubResource("AnimationNodeStateMachineTransition_286q0"), "spawn", "walk", SubResource("AnimationNodeStateMachineTransition_2w470")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylnkh"]
 atlas = ExtResource("2_56pig")
@@ -262,6 +302,22 @@ region = Rect2(0, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kid6r"]
 atlas = ExtResource("2_56pig")
 region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf4in"]
+atlas = ExtResource("4_koln8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vslun"]
+atlas = ExtResource("4_koln8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vamxe"]
+atlas = ExtResource("4_koln8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ufol"]
+atlas = ExtResource("4_koln8")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsj8"]
 atlas = ExtResource("2_56pig")
@@ -316,6 +372,23 @@ animations = [{
 "loop": true,
 "name": &"right",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf4in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vslun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vamxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ufol")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,

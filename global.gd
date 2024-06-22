@@ -12,6 +12,8 @@ var hell_active = false
 var earth_active = false
 var moon_active = false
 
+var default_three = false
+
 enum HECTYPE {EARTH, HELL, MOON}
 
 var inputstring = {'hell' : HECTYPE.HELL, 'earth' : HECTYPE.EARTH, 'moon' : HECTYPE.MOON}

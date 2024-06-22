@@ -156,6 +156,17 @@ func connect_persistent_nodes():
 	for node in get_tree().get_nodes_in_group('powerup'):
 		node.connect('obj_state_update', _update_world_state)
 
+func is_any_active():
+	var ret = false
+	var i = 1
+	for k in global.actives:
+		if global.actives[k] and !$hecCamera.get_node('hecatia' + str(i+1)).dead:
+			print($hecCamera.get_node('hecatia' + str(i+1)).hectype)
+			
+			ret = true
+			i = i + 1
+			break
+	return ret
 
 func get_default_world_state():
 	var world_state = {'state' : 0}

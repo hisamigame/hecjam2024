@@ -5,7 +5,7 @@ extends Node2D
 func _ready():
 	# set defaults so the game loops correctly
 	# if the player gets taken back to title after ending
-	global.current_world = 'world5'
+	global.current_world = 'world1'
 	
 	global.hide_ui()
 	# TODO: comment this out

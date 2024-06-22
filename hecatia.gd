@@ -74,16 +74,25 @@ func _ready():
 	if peace:
 		$bulletTimer.stop()
 
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	var any_active = false
+	if global.default_three:
+		any_active = global.world_node().is_any_active()
+	else:
+		any_active = true
+	
 	match state:
 		STATE.NORMAL:
 			var input_vector = get_input_direction()
 			
 			# If the character is not active, apply the effect and darken the sprite
-			$AnimatedSprite2D.material.set_shader_parameter("can_apply", not global.actives[press_event])
 			
-			if global.actives[press_event] and input_vector != Vector2.ZERO:
+			$AnimatedSprite2D.material.set_shader_parameter("can_apply", not global.actives[press_event] and any_active)
+			
+			if (!any_active or global.actives[press_event]) and input_vector != Vector2.ZERO:
 				direction = input_vector
 				velocity = input_vector * speed * global.TARGET_FPS
 				animationState.travel("walk")
