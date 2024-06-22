@@ -37,6 +37,7 @@ camera_limit_top = 0
 camera_limit_right = 280
 camera_limit_bottom = 240
 peace = true
+music = "res://junko.ogg"
 
 [node name="hecCamera" parent="." instance=ExtResource("2_o5fc7")]
 y_sort_enabled = true

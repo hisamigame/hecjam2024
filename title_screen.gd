@@ -6,7 +6,7 @@ func _ready():
 	# set defaults so the game loops correctly
 	# if the player gets taken back to title after ending
 	global.current_world = 'world1'
-	
+	global.change_music('res://title.ogg')
 	global.hide_ui()
 	# TODO: comment this out
 	#global.start_game()

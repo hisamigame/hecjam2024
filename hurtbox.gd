@@ -6,6 +6,8 @@ extends Area2D
 @export var direction = Vector2.ZERO
 @export var instakill = false
 @export var mystery = false
+@export var confuse = false
+@export var freeze = false
 
 func _ready():
 	pass # Replace with function body.

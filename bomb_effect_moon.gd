@@ -2,6 +2,8 @@ extends BombEffect
 
 @export var mystery = true
 @export var damage = 0
+@export var confuse = false
+@export var freeze = false
 var t = 0.0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,6 +13,8 @@ func _ready():
 	$AnimatedSprite2D.play("moon")
 	$hurtbox.mystery = mystery
 	$hurtbox.damage = 0
+	$hurtbox.confuse = confuse
+	$hurtbox.freeze = freeze
 	material.set_shader_parameter("t0", t)
 
 func _process(delta):

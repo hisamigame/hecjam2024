@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk8r3k6wejsnq"]
+
+[ext_resource type="Script" path="res://spiritSpawner.gd" id="1_c8g6b"]
+
+[node name="spiritSpawner" type="Node"]
+script = ExtResource("1_c8g6b")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

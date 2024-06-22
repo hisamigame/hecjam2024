@@ -4,6 +4,8 @@ const TARGET_FPS=60
 const x_width = 256
 const y_width = 176
 
+var rng = RandomNumberGenerator.new()
+
 var current_world = 'world0'
 var old_world = ''
 var old_world_scene = null
@@ -24,7 +26,7 @@ const defaultHP = 20
 const defaultMaxHP = 20
 const defaultAtk = 10
 const defaultSpl = 1
-const defaultBmb = 0
+const defaultBmb = 10
 
 const baseBombDMG = 50
 const bomb_duration = 0.5
@@ -103,6 +105,7 @@ func _ready():
 func start_game():
 	var world = load("res://" + global.current_world + ".tscn")
 	var worldscene = world.instantiate()
+	change_music(worldscene.music)
 	worldscene.name = global.current_world
 	global.get_subviewport().add_child(worldscene)
 	worldscene.process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -182,6 +185,15 @@ func unpause():
 func change_level(scene_name, spawnID):
 	call_deferred('_change_level', scene_name, spawnID)
 	
+func change_music(new_music):
+	if new_music != current_music:
+		current_music = new_music
+		# TODO:
+		# there should be a cross fade here
+		print(current_music)
+		$BGMPlayer.stream = load(current_music)
+		$BGMPlayer.play()
+	
 func _change_level(scene_name, spawnID):
 	var scene = load('res://' + scene_name + '.tscn')
 	pause()
@@ -190,14 +202,7 @@ func _change_level(scene_name, spawnID):
 	var newWorld = scene.instantiate()
 	print('change level')
 	print(newWorld.music)
-	if newWorld.music != current_music:
-		current_music = newWorld.music
-		# TODO:
-		# there should be a cross fade here
-		print(current_music)
-		$BGMPlayer.stream = load(current_music)
-		$BGMPlayer.play()
-	
+	change_music(newWorld.music)
 	old_world = current_world
 	current_world = scene_name
 	old_world_scene = old_world_node()

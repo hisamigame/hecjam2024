@@ -16,7 +16,14 @@ func _ready():
 	var ratio = global.y_width/float(global.x_width)
 	angle_threshold0 = atan(ratio)
 	angle_threshold1 = PI - angle_threshold0
-	$face.texture = sprite
+	match track_object.name:
+		'hecatia1':
+			$face.texture = load('res://earthface.png')
+		'hecatia2':
+			$face.texture = load('res://hellface.png')
+		'hecatia3':
+			$face.texture = load('res://moonface.png')
+	#$face.texture = sprite
 
 func get_draw_pos():
 	var cpos = global.get_camera_pos()

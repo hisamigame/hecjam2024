@@ -10,6 +10,8 @@ material = ExtResource("2_a5c0i")
 script = ExtResource("2_25gt6")
 mystery = true
 damage = 0
+confuse = false
+freeze = false
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 use_parent_material = true

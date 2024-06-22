@@ -1,5 +1,7 @@
 extends Node2D
 
+enum MOONBOMB {CHANGE_MUSIC, CONFUSE, FREEZE, INVINCIBILITY, HPUP, ATKUP, BMBUP}
+
 @export var camera_limit_left = -10000000
 @export var camera_limit_top = -10000000
 @export var camera_limit_right = 10000000
@@ -86,7 +88,7 @@ func bomb(actives, level):
 
 func hell_bomb(level):
 	var obj = hellBomb.instantiate()
-	obj.damage = global.baseBombDMG * level * global.spl[0]
+	obj.damage = (1.0 + (global.spl[0]-1) * 1.2) *  (global.baseBombDMG +  0.5* global.baseBombDMG * (level-1))
 	obj.position = $hecCamera.cam_position()
 	if level == 3:
 		obj.instakill = true
@@ -100,7 +102,7 @@ func earth_bomb(level):
 		if child is Hecatia:
 			if not child.dead:
 				child.healing_animation()
-	var plushp = 10 + (global.spl[HEC.EARTH] - 1) * 5
+	var plushp = round((1.0 + (global.spl[0]-1) * 1.2) * (10 + (global.spl[HEC.EARTH] - 1) * 5))
 	if level < 3:
 		var newhp = clamp(global.hp[HEC.HELL] + plushp,0,global.maxhp[HEC.HELL])
 		newhp = max(global.hp[HEC.HELL], newhp)
@@ -113,21 +115,49 @@ func earth_bomb(level):
 		global.set_hp(HEC.MOON, newhp)
 	else:
 		# can overheal
-		# TODO: maybe cap at 99? Not sure.
-		global.set_hp(HEC.HELL, global.hp[HEC.HELL] + plushp)
-		global.set_hp(HEC.EARTH, global.hp[HEC.EARTH] + plushp)
-		global.set_hp(HEC.MOON, global.hp[HEC.MOON] + plushp)
+		# overheal max determined by hearth spell level
+		var newhp = clamp(global.hp[HEC.HELL] + plushp,0,global.maxhp[HEC.HELL] + global.spl[HEC.EARTH])
+		global.set_hp(HEC.HELL, newhp)
+		newhp = clamp(global.hp[HEC.EARTH] + plushp,0,global.maxhp[HEC.EARTH] + global.spl[HEC.EARTH])
+		global.set_hp(HEC.EARTH, newhp)
+		newhp = clamp(global.hp[HEC.MOON] + plushp,0,global.maxhp[HEC.MOON] + global.spl[HEC.EARTH])
+		global.set_hp(HEC.MOON, newhp)
 	
 func moon_bomb(level):
 	var obj = moonBomb.instantiate()
+	# 0: change music
+	# 1: confuse enemies
+	# 2: invincibility
+	# 3: stat gain hp
+	# 4: stat gain atk
+	# 5: gain bomb
+	var neffects = 6
+	var nmaxoutcomes = 3
+	
+	var happening = range(0,nmaxoutcomes)
+	happening.shuffle()
+	var bonus = randi_range(0, global.spl[HEC.MOON])
+	for i in range(level):
+		var outcome = happening[i] + bonus
+		match outcome:
+			MOONBOMB.CHANGE_MUSIC:
+				pass
+			MOONBOMB.CONFUSE:
+				obj.confuse = true
+			MOONBOMB.FREEZE:
+				obj.freeze = true
+			MOONBOMB.INVINCIBILITY:
+				pass
+			MOONBOMB.HPUP:
+				pass
+			MOONBOMB.ATKUP:
+				pass
+			MOONBOMB.BMBUP:
+				pass
 	obj.position = $hecCamera.cam_position()
 	global.world_node().add_child(obj)
-	# TODO random effects
-	# invincibility
-	# change music
-	# turn enemy into weaklings / oure spirits
-	# confuse enemies
-
+	
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	camera.update_camera_position()
@@ -189,9 +219,9 @@ func get_camera_pos():
 	
 func show_oob(hectype):
 	match hectype:
-		HEC.HELL:
-			$OOBindicator1.visible = true
 		HEC.EARTH:
+			$OOBindicator1.visible = true
+		HEC.HELL:
 			$OOBindicator2.visible = true
 		HEC.MOON:
 			$OOBindicator3.visible = true

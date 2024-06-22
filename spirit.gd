@@ -1,15 +1,10 @@
 extends CharacterBody2D
 
-class_name Fairy
-
 var direction = Vector2.DOWN
-var speed = 0.5
+@export var speed = 0.25
 @export var hp = 50
-@export var damage = 2
+@export var damage = 5
 @onready var animationState = $AnimationTree.get('parameters/playback')
-
-@export var confused = false
-@export var frozen = false
 
 var dying_direction = Vector2.ZERO
 
@@ -44,17 +39,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	if $detectCol.has_overlapping_bodies():
+		modulate.a = 0.5
+	else:
+		modulate.a = 1.0
 	match state:
 		STATE.NORMAL:
-			if not frozen:
-				var hecpos = get_nearest_hec_pos()
-				if hecpos:
-					direction = position.direction_to(hecpos)
-				if confused:
-					direction = -direction
-				$AnimationTree.set("parameters/walk/blend_position", direction)
-				velocity = direction * speed * global.TARGET_FPS
-				move_and_slide()
+			var hecpos = get_nearest_hec_pos()
+			if hecpos:
+				direction = position.direction_to(hecpos)
+			velocity = direction * speed * global.TARGET_FPS
+			move_and_slide()
 		STATE.DYING:
 			velocity = dying_direction * speed * global.TARGET_FPS
 			move_and_slide()
@@ -67,23 +62,11 @@ func die(dir):
 	collision_layer = 0
 	collision_mask = 0
 
-func get_confused():
-	confused = true
-	material = load('res://confusion_material.tres')
-	
-func get_frozen():
-	frozen = true
-	
-
 func _on_hitbox_area_entered(area):
 	if area.instakill:
 		hp = 0
 	else:
 		hp = hp - area.damage
-		if area.confuse:
-			get_confused()
-		if area.freeze:
-			get_frozen()
 	area.queue_free()
 	if hp <= 0 and state == STATE.NORMAL:
 		die(area.direction)

@@ -16,7 +16,7 @@ var dead:
 		return state !=STATE.ALIVE
 
 @export var hp = 100
-
+@export var confused = false
 @export var spawnTime = 2.0
 
 var overlapping_bodies = 0
@@ -76,6 +76,8 @@ func die():
 func _on_hitbox_area_entered(area):
 	if state == STATE.ALIVE:
 		hp = hp - area.damage
+		if area.confuse:
+			confused = true
 		area.queue_free()
 		if hp <= 0:
 			die()
