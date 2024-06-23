@@ -47,6 +47,10 @@ func get_draw_pos():
 		draw_pos = cpos + draw_pos
 
 func _physics_process(_delta):
-	get_draw_pos()
-	position = draw_pos
-	$arrow.rotation = angle
+	if track_object.dead:
+		visible = false
+		process_mode = Node.PROCESS_MODE_DISABLED
+	else:
+		get_draw_pos()
+		position = draw_pos
+		$arrow.rotation = angle

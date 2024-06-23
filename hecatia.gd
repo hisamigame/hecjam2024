@@ -15,7 +15,7 @@ var last_direction = Vector2.DOWN
 var fire_direction = Vector2.DOWN
 var speed = 2
 var bullet_offset = 0
-@export var hold_direction_thresh = 0.04 # ~2 frame
+@export var hold_direction_thresh = 0.02 # ~2 frame
 
 @onready var animationState = $AnimationTree.get('parameters/playback')
 @onready var bullet = preload("res://hec_shot.tscn")
@@ -164,8 +164,10 @@ func die():
 	global.world_node().hide_oob(hectype)
 	$bulletTimer.stop()
 	collision_layer = 0
+	animationState.travel('die')
 	
 func enter_knockback(dir):
+	global.play_hecHurt()
 	state = STATE.KNOCKBACK
 	knockback_direction = dir
 	set_invincibility(invinc_duration)

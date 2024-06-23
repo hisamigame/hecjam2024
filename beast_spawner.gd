@@ -6,6 +6,7 @@ var idstr : String
 
 enum STATE {ALIVE, DEAD, REMOVED}
 
+@export var direction = Vector2.LEFT
 @export var state : STATE = STATE.ALIVE
 # Called when the node enters the scene tree for the first time.
 signal obj_state_update(idstr, state)
@@ -16,7 +17,7 @@ var dead:
 
 @export var hp = 200
 @export var confused = false
-@export var spawnTime = 2.0
+@export var spawnTime = 3.2
 
 var overlapping_bodies = 0
 
@@ -45,6 +46,7 @@ func set_initial_state(_state : STATE):
 			spawnTimer.stop()
 			$StaticBody2D.queue_free()
 func die():
+	global.play_death2()
 	state = STATE.DEAD
 	emit_signal('obj_state_update', idstr, state)
 	spawnTimer.stop()
@@ -54,15 +56,18 @@ func die():
 func _on_hitbox_area_entered(area):
 	if state == STATE.ALIVE:
 		hp = hp - area.damage
-		if area.confuse:
-			confused = true
 		area.queue_free()
 		if hp <= 0:
 			die()
+		else:
+			global.play_hurt2()
+			if area.confuse:
+				confused = true
 
 
 func spawn_mob():
 	var mob = mobType.instantiate()
+	mob.direction = direction
 	mob.position = position - Vector2(8,8)
 	global.world_node().add_child(mob)
 

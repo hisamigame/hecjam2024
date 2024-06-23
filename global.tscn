@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkxlg7evifv0b"]
+[gd_scene load_steps=26 format=3 uid="uid://dkxlg7evifv0b"]
 
 [ext_resource type="Script" path="res://global.gd" id="1_f3538"]
 [ext_resource type="PackedScene" uid="uid://c0ah0pwd3jm1y" path="res://transition.tscn" id="2_tqwpl"]
@@ -15,6 +15,16 @@
 [ext_resource type="PackedScene" uid="uid://c8gdc1dstca1p" path="res://bomb_screen.tscn" id="12_uue4g"]
 [ext_resource type="PackedScene" uid="uid://c0kkjklsv2me8" path="res://dialog_box.tscn" id="12_wf25t"]
 [ext_resource type="AudioStream" uid="uid://dkiewooobn406" path="res://planet_something_something.ogg" id="14_o2pbb"]
+[ext_resource type="AudioStream" uid="uid://b7tfsg31envn4" path="res://click2.wav" id="16_rsuxm"]
+[ext_resource type="AudioStream" uid="uid://bf8r7573qdci" path="res://Hit_02.wav" id="17_0dieg"]
+[ext_resource type="AudioStream" uid="uid://btqjvikoy1dpf" path="res://MenuSelectionClick.wav" id="17_3vwrv"]
+[ext_resource type="AudioStream" uid="uid://xu8cq6pxv4di" path="res://Explosion_03.wav" id="18_a6inm"]
+[ext_resource type="AudioStream" uid="uid://iiiukaj4jsh4" path="res://Hit_00.wav" id="18_rwuxw"]
+[ext_resource type="AudioStream" uid="uid://b8yd5p4mn6s4v" path="res://se_bomb.wav" id="20_rmpfb"]
+[ext_resource type="AudioStream" uid="uid://drxnuuwr2y3sm" path="res://se_buildup.wav" id="21_ru8o1"]
+[ext_resource type="AudioStream" uid="uid://dfa63p5jgkvvj" path="res://se_cardget.wav" id="22_krrco"]
+[ext_resource type="AudioStream" uid="uid://bf5bs6v3qeas6" path="res://Hurt.wav" id="23_elfhe"]
+[ext_resource type="PackedScene" uid="uid://bsfeppko0j8y3" path="res://game_over.tscn" id="25_6fpxu"]
 
 [node name="global" type="Control"]
 process_mode = 3
@@ -201,3 +211,42 @@ volume_db = -20.0
 [node name="BGMPlayerNext" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_o2pbb")
 volume_db = -20.0
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_rsuxm")
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_0dieg")
+volume_db = -10.0
+
+[node name="death2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_rwuxw")
+volume_db = -15.0
+
+[node name="doors" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_a6inm")
+volume_db = -15.0
+
+[node name="bomb" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_rmpfb")
+volume_db = -15.0
+
+[node name="buildup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_ru8o1")
+volume_db = -15.0
+
+[node name="powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_krrco")
+volume_db = -10.0
+max_polyphony = 3
+
+[node name="hecHurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_elfhe")
+volume_db = -10.0
+
+[node name="hurt2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_3vwrv")
+
+[node name="gameOver" parent="." instance=ExtResource("25_6fpxu")]
+visible = false
+layout_mode = 1

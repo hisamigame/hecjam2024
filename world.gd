@@ -80,6 +80,7 @@ func set_idle():
 				
 
 func bomb(actives, level):
+	global.play_bomb()
 	if actives["moon"]:
 		moon_bomb(level)
 	if actives["hell"]:
@@ -201,12 +202,6 @@ func get_alive_hec_positions():
 				hecposlist.append(child.position)
 	return hecposlist
 	
-func connect_persistent_nodes():
-	for node in get_tree().get_nodes_in_group('fairySpawner'):
-		node.connect('obj_state_update', _update_world_state)
-	for node in get_tree().get_nodes_in_group('powerup'):
-		node.connect('obj_state_update', _update_world_state)
-
 func is_any_active():
 	var ret = false
 	var i = 1
@@ -216,10 +211,21 @@ func is_any_active():
 			i = i + 1
 			break
 	return ret
+	
+func connect_persistent_nodes():
+	for node in get_tree().get_nodes_in_group('fairySpawner'):
+		node.connect('obj_state_update', _update_world_state)
+	for node in get_tree().get_nodes_in_group('moongate'):
+		node.connect('obj_state_update', _update_world_state)
+	for node in get_tree().get_nodes_in_group('powerup'):
+		node.connect('obj_state_update', _update_world_state)
+
 
 func get_default_world_state():
 	var world_state = {'state' : 0}
 	for node in get_tree().get_nodes_in_group('fairySpawner'):
+		world_state[node.name] =node.STATE.ALIVE
+	for node in get_tree().get_nodes_in_group('moongate'):
 		world_state[node.name] =node.STATE.ALIVE
 	for node in get_tree().get_nodes_in_group('powerup'):
 		world_state[node.name] =node.STATE.ALIVE
@@ -228,6 +234,8 @@ func get_default_world_state():
 func set_instance_state(world_state):
 	state = world_state['state']
 	for node in get_tree().get_nodes_in_group('fairySpawner'):
+		node.set_initial_state(world_state[node.name])
+	for node in get_tree().get_nodes_in_group('moongate'):
 		node.set_initial_state(world_state[node.name])
 	for node in get_tree().get_nodes_in_group('powerup'):
 		node.set_initial_state(world_state[node.name])

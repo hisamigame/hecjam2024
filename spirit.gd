@@ -61,6 +61,7 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func die(dir):
+	global.play_death()
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
 	$AnimationTree.active = true
@@ -90,6 +91,7 @@ func _on_hitbox_area_entered(area):
 	if hp <= 0 and state == STATE.NORMAL:
 		die(area.direction)
 	else:
+		global.play_hurt()
 		if area.confuse:
 			get_confused()
 		if area.freeze:

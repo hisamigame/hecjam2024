@@ -25,8 +25,8 @@ var actives = {'hell' : false, 'earth' : false, 'moon' : false}
 const defaultHP = 20
 const defaultMaxHP = 20
 const defaultAtk = 10
-const defaultSpl = 10
-const defaultBmb = 99
+const defaultSpl = 1
+const defaultBmb = 0
 
 const baseBombDMG = 50
 const bomb_duration = 0.5
@@ -54,13 +54,58 @@ const saveFile = 'file://save.json'
 
 var allWorldState = {} # we build the world-state dictionary as we traverse game
 
+func play_hurt():
+	if !$hurt.playing:
+		$hurt.play()
+		
+func play_death():
+	if !$death.playing:
+		$death.play()
+		
+func play_hurt2():
+	if !$hurt2.playing:
+		$hurt2.play()
+		
+func play_death2():
+	if !$death2.playing:
+		$death2.play()
+		
+func play_bomb():
+	# bomb sounds are rare and have long tail
+	# always play them!
+	#if !$bomb.playing:
+	$bomb.play()
+		
+func play_powerup():
+	#if !$powerup.playing:
+	#always play it!
+	$powerup.play()
+	
+func play_buildup(t = 0.0):
+	if !$buildup.playing:
+		$buildup.play(t) 
+		
+func stop_buildup():
+	if $buildup.playing:
+		$buildup.stop()
+
+func play_hecHurt():
+	if !$hecHurt.playing:
+		$hecHurt.play()
+		
+func play_doors():
+	if !$doors.playing:
+		$doors.play()
+
 func glow_moongates():
 	world_node().glow_moongates()
 	
 func unglow_moongates():
 	world_node().unglow_moongates()
 
-func set_bombs(newbombs):
+func set_bombs(newbombs, cool=true):
+	if cool and newbombs > bombs:
+		play_powerup()
 	bombs = newbombs
 	bomblabel.text = str(bombs)
 
@@ -70,15 +115,21 @@ func set_hp(t, newhp):
 	hp[t] = newhp
 	hplabels[t].text = str(newhp) +"/" + str(maxhp[t])
 	
-func set_maxhp(t, newmaxhp):
+func set_maxhp(t, newmaxhp, cool=true):
+	if cool and newmaxhp>maxhp[t]:
+		play_powerup()
 	maxhp[t] = newmaxhp
 	hplabels[t].text = str(hp[t]) +"/" + str(newmaxhp)
 	
-func set_spl(t, newSPL):
+func set_spl(t, newSPL, cool=true):
+	if cool and newSPL > spl[t]:
+		play_powerup()
 	spl[t] = newSPL
 	spllabels[t].text = str(newSPL)
 	
-func set_atk(t, newATK):
+func set_atk(t, newATK, cool=true):
+	if cool and newATK>atk[t]:
+		play_powerup()
 	atk[t] = newATK
 	atklabels[t].text = str(newATK)
 
@@ -102,6 +153,29 @@ func set_world_state(world, state):
 func _ready():
 	hide_ui()
 
+func gameover():
+	$gameOver.activate()
+	
+func win():
+	$dialogBox.deactivate()
+	$gameOver.deactivate()
+	$VBoxContainer/UI/bombScreen.deactivate()
+	get_tree().change_scene_to_file('res://win_screen.tscn')
+	change_music('res://title.ogg')
+	global.hide_ui()
+	global.canbomb = false
+	global.world_node().queue_free()
+
+func to_title():
+	$dialogBox.deactivate()
+	$gameOver.deactivate()
+	$VBoxContainer/UI/bombScreen.deactivate()
+	get_tree().change_scene_to_file('res://title_screen.tscn')
+	change_music('res://title.ogg')
+	global.hide_ui()
+	global.canbomb = false
+	global.world_node().queue_free()
+
 func start_game():
 	var world = load("res://" + global.current_world + ".tscn")
 	var worldscene = world.instantiate()
@@ -112,16 +186,16 @@ func start_game():
 	set_hp(HECTYPE.HELL, defaultHP)
 	set_hp(HECTYPE.EARTH, defaultHP)
 	set_hp(HECTYPE.MOON, defaultHP)
-	set_maxhp(HECTYPE.HELL, defaultMaxHP)
-	set_maxhp(HECTYPE.EARTH, defaultMaxHP)
-	set_maxhp(HECTYPE.MOON, defaultMaxHP)
-	set_atk(HECTYPE.HELL, defaultAtk)
-	set_atk(HECTYPE.EARTH, defaultAtk)
-	set_atk(HECTYPE.MOON, defaultAtk)
-	set_spl(HECTYPE.HELL, defaultSpl)
-	set_spl(HECTYPE.EARTH, defaultSpl)
-	set_spl(HECTYPE.MOON, defaultSpl)
-	set_bombs(defaultBmb)
+	set_maxhp(HECTYPE.HELL, defaultMaxHP, false)
+	set_maxhp(HECTYPE.EARTH, defaultMaxHP, false)
+	set_maxhp(HECTYPE.MOON, defaultMaxHP, false)
+	set_atk(HECTYPE.HELL, defaultAtk, false)
+	set_atk(HECTYPE.EARTH, defaultAtk, false)
+	set_atk(HECTYPE.MOON, defaultAtk, false)
+	set_spl(HECTYPE.HELL, defaultSpl, false)
+	set_spl(HECTYPE.EARTH, defaultSpl, false)
+	set_spl(HECTYPE.MOON, defaultSpl, false)
+	set_bombs(defaultBmb, false)
 	global.show_ui()
 	get_tree().current_scene.call_deferred('free')
 	canbomb = true

@@ -62,6 +62,7 @@ func set_initial_state(_state : STATE):
 			$StaticBody2D.queue_free()
 
 func die():
+	global.play_death2()
 	state = STATE.DEAD
 	emit_signal('obj_state_update', idstr, state)
 	spawnTimer.stop()
@@ -76,11 +77,13 @@ func die():
 func _on_hitbox_area_entered(area):
 	if state == STATE.ALIVE:
 		hp = hp - area.damage
-		if area.confuse:
-			confused = true
 		area.queue_free()
 		if hp <= 0:
 			die()
+		else:
+			global.play_hurt2()
+			if area.confuse:
+				confused = true
 
 
 func spawn_fairy():

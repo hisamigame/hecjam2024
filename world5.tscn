@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://01q5sw2m18r2"]
+[gd_scene load_steps=20 format=3 uid="uid://01q5sw2m18r2"]
 
 [ext_resource type="Script" path="res://worldBoss.gd" id="1_p0ju7"]
 [ext_resource type="PackedScene" uid="uid://cbvk1tdieovwp" path="res://trigger_holder.tscn" id="2_d8qbb"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://yfkyv21mqb3w" path="res://earthface.png" id="11_7uc5n"]
 [ext_resource type="Texture2D" uid="uid://8jeik4yd7yjf" path="res://moonface.png" id="12_6yi7k"]
 [ext_resource type="PackedScene" uid="uid://b17n4m3n6jv0m" path="res://spawn_point.tscn" id="13_ser83"]
+[ext_resource type="PackedScene" uid="uid://5gnc046837ub" path="res://sound_trigger.tscn" id="13_wtw2u"]
 [ext_resource type="PackedScene" uid="uid://cnnxenb02x3p5" path="res://fairy_spawner.tscn" id="14_nvef8"]
 [ext_resource type="PackedScene" uid="uid://cisxf7vpsmec4" path="res://multitrigger.tscn" id="14_rvrxm"]
 [ext_resource type="PackedScene" uid="uid://dlvgdvoyrtdhw" path="res://wall_segment.tscn" id="17_n6o4h"]
@@ -101,6 +102,8 @@ layer_0/tile_data = PackedInt32Array(65534, 0, 1, 131070, 0, 2, 131071, 65536, 2
 layer_1/tile_data = PackedInt32Array(131074, 262147, 65536, 65539, 3, 0, -65532, 131075, 0, 2, 65539, 1, -131071, 131075, 1, 0, 131075, 1, 65534, 3, 1, -131072, 3, 65537, -65537, 3, 1, -65538, 131075, 65537)
 
 [node name="multitrigger" parent="." instance=ExtResource("14_rvrxm")]
+
+[node name="soundTrigger" parent="multitrigger" instance=ExtResource("13_wtw2u")]
 
 [node name="triggerHolder2" parent="multitrigger" instance=ExtResource("2_d8qbb")]
 process_mode = 3

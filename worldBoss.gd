@@ -8,6 +8,7 @@ func _ready():
 		state = global.allWorldState['world5']['state']
 	if state == 1:
 		initial_dialog = null
+		$multitrigger/soundTrigger.queue_free()
 	super()
 	print(state)
 	#if state == 1:

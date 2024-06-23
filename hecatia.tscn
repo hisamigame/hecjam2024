@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://b0d5xty6ahvuq"]
+[gd_scene load_steps=53 format=3 uid="uid://b0d5xty6ahvuq"]
 
 [ext_resource type="Script" path="res://hecatia.gd" id="1_r73bk"]
 [ext_resource type="SpriteFrames" uid="uid://xvukukkadyh2" path="res://hell_spriteframes.tres" id="2_m6sjr"]
@@ -705,9 +705,37 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_46n5t"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"die"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3sc40"]
 _data = {
 "RESET": SubResource("Animation_vrq1u"),
+"die": SubResource("Animation_46n5t"),
 "down": SubResource("Animation_fiolg"),
 "down_idle": SubResource("Animation_iwkpk"),
 "down_left": SubResource("Animation_76b3p"),
@@ -725,6 +753,9 @@ _data = {
 "up_right": SubResource("Animation_rflyy"),
 "up_right_idle": SubResource("Animation_opy2c")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lefuu"]
+animation = &"die"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d1ph3"]
 animation = &"left_idle"
@@ -823,13 +854,19 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_blkof"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hi35g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0rir6"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3sdgc"]
 states/Start/position = Vector2(349, 51)
+states/die/node = SubResource("AnimationNodeAnimation_lefuu")
+states/die/position = Vector2(743, 69)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_sstno")
 states/idle/position = Vector2(624, 141)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_76mwd")
 states/walk/position = Vector2(624, 51)
-transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_grnve"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_w0rg5"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_blkof")]
+transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_grnve"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_w0rg5"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_blkof"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_hi35g"), "walk", "die", SubResource("AnimationNodeStateMachineTransition_0rir6")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2rw44"]
 radius = 6.0

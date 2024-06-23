@@ -341,16 +341,36 @@ texture = ExtResource("1_n1lib")
 0:0/0/terrains_peering_bit/right_side = 0
 0:0/0/terrains_peering_bit/bottom_right_corner = 0
 0:0/0/terrains_peering_bit/bottom_side = 0
+0:4/next_alternative_id = 2
 0:4/0 = 0
-0:4/0/z_index = 1
+0:4/0/z_index = 2
+0:4/1 = 1
+0:4/1/flip_h = true
+0:4/1/z_index = 2
+1:4/next_alternative_id = 2
 1:4/0 = 0
-1:4/0/z_index = 1
+1:4/0/z_index = 2
+1:4/1 = 1
+1:4/1/flip_h = true
+1:4/1/z_index = 2
+2:4/next_alternative_id = 2
 2:4/0 = 0
-2:4/0/z_index = 1
+2:4/0/z_index = 2
+2:4/1 = 1
+2:4/1/flip_h = true
+2:4/1/z_index = 2
+3:4/next_alternative_id = 2
 3:4/0 = 0
-3:4/0/z_index = 1
+3:4/0/z_index = 2
+3:4/1 = 1
+3:4/1/flip_h = true
+3:4/1/z_index = 2
+9:4/next_alternative_id = 2
 9:4/0 = 0
-9:4/0/z_index = 1
+9:4/0/z_index = 2
+9:4/1 = 1
+9:4/1/flip_h = true
+9:4/1/z_index = 2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67hvt"]
 texture = ExtResource("2_qofd8")
@@ -876,6 +896,7 @@ shape = SubResource("RectangleShape2D_orn5v")
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-8, -8)
 rect = Rect2(-8, -8, 16, 16)
+enable_node_path = NodePath("spawnTimer")
 
 [node name="spawnTimer" type="Timer" parent="VisibleOnScreenEnabler2D"]
 process_callback = 0

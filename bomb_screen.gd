@@ -87,9 +87,7 @@ func _process(delta):
 	var can_bomb := true
 	
 	if level > global.bombs:
-		# TODO:
 		# cannot bomb this hard. Notify player
-		
 		_deactivate_sprites()
 		
 		$NotEnoughBombsLabel.visible = true
@@ -121,8 +119,10 @@ func _process(delta):
 		
 	if any_active:
 		held_time = held_time + delta
+		global.play_buildup(held_time)
 		
 	elif can_bomb:
+		global.stop_buildup()
 		# No one active, but can bomb. Lower the progress gradually and clamp to 0
 		held_time = max(held_time - delta * held_time_substraction_factor, 0)
 		
@@ -153,6 +153,7 @@ func _process(delta):
 		global.unglow_moongates()
 		global.unpause()
 		global.set_bombs(global.bombs - level)
+		global.stop_buildup()
 		global.world_node().bomb(global.actives, level)
 		
 		# TODO: Notify camera to shake the screen

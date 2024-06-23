@@ -25,11 +25,17 @@ var hecatias = []
 func update_camera_position():
 	var pos = Vector2.ZERO
 	var n = 0
+	var ndead = 0
 	for h in hecatias:
 		if not h.dead:
 			pos = pos + h.position
 			n = n+1
-	$Camera2D.position = (pos/n).clamp(limit_lower, limit_upper)
+		else:
+			ndead = ndead + 1
+	if ndead != 3:
+		$Camera2D.position = (pos/n).clamp(limit_lower, limit_upper)
+	else:
+		global.gameover()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hecatias = [$hecatia1, $hecatia2, $hecatia3]

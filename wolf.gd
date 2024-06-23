@@ -5,8 +5,8 @@ class_name Wolf
 @export var direction = Vector2.LEFT
 var speed = 0.75
 var back_speed = 1.0
-@export var hp = 200
-@export var damage = 2
+@export var hp = 250
+@export var damage = 10
 @onready var animationState = $AnimationTree.get('parameters/playback')
 
 @export var confused = false
@@ -65,6 +65,7 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func die(dir):
+	global.play_death()
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
 	$AnimationTree.active = true
@@ -97,6 +98,7 @@ func _on_hitbox_area_entered(area):
 	if hp <= 0 and state != STATE.DYING:
 		die(area.direction)
 	else:
+		global.play_hurt()
 		if area.confuse:
 			get_confused()
 		if area.freeze:

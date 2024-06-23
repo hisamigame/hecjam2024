@@ -1,6 +1,11 @@
-[gd_resource type="SpriteFrames" load_steps=34 format=3 uid="uid://bku2kuagnjp1w"]
+[gd_resource type="SpriteFrames" load_steps=36 format=3 uid="uid://bku2kuagnjp1w"]
 
+[ext_resource type="Texture2D" uid="uid://c363h8emyli7j" path="res://hell_dead.png" id="1_fc54b"]
 [ext_resource type="Texture2D" uid="uid://d2xerbdy4knci" path="res://Sprite_Player_Hecatia_Moon-Sheet.png" id="2_ewdob"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r7ql"]
+atlas = ExtResource("1_fc54b")
+region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c5da"]
 atlas = ExtResource("2_ewdob")
@@ -132,6 +137,14 @@ region = Rect2(0, 96, 16, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r7ql")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3c5da")

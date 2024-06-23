@@ -83,6 +83,8 @@ func _on_timer_timeout():
 		if frame == 7:
 			$Timer.stop()
 	else:
-		# closing
+		# close
+		if frame == 14:
+			global.play_doors()
 		if frame == 19:
 			$Timer.stop()

@@ -6,7 +6,7 @@ var direction = Vector2.DOWN
 var speed = 0.5
 var evade_speed = 1.0
 @export var hp = 200
-@export var damage = 2
+@export var damage = 7
 @onready var animationState = $AnimationTree.get('parameters/playback')
 
 @export var confused = false
@@ -64,7 +64,7 @@ func _physics_process(_delta):
 				var hecpos = get_nearest_hec_pos()
 				if hecpos:
 					direction = position.direction_to(hecpos)
-					direction = direction.from_angle(coinflip*PI/2) 
+					direction = direction.rotated(coinflip*PI/2) 
 				if confused:
 					direction = -direction
 				$AnimationTree.set("parameters/walk/blend_position", direction)
@@ -76,6 +76,7 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func die(dir):
+	global.play_death()
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
 	$AnimationTree.active = true
@@ -114,6 +115,7 @@ func _on_hitbox_area_entered(area):
 	if hp <= 0 and state != STATE.DYING:
 		die(area.direction)
 	else:
+		global.play_hurt()
 		to_evade()
 		if area.confuse:
 			get_confused()
