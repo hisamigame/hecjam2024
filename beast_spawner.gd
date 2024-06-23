@@ -1,8 +1,7 @@
-extends TileMap
+extends Node2D
 
-class_name FairySpawner
 
-@export var fairyType : PackedScene = preload('res://fairy.tscn')
+@export var mobType : PackedScene = preload('res://otter.tscn')
 var idstr : String
 
 enum STATE {ALIVE, DEAD, REMOVED}
@@ -15,7 +14,7 @@ var dead:
 	get:
 		return state !=STATE.ALIVE
 
-@export var hp = 100
+@export var hp = 200
 @export var confused = false
 @export var spawnTime = 2.0
 
@@ -26,20 +25,6 @@ var overlapping_bodies = 0
 @export var wiltTime1 = 0.5
 @export var wiltTime2 = 1.0
 
-@export var deadframe = 0:
-	set(v):
-		var cells = get_used_cells(0)
-		for cell in cells:
-			var ac = get_cell_atlas_coords(0,cell)
-			set_cell(0, cell,v+1, ac)
-		cells = get_used_cells(1)
-		for cell in cells:
-			var ac = get_cell_atlas_coords(1,cell)
-			set_cell(1, cell,v+4, ac)
-			
-			#print(data.get_terrain())
-	get:
-		return deadframe
 
 func _ready():
 	idstr = name
@@ -56,22 +41,15 @@ func set_initial_state(_state : STATE):
 			$AnimatedSprite2D.play('default')
 		STATE.DEAD:
 			$AnimatedSprite2D.play('dead')
-			$AnimatedSprite2D.frame = 1
-			deadframe = 1
+			$AnimatedSprite2D.frame = 0
 			spawnTimer.stop()
 			$StaticBody2D.queue_free()
-
 func die():
 	state = STATE.DEAD
 	emit_signal('obj_state_update', idstr, state)
 	spawnTimer.stop()
 	$StaticBody2D.queue_free()
 	$AnimatedSprite2D.play('dead')
-	await get_tree().create_timer(wiltTime1).timeout
-	deadframe = 0
-	await get_tree().create_timer(wiltTime2).timeout
-	deadframe = 1
-
 
 func _on_hitbox_area_entered(area):
 	if state == STATE.ALIVE:
@@ -83,10 +61,10 @@ func _on_hitbox_area_entered(area):
 			die()
 
 
-func spawn_fairy():
-	var fairy = fairyType.instantiate()
-	fairy.position = position - Vector2(8,8)
-	global.world_node().add_child(fairy)
+func spawn_mob():
+	var mob = mobType.instantiate()
+	mob.position = position - Vector2(8,8)
+	global.world_node().add_child(mob)
 
 func _on_overlap_detector_body_entered(body):
 	if body.is_in_group('mobileEnemy'):
@@ -101,4 +79,4 @@ func _on_overlap_detector_body_exited(body):
 
 func _on_spawn_timer_timeout():
 	if overlapping_bodies == 0:
-		spawn_fairy()
+		spawn_mob()

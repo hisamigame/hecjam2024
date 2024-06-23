@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxh3tqtylvpot"]
+
+[ext_resource type="Script" path="res://beast_spawner.gd" id="7_02gre"]
+[ext_resource type="Texture2D" uid="uid://dpfgmgpsswvh" path="res://monster_spawner_hole.png" id="8_0a0cp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdouf"]
+atlas = ExtResource("8_0a0cp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oobkc"]
+atlas = ExtResource("8_0a0cp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nocmk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdouf")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oobkc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lml6"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t40oa"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orn5v"]
+size = Vector2(16, 16)
+
+[node name="beastSpawner0" type="Node2D" groups=["enemy", "fairySpawner"]]
+z_index = -1
+y_sort_enabled = true
+script = ExtResource("7_02gre")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(-8, -8)
+sprite_frames = SubResource("SpriteFrames_nocmk")
+animation = &"dead"
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(-8, -8)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_0lml6")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-8, -8)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_t40oa")
+
+[node name="overlapDetector" type="Area2D" parent="."]
+position = Vector2(-8, -8)
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="overlapDetector"]
+shape = SubResource("RectangleShape2D_orn5v")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-8, -8)
+rect = Rect2(-8, -8, 16, 16)
+
+[node name="spawnTimer" type="Timer" parent="VisibleOnScreenEnabler2D"]
+process_callback = 0
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="overlapDetector" to="." method="_on_overlap_detector_body_entered"]
+[connection signal="body_exited" from="overlapDetector" to="." method="_on_overlap_detector_body_exited"]
+[connection signal="timeout" from="VisibleOnScreenEnabler2D/spawnTimer" to="." method="_on_spawn_timer_timeout"]

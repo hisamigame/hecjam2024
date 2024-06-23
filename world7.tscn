@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c78kqvcciks2a"]
+[gd_scene load_steps=19 format=3 uid="uid://c78kqvcciks2a"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_xwxwf"]
 [ext_resource type="PackedScene" uid="uid://dgxvmmkwegg1" path="res://hec_camera.tscn" id="2_51rv6"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://cnnxenb02x3p5" path="res://fairy_spawner.tscn" id="12_of0tl"]
 [ext_resource type="PackedScene" uid="uid://cc5udx6ecletp" path="res://junko.tscn" id="13_33jbo"]
 [ext_resource type="PackedScene" uid="uid://4llmyh5qy3do" path="res://talk_box.tscn" id="15_xbr07"]
+[ext_resource type="PackedScene" uid="uid://cxh6yqri6yyra" path="res://otter.tscn" id="16_orykx"]
+[ext_resource type="PackedScene" uid="uid://bxh3tqtylvpot" path="res://beast_spawner.tscn" id="17_pijy6"]
+[ext_resource type="PackedScene" uid="uid://dt6avf23u0cji" path="res://wolf.tscn" id="18_usjra"]
 
 [node name="world" type="Node2D"]
 y_sort_enabled = true
@@ -92,3 +95,15 @@ portrait1_list_list = Array[String](["hen|hen"])
 status1_list_list = Array[String](["1|2"])
 portrait2_list_list = Array[String](["juh|juh"])
 status2_list_list = Array[String](["2|1"])
+
+[node name="otter" parent="." instance=ExtResource("16_orykx")]
+position = Vector2(-32, 128)
+
+[node name="otter2" parent="." instance=ExtResource("16_orykx")]
+position = Vector2(-24, 80)
+
+[node name="beastSpawner0" parent="." instance=ExtResource("17_pijy6")]
+position = Vector2(24, 128)
+
+[node name="wolf" parent="." instance=ExtResource("18_usjra")]
+position = Vector2(40, 120)

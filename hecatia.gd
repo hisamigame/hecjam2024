@@ -117,7 +117,8 @@ func _physics_process(delta):
 				if !nodoublechat or just_pressed_any_direction():
 					nodoublechat = true
 					var chatbox = $RayCast2D.get_collider()
-					animationState.travel('idle')
+					#animationState.travel('idle')
+					global.world_node().set_idle()
 					chatbox.initiator = hectype
 					global.dialogBox.activate(chatbox)
 					#chatbox.call_deferred('next_message')

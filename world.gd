@@ -62,7 +62,6 @@ func _ready():
 func unglow_moongates():
 	var moongates = get_tree().get_nodes_in_group('moongate')
 	for gate in moongates:
-		print('unglow')
 		gate.material = null
 	
 func glow_moongates():
@@ -73,9 +72,14 @@ func glow_moongates():
 		# might be fine?
 		gate.material = preload('res://moongate_material.tres')
 
+func set_idle():
+	for child in $hecCamera.get_children():
+		if child is Hecatia:
+			if not child.dead:
+				child.animationState.travel('idle')
+				
+
 func bomb(actives, level):
-	print("booom")
-	print(actives)
 	if actives["moon"]:
 		moon_bomb(level)
 	if actives["hell"]:
@@ -208,8 +212,6 @@ func is_any_active():
 	var i = 1
 	for k in global.actives:
 		if global.actives[k] and !$hecCamera.get_node('hecatia' + str(i+1)).dead:
-			print($hecCamera.get_node('hecatia' + str(i+1)).hectype)
-			
 			ret = true
 			i = i + 1
 			break

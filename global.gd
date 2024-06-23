@@ -156,7 +156,6 @@ func _unhandled_input(event):
 	
 	if event.is_action_pressed("bomb") and canbomb and global.bombs > 0:
 		pause()
-		print("boom incoming...")
 		global.canbomb = false
 		$VBoxContainer/UI/bombScreen.activate()
 
@@ -190,7 +189,6 @@ func change_music(new_music):
 		current_music = new_music
 		# TODO:
 		# there should be a cross fade here
-		print(current_music)
 		$BGMPlayer.stream = load(current_music)
 		$BGMPlayer.play()
 		
@@ -204,8 +202,6 @@ func _change_level(scene_name, spawnID):
 	canbomb = false
 	transition()
 	var newWorld = scene.instantiate()
-	print('change level')
-	print(newWorld.music)
 	change_music(newWorld.music)
 	old_world = current_world
 	current_world = scene_name

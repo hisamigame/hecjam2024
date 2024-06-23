@@ -310,7 +310,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
 tree_root = SubResource("AnimationNodeStateMachine_nu0dl")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -321,6 +320,7 @@ animation = &"normal"
 offset = Vector2(0, -5)
 
 [node name="moonconfused" parent="." instance=ExtResource("2_jjs2s")]
+process_mode = 4
 visible = false
 z_index = 1
 position = Vector2(0, -8)
