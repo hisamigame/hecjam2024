@@ -1,9 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://b7g653berheh0"]
+[gd_scene load_steps=43 format=3 uid="uid://7abal7dkadyy"]
 
-[ext_resource type="Script" path="res://hisami.gd" id="1_av2w1"]
-[ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_vxxns"]
-[ext_resource type="Texture2D" uid="uid://cg5m3tatjr5wy" path="res://hisami_death.png" id="3_y666r"]
-[ext_resource type="Texture2D" uid="uid://bxbwe12giqhb3" path="res://Sprite_Hisami-Sheet.png" id="4_lcyvo"]
+[ext_resource type="Script" path="res://hisami2.gd" id="1_7hp6f"]
+[ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_4pbij"]
+[ext_resource type="Texture2D" uid="uid://cg5m3tatjr5wy" path="res://hisami_death.png" id="3_8yp02"]
+[ext_resource type="Texture2D" uid="uid://bxbwe12giqhb3" path="res://Sprite_Hisami-Sheet.png" id="4_ct84h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5i4b"]
 size = Vector2(12, 12)
@@ -233,75 +233,75 @@ states/walk/position = Vector2(421, 118)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_bqvwi"), "walk", "die", SubResource("AnimationNodeStateMachineTransition_5pptb"), "die", "End", SubResource("AnimationNodeStateMachineTransition_qemck")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ebopr"]
-atlas = ExtResource("3_y666r")
+atlas = ExtResource("3_8yp02")
 region = Rect2(16, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rfxjm"]
-atlas = ExtResource("3_y666r")
+atlas = ExtResource("3_8yp02")
 region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wxtc"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(16, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgcte"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnkx1"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nd1ga"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fp24t"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(16, 96, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ovshm"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(32, 96, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2f4d1"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(48, 96, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yebq4"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(0, 96, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b6vwj"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(16, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3viwu"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(32, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rk4yw"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(48, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3mxvs"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(0, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h07tu"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(16, 64, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nmkn"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(32, 64, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mj1k4"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(48, 64, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yoa7"]
-atlas = ExtResource("4_lcyvo")
+atlas = ExtResource("4_ct84h")
 region = Rect2(0, 64, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r7s3w"]
@@ -394,11 +394,12 @@ z_index = 2
 y_sort_enabled = true
 collision_layer = 48
 collision_mask = 16
-script = ExtResource("1_av2w1")
+motion_mode = 1
+script = ExtResource("1_7hp6f")
 
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
-texture = ExtResource("2_vxxns")
+texture = ExtResource("2_4pbij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l5i4b")

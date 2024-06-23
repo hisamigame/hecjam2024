@@ -72,7 +72,8 @@ func deactivate():
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED
 	global.unpause()
-	current_chatbox.next_message()
+	if current_chatbox!= null:
+		current_chatbox.next_message()
 
 #func _unhandled_input(event):
 #	print("in dialog!!")

@@ -267,6 +267,8 @@ animations = [{
 
 [node name="yinyang" groups=["mobileEnemy"] instance=ExtResource("1_njf46")]
 z_index = 1
+collision_layer = 48
+motion_mode = 1
 script = ExtResource("2_735lk")
 speed = 1.0
 hp = 100
