@@ -267,7 +267,7 @@ func change_music(new_music):
 		$BGMPlayer.play()
 		
 func funny_music():
-	$BGMPlayer.stream = load('res://planet_something_something_2.ogg')
+	$BGMPlayer.stream = load('res://planet_something_something_3.ogg')
 	$BGMPlayer.play()
 	
 func _change_level(scene_name, spawnID):

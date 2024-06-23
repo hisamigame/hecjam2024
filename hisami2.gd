@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name Boss1
+class_name Boss2
 
 var direction = Vector2.DOWN
 var speed = 0.5
@@ -12,6 +12,7 @@ var dying_direction = Vector2.ZERO
 
 enum STATE {NORMAL, DYING}
 var state = STATE.NORMAL
+var nprojectile = 0
 
 var bullet = preload('res://vineshot.tscn')
 
@@ -78,11 +79,31 @@ func _on_animation_tree_animation_finished(anim_name):
 
 
 func _on_timer_timeout():
+	var nearhecpos
 	var obj = bullet.instantiate()
+	if nprojectile % 2 == 0:
+		fire_direction = Vector2.DOWN
+	else:
+		nearhecpos = get_nearest_hec_pos()
+		if nearhecpos == null:
+			nearhecpos = global.get_camera_pos()
+		if nearhecpos.x > position.x:
+			# hec further to right
+			fire_direction = Vector2.RIGHT
+		else:
+			fire_direction = Vector2.LEFT
 	obj.direction = fire_direction
 	match fire_direction:
 		Vector2.DOWN:
 			obj.position.x = position.x
 			obj.position.y = global.get_camera_pos().y - global.y_width
 			obj.rotation = PI/2
+		Vector2.RIGHT:
+			obj.position.x = global.get_camera_pos().x - global.x_width
+			obj.position.y = nearhecpos.y
+		Vector2.LEFT:
+			obj.position.x = global.get_camera_pos().x + global.x_width
+			obj.position.y = nearhecpos.y
+		
+	nprojectile = nprojectile + 1
 	global.world_node().add_child(obj)
