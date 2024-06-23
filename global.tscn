@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dkxlg7evifv0b"]
+[gd_scene load_steps=29 format=3 uid="uid://dkxlg7evifv0b"]
 
 [ext_resource type="Script" path="res://global.gd" id="1_f3538"]
 [ext_resource type="PackedScene" uid="uid://c0ah0pwd3jm1y" path="res://transition.tscn" id="2_tqwpl"]
@@ -9,11 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://da2gmkuwppvu8" path="res://c.png" id="5_m336x"]
 [ext_resource type="Texture2D" uid="uid://cjw4dntpipiq2" path="res://z_pressed.png" id="5_suq63"]
 [ext_resource type="Texture2D" uid="uid://3xepemymxfm5" path="res://x_pressed.png" id="7_d4dnk"]
+[ext_resource type="AudioStream" uid="uid://cbir4r4huovyi" path="res://earth_button.wav" id="7_xyfbj"]
 [ext_resource type="Texture2D" uid="uid://cnwejc270bglq" path="res://c_pressed.png" id="9_v2ejs"]
 [ext_resource type="LabelSettings" uid="uid://dvfxsm4rdmx3p" path="res://slashes.tres" id="10_8kyi3"]
+[ext_resource type="AudioStream" uid="uid://ja1synfpc2dw" path="res://hell_button.wav" id="10_tv0g7"]
 [ext_resource type="LabelSettings" uid="uid://b6qex0hmgcj01" path="res://bomb_label_setting.tres" id="11_7wx65"]
 [ext_resource type="PackedScene" uid="uid://c8gdc1dstca1p" path="res://bomb_screen.tscn" id="12_uue4g"]
 [ext_resource type="PackedScene" uid="uid://c0kkjklsv2me8" path="res://dialog_box.tscn" id="12_wf25t"]
+[ext_resource type="AudioStream" uid="uid://cywfkxe58owvn" path="res://moon_button.wav" id="13_2axnp"]
 [ext_resource type="AudioStream" uid="uid://dkiewooobn406" path="res://planet_something_something.ogg" id="14_o2pbb"]
 [ext_resource type="AudioStream" uid="uid://b7tfsg31envn4" path="res://click2.wav" id="16_rsuxm"]
 [ext_resource type="AudioStream" uid="uid://bf8r7573qdci" path="res://Hit_02.wav" id="17_0dieg"]
@@ -76,6 +79,9 @@ script = ExtResource("4_cq4ox")
 default_texture = ExtResource("3_l2nsd")
 pressed_texture = ExtResource("5_suq63")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/UI/Z"]
+stream = ExtResource("7_xyfbj")
+
 [node name="X" type="Sprite2D" parent="VBoxContainer/UI"]
 process_mode = 3
 position = Vector2(110, 28)
@@ -84,6 +90,9 @@ script = ExtResource("4_cq4ox")
 default_texture = ExtResource("4_ftbwk")
 pressed_texture = ExtResource("7_d4dnk")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/UI/X"]
+stream = ExtResource("10_tv0g7")
+
 [node name="C" type="Sprite2D" parent="VBoxContainer/UI"]
 process_mode = 3
 position = Vector2(193, 28)
@@ -91,6 +100,9 @@ texture = ExtResource("5_m336x")
 script = ExtResource("4_cq4ox")
 default_texture = ExtResource("5_m336x")
 pressed_texture = ExtResource("9_v2ejs")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/UI/C"]
+stream = ExtResource("13_2axnp")
 
 [node name="hp0" type="Label" parent="VBoxContainer/UI"]
 layout_mode = 0
