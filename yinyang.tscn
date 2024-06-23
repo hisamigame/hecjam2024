@@ -305,22 +305,21 @@ editor_description = "The front raycast should be placed where the direction ray
 
 Both raycasts must be as long or longer than the direction raycast, or they may fail to detect a wall when the node is rotated.
 
-The size of these raycasts will determine how close the object will remain to the wall."
+The X position of the rear raycast will determine how close the object will stick to the wall, because it tells the enemy when to rotate after it leaves a wall."
 position = Vector2(0, -5)
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="WallRayCasts" index="0"]
 position = Vector2(-8, 0)
 rotation = 1.5708
-target_position = Vector2(12, 0)
+target_position = Vector2(11, -4.00543e-05)
 collision_mask = 18
 metadata/_edit_lock_ = true
 
 [node name="RearRayCast2D" type="RayCast2D" parent="WallRayCasts" index="1"]
-position = Vector2(8, 0)
+position = Vector2(4, 0)
 rotation = 1.5708
-target_position = Vector2(12, 0)
+target_position = Vector2(11, -3.98199e-05)
 collision_mask = 18
-metadata/_edit_lock_ = true
 
 [node name="DirectionRayCast2D" type="RayCast2D" parent="." index="8"]
 position = Vector2(0, -5)
