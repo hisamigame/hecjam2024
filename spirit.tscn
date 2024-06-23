@@ -1,10 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://cubinll75m3fh"]
+[gd_scene load_steps=37 format=3 uid="uid://cubinll75m3fh"]
 
 [ext_resource type="Script" path="res://spirit.gd" id="1_l0bir"]
 [ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_bgst3"]
 [ext_resource type="PackedScene" uid="uid://c0g3p3bxk4bbv" path="res://moonconfused.tscn" id="2_jjs2s"]
 [ext_resource type="Texture2D" uid="uid://dqcchtp0yun8q" path="res://enemies_16x16.png" id="3_5yj2p"]
-[ext_resource type="Texture2D" uid="uid://d24nwk5hjp04r" path="res://fairy_spawn.png" id="4_oyg3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5i4b"]
 size = Vector2(12, 12)
@@ -202,9 +201,25 @@ region = Rect2(48, 0, 16, 16)
 atlas = ExtResource("3_5yj2p")
 region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bf4in"]
-atlas = ExtResource("4_oyg3x")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7ymf"]
+atlas = ExtResource("3_5yj2p")
+region = Rect2(64, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw58f"]
+atlas = ExtResource("3_5yj2p")
+region = Rect2(80, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uo8j"]
+atlas = ExtResource("3_5yj2p")
+region = Rect2(96, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgyhl"]
+atlas = ExtResource("3_5yj2p")
+region = Rect2(112, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bxf5"]
+atlas = ExtResource("3_5yj2p")
+region = Rect2(0, 112, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r7s3w"]
 animations = [{
@@ -250,7 +265,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bf4in")
+"texture": SubResource("AtlasTexture_w7ymf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xw58f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uo8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgyhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bxf5")
 }],
 "loop": true,
 "name": &"spawn",
@@ -283,6 +310,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 tree_root = SubResource("AnimationNodeStateMachine_nu0dl")
 anim_player = NodePath("../AnimationPlayer")
 
