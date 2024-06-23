@@ -267,7 +267,7 @@ animations = [{
 
 [node name="yinyang" instance=ExtResource("1_njf46")]
 script = ExtResource("2_735lk")
-speed = 1.5
+speed = 1.0
 
 [node name="shadow" parent="." index="0"]
 z_index = -3
