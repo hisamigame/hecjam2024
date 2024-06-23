@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0g3p3bxk4bbv"]
+
+[ext_resource type="Material" uid="uid://b3lwplh6iyps5" path="res://confusion_material.tres" id="1_6lndo"]
+[ext_resource type="Texture2D" uid="uid://dnli5ju4q3jxg" path="res://moonconfuse.png" id="2_m1f23"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixf0s"]
+atlas = ExtResource("2_m1f23")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n153j"]
+atlas = ExtResource("2_m1f23")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay110"]
+atlas = ExtResource("2_m1f23")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n007"]
+atlas = ExtResource("2_m1f23")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3fq84"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixf0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n153j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay110")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n007")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="moonconfused" type="AnimatedSprite2D"]
+material = ExtResource("1_6lndo")
+sprite_frames = SubResource("SpriteFrames_3fq84")
+frame_progress = 0.418813

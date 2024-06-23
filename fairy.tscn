@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://bdcow2b23evpq"]
+[gd_scene load_steps=43 format=3 uid="uid://bdcow2b23evpq"]
 
 [ext_resource type="Script" path="res://fairy.gd" id="1_o25xi"]
 [ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_2ic1x"]
 [ext_resource type="Texture2D" uid="uid://bqhs8sivsy0tr" path="res://Fairy-Sheet.png" id="2_56pig"]
 [ext_resource type="Texture2D" uid="uid://d24nwk5hjp04r" path="res://fairy_spawn.png" id="4_koln8"]
+[ext_resource type="PackedScene" uid="uid://c0g3p3bxk4bbv" path="res://moonconfused.tscn" id="5_fb06w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5i4b"]
 size = Vector2(12, 12)
@@ -434,6 +435,13 @@ use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_r7s3w")
 animation = &"right"
 offset = Vector2(0, -5)
+
+[node name="moonconfused" parent="." instance=ExtResource("5_fb06w")]
+process_mode = 4
+visible = false
+z_index = 1
+position = Vector2(0, -13)
+frame_progress = 0.795646
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 0

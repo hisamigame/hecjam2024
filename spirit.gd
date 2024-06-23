@@ -11,6 +11,9 @@ var dying_direction = Vector2.ZERO
 enum STATE {NORMAL, DYING}
 var state = STATE.NORMAL
 
+var confused = false
+var frozen = false
+
 var dead:
 	get:
 		return state != STATE.NORMAL
@@ -45,11 +48,14 @@ func _physics_process(_delta):
 		modulate.a = 1.0
 	match state:
 		STATE.NORMAL:
-			var hecpos = get_nearest_hec_pos()
-			if hecpos:
-				direction = position.direction_to(hecpos)
-			velocity = direction * speed * global.TARGET_FPS
-			move_and_slide()
+			if not frozen:
+				var hecpos = get_nearest_hec_pos()
+				if hecpos:
+					direction = position.direction_to(hecpos)
+				if confused:
+					direction = -direction
+				velocity = direction * speed * global.TARGET_FPS
+				move_and_slide()
 		STATE.DYING:
 			velocity = dying_direction * speed * global.TARGET_FPS
 			move_and_slide()
@@ -57,10 +63,23 @@ func _physics_process(_delta):
 func die(dir):
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
+	$AnimationTree.active = true
 	animationState.travel("die")
 	dying_direction = dir
 	collision_layer = 0
 	collision_mask = 0
+
+func get_confused():
+	confused = true
+	#material = load('res://confusion_material.tres')
+	$moonconfused.visible = true
+	$moonconfused.process_mode = Node.PROCESS_MODE_INHERIT
+	$moonconfused.play('default')
+	
+func get_frozen():
+	frozen = true
+	material = load('res://frozen_material.tres')
+	$AnimationTree.active = false
 
 func _on_hitbox_area_entered(area):
 	if area.instakill:
@@ -70,7 +89,11 @@ func _on_hitbox_area_entered(area):
 	area.queue_free()
 	if hp <= 0 and state == STATE.NORMAL:
 		die(area.direction)
-
+	else:
+		if area.confuse:
+			get_confused()
+		if area.freeze:
+			get_frozen()
 
 func _on_animation_tree_animation_finished(anim_name):
 	if anim_name == 'die':

@@ -25,8 +25,8 @@ var actives = {'hell' : false, 'earth' : false, 'moon' : false}
 const defaultHP = 20
 const defaultMaxHP = 20
 const defaultAtk = 10
-const defaultSpl = 1
-const defaultBmb = 10
+const defaultSpl = 10
+const defaultBmb = 99
 
 const baseBombDMG = 50
 const bomb_duration = 0.5
@@ -193,6 +193,10 @@ func change_music(new_music):
 		print(current_music)
 		$BGMPlayer.stream = load(current_music)
 		$BGMPlayer.play()
+		
+func funny_music():
+	$BGMPlayer.stream = load('res://planet_something_something_2.ogg')
+	$BGMPlayer.play()
 	
 func _change_level(scene_name, spawnID):
 	var scene = load('res://' + scene_name + '.tscn')

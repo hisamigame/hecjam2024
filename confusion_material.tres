@@ -16,5 +16,5 @@ noise = SubResource("FastNoiseLite_0ckmp")
 
 [resource]
 shader = ExtResource("1_3tvpe")
-shader_parameter/color = Color(0.731531, 0.616464, 0.968526, 1)
+shader_parameter/color = Color(0.935941, 0.499007, 0.914719, 1)
 shader_parameter/noise_tex = SubResource("NoiseTexture2D_220tl")

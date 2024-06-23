@@ -62,6 +62,7 @@ func _physics_process(_delta):
 func die(dir):
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
+	$AnimationTree.active = true
 	animationState.travel("die")
 	dying_direction = dir
 	collision_layer = 0
@@ -69,10 +70,15 @@ func die(dir):
 
 func get_confused():
 	confused = true
-	material = load('res://confusion_material.tres')
+	#material = load('res://confusion_material.tres')
+	$moonconfused.visible = true
+	$moonconfused.process_mode = Node.PROCESS_MODE_INHERIT
+	$moonconfused.play('default')
 	
 func get_frozen():
 	frozen = true
+	material = load('res://frozen_material.tres')
+	$AnimationTree.active = false
 	
 
 func _on_hitbox_area_entered(area):
@@ -80,13 +86,14 @@ func _on_hitbox_area_entered(area):
 		hp = 0
 	else:
 		hp = hp - area.damage
+	area.queue_free()
+	if hp <= 0 and state == STATE.NORMAL:
+		die(area.direction)
+	else:
 		if area.confuse:
 			get_confused()
 		if area.freeze:
 			get_frozen()
-	area.queue_free()
-	if hp <= 0 and state == STATE.NORMAL:
-		die(area.direction)
 
 
 func _on_animation_tree_animation_finished(anim_name):

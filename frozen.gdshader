@@ -18,4 +18,6 @@ void fragment() {
 	//vec4(overlay(color, vec4(noise_value)).rgb, COLOR.w);	
 	COLOR.rgb =  mix(COLOR.rgb, vec4(overlay(color, vec4(noise_value))).rbg, 0.5
 	);
+	COLOR.rbg = clamp(COLOR.rbg, vec3(0.25,0.75,0.25), vec3(1.0));
 }
+	

@@ -33,6 +33,8 @@ camera_limit_left = -216
 camera_limit_top = -88
 camera_limit_right = 344
 camera_limit_bottom = 312
+state = null
+peace = null
 music = "res://junko.ogg"
 
 [node name="TileMap" parent="." instance=ExtResource("5_gk8f0")]

@@ -892,8 +892,12 @@ collision_mask = 64
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="invincibilityTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="bulletTimer" to="." method="_on_bullet_timer_timeout"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="invincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

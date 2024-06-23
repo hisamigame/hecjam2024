@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dobxs4og20ijw"]
+
+[ext_resource type="Shader" path="res://frozen.gdshader" id="1_0ktd2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0nd6b"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8bcfv"]
+seamless = true
+noise = SubResource("FastNoiseLite_0nd6b")
+
+[resource]
+shader = ExtResource("1_0ktd2")
+shader_parameter/color = Color(0, 0.745844, 0.798755, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_8bcfv")

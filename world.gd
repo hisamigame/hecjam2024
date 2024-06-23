@@ -116,22 +116,23 @@ func earth_bomb(level):
 	else:
 		# can overheal
 		# overheal max determined by hearth spell level
-		var newhp = clamp(global.hp[HEC.HELL] + plushp,0,global.maxhp[HEC.HELL] + global.spl[HEC.EARTH])
+		var newhp = clamp(global.hp[HEC.HELL] + plushp,0,global.maxhp[HEC.HELL] + 10*global.spl[HEC.EARTH])
 		global.set_hp(HEC.HELL, newhp)
-		newhp = clamp(global.hp[HEC.EARTH] + plushp,0,global.maxhp[HEC.EARTH] + global.spl[HEC.EARTH])
+		newhp = clamp(global.hp[HEC.EARTH] + plushp,0,global.maxhp[HEC.EARTH] + 10*global.spl[HEC.EARTH])
 		global.set_hp(HEC.EARTH, newhp)
-		newhp = clamp(global.hp[HEC.MOON] + plushp,0,global.maxhp[HEC.MOON] + global.spl[HEC.EARTH])
+		newhp = clamp(global.hp[HEC.MOON] + plushp,0,global.maxhp[HEC.MOON] + 10*global.spl[HEC.EARTH])
 		global.set_hp(HEC.MOON, newhp)
 	
 func moon_bomb(level):
 	var obj = moonBomb.instantiate()
 	# 0: change music
 	# 1: confuse enemies
-	# 2: invincibility
-	# 3: stat gain hp
-	# 4: stat gain atk
-	# 5: gain bomb
-	var neffects = 6
+	# 2: freeze enemy
+	# 3: invincibility
+	# 4: stat gain hp
+	# 5: stat gain atk
+	# 6: gain bomb
+	# var neffects = 7
 	var nmaxoutcomes = 3
 	
 	var happening = range(0,nmaxoutcomes)
@@ -141,19 +142,35 @@ func moon_bomb(level):
 		var outcome = happening[i] + bonus
 		match outcome:
 			MOONBOMB.CHANGE_MUSIC:
-				pass
+				global.funny_music()
 			MOONBOMB.CONFUSE:
 				obj.confuse = true
 			MOONBOMB.FREEZE:
 				obj.freeze = true
 			MOONBOMB.INVINCIBILITY:
-				pass
+				for child in $hecCamera.get_children():
+					if child is Hecatia:
+						if not child.dead:
+							child.set_invincibility(5+2.5*global.spl[HEC.MOON])
 			MOONBOMB.HPUP:
-				pass
+				global.set_maxhp(HEC.EARTH, global.maxhp[HEC.EARTH]+1)
+				global.set_maxhp(HEC.HELL, global.maxhp[HEC.HELL]+1)
+				global.set_maxhp(HEC.MOON, global.maxhp[HEC.MOON]+1)
 			MOONBOMB.ATKUP:
-				pass
+				global.set_atk(HEC.EARTH, global.atk[HEC.EARTH]+1)
+				global.set_atk(HEC.HELL, global.atk[HEC.HELL]+1)
+				global.set_atk(HEC.MOON, global.atk[HEC.MOON]+1)
 			MOONBOMB.BMBUP:
-				pass
+				global.set_bombs(global.bombs + 1)
+			_:
+				# if we have a large bonus
+				# we could get higher values
+				# give ATKUP effect
+				# thus, we can get more atkup per bomb
+				global.set_atk(HEC.EARTH, global.atk[HEC.EARTH]+1)
+				global.set_atk(HEC.HELL, global.atk[HEC.HELL]+1)
+				global.set_atk(HEC.MOON, global.atk[HEC.MOON]+1)
+				
 	obj.position = $hecCamera.cam_position()
 	global.world_node().add_child(obj)
 	

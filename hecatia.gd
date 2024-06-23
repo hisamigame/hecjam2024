@@ -25,7 +25,7 @@ var t_same_direction = 0.0
 var knockback_direction : Vector2 = Vector2.ZERO
 @export var knockback_speed = 2.0
 @export var knockback_duration = 0.2
-@export var invinc_duration = 2.3
+@export var invinc_duration = 2.5
 var invincible = false
 var nodoublechat = false
 
@@ -167,23 +167,30 @@ func die():
 func enter_knockback(dir):
 	state = STATE.KNOCKBACK
 	knockback_direction = dir
-	invincible = true
-	$hitbox.set_deferred('monitoring', false)
-	modulate.a = 0.5
-	$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",0.5)
+	set_invincibility(invinc_duration)
 	await get_tree().create_timer(knockback_duration).timeout
 	state = STATE.NORMAL
-	await get_tree().create_timer(invinc_duration).timeout
+	
+func set_invincibility(t):
+	if t > $invincibilityTimer.time_left:
+		invincible = true
+		$hitbox.set_deferred('monitoring', false)
+		#modulate.a = 0.5
+		$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",0.5)
+		$invincibilityTimer.start(t)
+		
+
+func _on_invincibility_timer_timeout():
 	invincible = false
-	#$hitbox.monitoring = true
 	$hitbox.set_deferred('monitoring', true)
-	modulate.a = 1.0
+	#modulate.a = 1.0
 	$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",1.0)
+
 
 func _on_bullet_timer_timeout():
 	var obj = bullet.instantiate()
 	obj.direction = fire_direction
-	obj.position = position + fire_direction * bullet_offset
+	obj.position = position + Vector2(0,-1)
 	obj.hectype = hectype
 	obj.damage = global.atk[hectype]
 	global.world_node().add_child(obj)
@@ -237,3 +244,5 @@ func _on_hitbox_area_entered(area):
 			enter_knockback(dir)
 		else:
 			die()
+
+
