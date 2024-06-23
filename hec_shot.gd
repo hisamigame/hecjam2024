@@ -36,6 +36,8 @@ func _on_hurtbox_tree_exiting():
 
 
 func _explode() -> void:
+	$hurtbox/CollisionShape2D.set_deferred("disabled", true)
+	
 	speed *= on_hit_speed_multiplier
 	
 	$AnimationTree.get('parameters/playback').travel(_get_explosion_animation_name()) 
