@@ -14,9 +14,15 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	match state:
 		STATE.NORMAL:
-			velocity = direction * speed * global.TARGET_FPS
-			
-			move_and_slide()
+			if not frozen:
+				if confused:
+					direction = -direction
+				
+				velocity = direction * speed * global.TARGET_FPS
+				
+				move_and_slide()
+				
+				_check_walls()
 		STATE.DYING:
 			velocity = dying_direction * speed * global.TARGET_FPS
 			
@@ -24,7 +30,9 @@ func _physics_process(_delta: float) -> void:
 	
 	if $WallRayCasts/FrontRayCast2D.is_colliding() or $WallRayCasts/RearRayCast2D.is_colliding():
 		is_next_to_wall = true
-	
+
+
+func _check_walls() -> void:
 	if is_next_to_wall:
 		if $DirectionRayCast2D.is_colliding():
 			_rotate_ray_casts(rotation_angle_radians)
