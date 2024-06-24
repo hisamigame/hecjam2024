@@ -23,7 +23,7 @@ enum KIND {HP, ATK, SPL, BMB}
 
 @onready var chatbox_class = preload("res://talk_box.tscn")
 
-@onready var floating_label_scene: PackedScene = preload("res://FloatingLabel.tscn")
+@onready var floating_label_scene: PackedScene = preload("res://floating_label.tscn")
 
 enum HEC {EARTH, HELL, MOON}
 
