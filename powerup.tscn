@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://6b4m1yao42jo"]
+[gd_scene load_steps=16 format=3 uid="uid://6b4m1yao42jo"]
 
 [ext_resource type="Script" path="res://powerup.gd" id="1_84sed"]
+[ext_resource type="PackedScene" uid="uid://bupffubyy3ifo" path="res://floating_label.tscn" id="2_3g07d"]
 [ext_resource type="Texture2D" uid="uid://ghpk2hlmbxd1" path="res://p.png" id="2_toppa"]
 [ext_resource type="Texture2D" uid="uid://d3e57cvvdnxav" path="res://b.png" id="3_467yp"]
 [ext_resource type="Texture2D" uid="uid://b2yct3q2gvf3w" path="res://hp.png" id="4_5p1xc"]
@@ -102,6 +103,7 @@ _data = {
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_84sed")
+floating_label_scene = ExtResource("2_3g07d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g6shc")

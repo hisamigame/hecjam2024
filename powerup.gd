@@ -13,6 +13,8 @@ enum KIND {HP, ATK, SPL, BMB}
 
 @export var state = STATE.ALIVE
 
+@export var floating_label_scene: PackedScene
+
 signal obj_state_update(idstr, state)
 
 func set_kind(k : KIND):
@@ -48,16 +50,34 @@ func _on_timer_timeout():
 
 func _on_area_2d_body_entered(body):
 	if body is Hecatia:
+		# TODO: Get HEC type, set color of text accordingly
+		
+		var floating_label: Node2D = floating_label_scene.instantiate()
+		floating_label.position = position
+		get_parent().add_child(floating_label)
+		
 		match kind:
 			KIND.HP:
 				global.set_maxhp(body.hectype, global.maxhp[body.hectype] +maxhp_plus)
 				global.set_hp(body.hectype, global.hp[body.hectype] +maxhp_plus) 
+				
+				show_label(floating_label, body.hectype, maxhp_plus)
 			KIND.ATK:
-				global.set_atk(body.hectype, global.atk[body.hectype] +atk_plus) 
+				global.set_atk(body.hectype, global.atk[body.hectype] +atk_plus)
+				
+				show_label(floating_label, body.hectype, atk_plus)
 			KIND.SPL:
 				global.set_spl(body.hectype, global.spl[body.hectype] +spl_plus) 
+				
+				show_label(floating_label, body.hectype, spl_plus)
 			KIND.BMB:
 				global.set_bombs(global.bombs + 1)
+				
+				show_label(floating_label, body.hectype, 1)
 		state = STATE.DEAD
 		emit_signal('obj_state_update', name, state)
 		queue_free()
+
+
+func show_label(floating_label: Node2D, hectype, value) -> void:
+	floating_label.set_text(hectype, kind, value)

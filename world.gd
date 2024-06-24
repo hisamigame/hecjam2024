@@ -2,6 +2,8 @@ extends Node2D
 
 enum MOONBOMB {CHANGE_MUSIC, CONFUSE, FREEZE, INVINCIBILITY, HPUP, ATKUP, BMBUP}
 
+enum KIND {HP, ATK, SPL, BMB}
+
 @export var camera_limit_left = -10000000
 @export var camera_limit_top = -10000000
 @export var camera_limit_right = 10000000
@@ -20,6 +22,8 @@ enum MOONBOMB {CHANGE_MUSIC, CONFUSE, FREEZE, INVINCIBILITY, HPUP, ATKUP, BMBUP}
 @onready var moonBomb = preload("res://bomb_effect_moon.tscn")
 
 @onready var chatbox_class = preload("res://talk_box.tscn")
+
+@onready var floating_label_scene: PackedScene = preload("res://floating_label.tscn")
 
 enum HEC {EARTH, HELL, MOON}
 
@@ -158,28 +162,29 @@ func moon_bomb(level):
 						if not child.dead:
 							child.set_invincibility(5+2.5*global.spl[HEC.MOON])
 			MOONBOMB.HPUP:
-				global.set_maxhp(HEC.EARTH, global.maxhp[HEC.EARTH]+1)
-				global.set_maxhp(HEC.HELL, global.maxhp[HEC.HELL]+1)
-				global.set_maxhp(HEC.MOON, global.maxhp[HEC.MOON]+1)
+				for child in $hecCamera.get_children():
+					if child is Hecatia:
+						increase_maxhp_and_show_label(child)
 			MOONBOMB.ATKUP:
-				global.set_atk(HEC.EARTH, global.atk[HEC.EARTH]+1)
-				global.set_atk(HEC.HELL, global.atk[HEC.HELL]+1)
-				global.set_atk(HEC.MOON, global.atk[HEC.MOON]+1)
+				for child in $hecCamera.get_children():
+					if child is Hecatia:
+						increase_atk_and_show_label(child)
 			MOONBOMB.BMBUP:
 				global.set_bombs(global.bombs + 1)
+				
+				show_stat_increase_label($hecCamera/hecatia3, KIND.BMB, 1)
 			_:
 				# if we have a large bonus
 				# we could get higher values
 				# give ATKUP effect
 				# thus, we can get more atkup per bomb
-				global.set_atk(HEC.EARTH, global.atk[HEC.EARTH]+1)
-				global.set_atk(HEC.HELL, global.atk[HEC.HELL]+1)
-				global.set_atk(HEC.MOON, global.atk[HEC.MOON]+1)
+				for child in $hecCamera.get_children():
+					if child is Hecatia:
+						increase_atk_and_show_label(child)
 				
 	obj.position = $hecCamera.cam_position()
 	global.world_node().add_child(obj)
-	
-		
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	camera.update_camera_position()
@@ -268,3 +273,29 @@ func set_state(s):
 
 func _update_world_state(spawnerID, spawnerState):
 	global.allWorldState[worldID][spawnerID] = spawnerState
+
+
+func increase_maxhp_and_show_label(hecatia: Hecatia, value: int = 1) -> void:
+	# Taking advantage of the fact that the value of hectype
+	# corresponds to the position in the maxhp array
+	global.set_maxhp(hecatia.hectype, global.maxhp[hecatia.hectype] + value)
+	
+	show_stat_increase_label(hecatia, KIND.HP, value)
+
+
+func increase_atk_and_show_label(hecatia: Hecatia, value: int = 1) -> void:
+	global.set_atk(hecatia.hectype, global.atk[hecatia.hectype] + value)
+	
+	show_stat_increase_label(hecatia, KIND.ATK, value)
+
+
+func show_stat_increase_label(hecatia: Hecatia, kind: KIND, value: int) -> void:
+	if hecatia.dead:
+		return
+	
+	var floating_label: Node2D = floating_label_scene.instantiate()
+	
+	floating_label.set_text(hecatia.hectype, kind, value)
+	floating_label.global_position = hecatia.global_position
+	
+	add_child(floating_label)
