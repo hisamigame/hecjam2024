@@ -162,6 +162,7 @@ func get_input_direction():
 
 
 func die():
+	global.play_hecDead()
 	state = STATE.DEAD
 	global.world_node().hide_oob(hectype)
 	$bulletTimer.stop()
@@ -176,21 +177,27 @@ func enter_knockback(dir):
 	await get_tree().create_timer(knockback_duration).timeout
 	state = STATE.NORMAL
 	
-func set_invincibility(t):
+func set_invincibility(t, moon=false):
 	if t > $invincibilityTimer.time_left:
 		invincible = true
 		$hitbox.set_deferred('monitoring', false)
 		#modulate.a = 0.5
 		$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",0.5)
 		$invincibilityTimer.start(t)
-		
+		if moon:
+			$shield.visible = true
+			$AnimationPlayerMoonShield.play('updownetc')
 
 func _on_invincibility_timer_timeout():
 	invincible = false
 	$hitbox.set_deferred('monitoring', true)
 	#modulate.a = 1.0
 	$AnimatedSprite2D.material.set_shader_parameter("modulate_factor",1.0)
-
+	# these last two lines are only needed if we got here due to moon bombing
+	# but they never hurt so just do them since we can't easily 
+	# distinguish how the timer was set here.
+	$shield.visible = false
+	$AnimationPlayerMoonShield.stop()
 
 func _on_bullet_timer_timeout():
 	var obj = bullet.instantiate()

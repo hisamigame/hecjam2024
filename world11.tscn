@@ -96,7 +96,7 @@ layer_1/tile_data = PackedInt32Array(65537, 262147, 0, -131075, 65539, 65537, -1
 position = Vector2(88, -168)
 
 [node name="talkBox" parent="junko" instance=ExtResource("15_egjti")]
-message_list_list = Array[String](["Beast spirits! I guess they're to claim this land too."])
+message_list_list = Array[String](["So Hisami was the culprit! And now Beast spirits are everywhere!"])
 portrait1_list_list = Array[String](["hen"])
 status1_list_list = Array[String](["1"])
 portrait2_list_list = Array[String](["jua"])

@@ -126,13 +126,14 @@ toScene = "world11"
 
 [node name="hisami" parent="." instance=ExtResource("17_sviyf")]
 position = Vector2(120, 136)
+hp = 1000
 
 [node name="talkBox" parent="." instance=ExtResource("18_srhmj")]
-message_list_list = Array[String](["You! What are you doing here?|I'm enjoying myself.|Do it elsewhere!"])
+message_list_list = Array[String](["You! What are you doing here?|I'm enjoying myself. I can't believe all this nature is hell!|I want to share it with my certain someone..."])
 portrait1_list_list = Array[String](["hea|hen|hea"])
-status1_list_list = Array[String](["2|1|2"])
+status1_list_list = Array[String](["2|1|1"])
 portrait2_list_list = Array[String](["hih|hin|hih"])
-status2_list_list = Array[String](["1|2|1"])
+status2_list_list = Array[String](["1|2|2"])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(24, 232)

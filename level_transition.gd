@@ -8,6 +8,5 @@ extends Area2D
 var sprite : Texture2D
 
 func _on_body_entered(_body):
-	print(_body)
 	global.change_level(toScene, spawnID)
 

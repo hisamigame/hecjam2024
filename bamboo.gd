@@ -9,9 +9,6 @@ func _ready():
 	$hurtbox.damage = damage
 	$AnimationPlayer.play('emerge')
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func set_hp(v):
 	hp = v
@@ -28,6 +25,9 @@ func _on_hitbox_area_entered(area):
 	set_hp(hp - area.damage)
 	if hp <=0:
 		$AnimationPlayer.play('die')
+		global.play_death()
+	else:
+		global.play_hurt()
 
 
 func _on_animation_player_animation_finished(anim_name):

@@ -20,6 +20,9 @@ func switch():
 			disable_children()
 		else:
 			enable_children()
+		for child in get_children():
+			if child is SoundTrigger:
+				child.switch()
 		
 
 func disable_children():

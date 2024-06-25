@@ -19,7 +19,10 @@ var bamboo = preload('res://bamboo.tscn')
 
 @export var fire_direction = Vector2.DOWN
 
-
+var xmin = 56
+var xmax = 184
+var ymin = 40
+var ymax = 296
 
 var dead:
 	get:
@@ -62,6 +65,7 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func die(dir):
+	global.play_death()
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
 	animationState.travel("die")
@@ -74,6 +78,8 @@ func _on_hitbox_area_entered(area):
 	area.queue_free()
 	if hp <= 0 and state == STATE.NORMAL:
 		die(area.direction)
+	else:
+		global.play_hurt()
 
 
 func _on_animation_tree_animation_finished(anim_name):
@@ -114,3 +120,10 @@ func _on_timer_timeout():
 
 func _on_timer_bamboo_timeout():
 	var obj = bamboo.instantiate()
+	var iy = global.rng.randi_range(0,15)
+	var ix = global.rng.randi_range(0,7)
+	var pos = Vector2(ix,iy) * 16 + Vector2(xmin,ymin)
+	
+	obj.position = pos
+	global.world_node().add_child(obj)
+	

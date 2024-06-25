@@ -15,6 +15,7 @@ func _ready():
 	match stairtype:
 		DIR.UP:
 			sprite = preload('res://stairUp.png')
+			z_index = 2
 		DIR.DOWN:
 			sprite = preload('res://stairDown.png')
 	$Sprite2D.texture = sprite

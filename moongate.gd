@@ -20,6 +20,8 @@ func set_initial_state(_state : STATE):
 func die():
 	state = STATE.DEAD
 	emit_signal('obj_state_update', name, state)
+	for c in get_children():
+		c.queue_free()
 	queue_free()
 
 func _on_hitbox_area_entered(area):

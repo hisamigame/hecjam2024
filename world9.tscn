@@ -127,7 +127,6 @@ layer_1/tile_data = PackedInt32Array(262142, 3, 0)
 
 [node name="stair5" parent="." instance=ExtResource("16_5djr2")]
 position = Vector2(-488, 96)
-stairtype = 1
 toScene = "world8"
 spawnID = 5
 
@@ -136,7 +135,6 @@ position = Vector2(-488, 112)
 
 [node name="stair6" parent="." instance=ExtResource("16_5djr2")]
 position = Vector2(216, -152)
-stairtype = 1
 toScene = "world8"
 spawnID = 6
 
@@ -145,7 +143,6 @@ position = Vector2(216, -136)
 
 [node name="stair7" parent="." instance=ExtResource("16_5djr2")]
 position = Vector2(-56, 216)
-stairtype = 1
 toScene = "world8"
 spawnID = 7
 
@@ -154,7 +151,6 @@ position = Vector2(-56, 200)
 
 [node name="stair8" parent="." instance=ExtResource("16_5djr2")]
 position = Vector2(120, 184)
-stairtype = 1
 toScene = "world8"
 spawnID = 8
 

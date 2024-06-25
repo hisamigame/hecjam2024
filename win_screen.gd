@@ -1,6 +1,7 @@
 extends Node2D
 
-
+var wait = 0.1
+var t = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# set defaults so the game loops correctly
@@ -10,6 +11,13 @@ func _ready():
 	# TODO: comment this out
 	#global.start_game()
 
-func _unhandled_input(event):
-	if event.is_action_pressed('bomb'):
-		get_tree().change_scene_to_file('res://title_screen.tscn')
+func any_input():
+	return Input.is_action_just_pressed('hell') or Input.is_action_just_pressed('earth') or Input.is_action_just_pressed('moon') or Input.is_action_just_pressed('bomb')
+
+
+func _process(delta):
+	if t < wait:
+		t = t + delta
+	else:
+		if any_input():
+			global.to_title()

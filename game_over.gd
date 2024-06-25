@@ -1,6 +1,5 @@
 extends Control
 
-var canstart = false
 var wait = 0.1
 var t = 0
 

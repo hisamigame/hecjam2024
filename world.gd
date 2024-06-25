@@ -2,7 +2,7 @@ extends Node2D
 
 enum MOONBOMB {CHANGE_MUSIC, CONFUSE, FREEZE, INVINCIBILITY, HPUP, ATKUP, BMBUP}
 
-enum KIND {HP, ATK, SPL, BMB}
+enum KIND {HP, ATK, SPL, BMB, HEALTH}
 
 @export var camera_limit_left = -10000000
 @export var camera_limit_top = -10000000
@@ -43,10 +43,8 @@ func _ready():
 		
 	
 	worldID = scene_file_path.split('res://')[1].split('.tscn')[0]
-	print(worldID)
 	var world_state = global.get_world_state(worldID)
 	global.set_world_state(worldID, world_state)
-	print(global.allWorldState)
 	set_instance_state(world_state)
 	connect_persistent_nodes()
 	
@@ -85,20 +83,21 @@ func set_idle():
 
 func bomb(actives, level):
 	global.play_bomb()
-	if actives["moon"]:
-		moon_bomb(level)
 	if actives["hell"]:
 		hell_bomb(level)
 	if actives["earth"]:
 		earth_bomb(level)
+	if actives["moon"]:
+		moon_bomb(level)
 	await get_tree().create_timer(global.bomb_duration).timeout
 	global.canbomb = true
 	
 
 func hell_bomb(level):
 	var obj = hellBomb.instantiate()
-	obj.damage = (1.0 + (global.spl[0]-1) * 1.2) *  (global.baseBombDMG +  0.5* global.baseBombDMG * (level-1))
+	obj.damage = (1.0 + (global.spl[0]-1)**2 * 0.1) *  (global.baseBombDMG +  0.5* global.baseBombDMG * (level-1))
 	obj.position = $hecCamera.cam_position()
+	print(obj.damage)
 	if level == 3:
 		obj.instakill = true
 	global.world_node().add_child(obj)
@@ -107,21 +106,23 @@ func earth_bomb(level):
 	var obj = earthBomb.instantiate()
 	obj.position = $hecCamera.cam_position()
 	global.world_node().add_child(obj)
+	var plushp = round((1.0 + (global.spl[HEC.EARTH]-1) * 0.2) * (10 + (level - 1) * 5))
 	for child in $hecCamera.get_children():
 		if child is Hecatia:
 			if not child.dead:
 				child.healing_animation()
-	var plushp = round((1.0 + (global.spl[0]-1) * 1.2) * (10 + (global.spl[HEC.EARTH] - 1) * 5))
+				show_hp_gain_label(child, plushp)
+	
 	if level < 3:
 		var newhp = clamp(global.hp[HEC.HELL] + plushp,0,global.maxhp[HEC.HELL])
-		newhp = max(global.hp[HEC.HELL], newhp)
-		global.set_hp(HEC.HELL, newhp)
+		if newhp > global.hp[HEC.HELL]:
+			global.set_hp(HEC.HELL, newhp)
 		newhp = clamp(global.hp[HEC.EARTH] + plushp,0,global.maxhp[HEC.EARTH])
-		newhp = max(global.hp[HEC.EARTH], newhp)
-		global.set_hp(HEC.EARTH, newhp)
+		if newhp > global.hp[HEC.EARTH]:
+			global.set_hp(HEC.EARTH, newhp)
 		newhp = clamp(global.hp[HEC.MOON] + plushp,0,global.maxhp[HEC.MOON])
-		newhp = max(global.hp[HEC.MOON], newhp)
-		global.set_hp(HEC.MOON, newhp)
+		if newhp > global.hp[HEC.MOON]:
+			global.set_hp(HEC.MOON, newhp)
 	else:
 		# can overheal
 		# overheal max determined by hearth spell level
@@ -160,7 +161,7 @@ func moon_bomb(level):
 				for child in $hecCamera.get_children():
 					if child is Hecatia:
 						if not child.dead:
-							child.set_invincibility(5+2.5*global.spl[HEC.MOON])
+							child.set_invincibility(5+2.5*global.spl[HEC.MOON], true)
 			MOONBOMB.HPUP:
 				for child in $hecCamera.get_children():
 					if child is Hecatia:
@@ -260,9 +261,9 @@ func show_oob(hectype):
 			
 func hide_oob(hectype):
 	match hectype:
-		HEC.HELL:
-			$OOBindicator1.visible = false
 		HEC.EARTH:
+			$OOBindicator1.visible = false
+		HEC.HELL:
 			$OOBindicator2.visible = false
 		HEC.MOON:
 			$OOBindicator3.visible = false
@@ -274,6 +275,11 @@ func set_state(s):
 func _update_world_state(spawnerID, spawnerState):
 	global.allWorldState[worldID][spawnerID] = spawnerState
 
+
+func show_hp_gain_label(hecatia: Hecatia, value: int = 1) -> void:
+	# Taking advantage of the fact that the value of hectype
+	# corresponds to the position in the maxhp array
+	show_stat_increase_label(hecatia, KIND.HEALTH, value)
 
 func increase_maxhp_and_show_label(hecatia: Hecatia, value: int = 1) -> void:
 	# Taking advantage of the fact that the value of hectype

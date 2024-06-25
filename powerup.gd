@@ -14,6 +14,7 @@ enum KIND {HP, ATK, SPL, BMB}
 @export var state = STATE.ALIVE
 
 @export var floating_label_scene: PackedScene
+var collected = false
 
 signal obj_state_update(idstr, state)
 
@@ -49,8 +50,7 @@ func _on_timer_timeout():
 	set_kind(new_kind)
 
 func _on_area_2d_body_entered(body):
-	if body is Hecatia:
-		# TODO: Get HEC type, set color of text accordingly
+	if body is Hecatia and not collected:
 		
 		var floating_label: Node2D = floating_label_scene.instantiate()
 		floating_label.position = position
@@ -77,6 +77,8 @@ func _on_area_2d_body_entered(body):
 		state = STATE.DEAD
 		emit_signal('obj_state_update', name, state)
 		queue_free()
+		# desperate attempt to prevent double picking ups
+		collected = true
 
 
 func show_label(floating_label: Node2D, hectype, value) -> void:

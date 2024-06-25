@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2cyft4l8ytj2"]
+
+[ext_resource type="Script" path="res://chatTrigger.gd" id="1_mybae"]
+
+[node name="chatTrigger" type="Node"]
+script = ExtResource("1_mybae")

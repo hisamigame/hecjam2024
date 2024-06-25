@@ -396,6 +396,8 @@ collision_layer = 48
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_1djo1")
+hp = 1500
+damage = 25
 
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
@@ -432,6 +434,8 @@ wait_time = 2.0
 autostart = true
 
 [node name="TimerBamboo" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

@@ -118,7 +118,7 @@ func _on_hitbox_area_entered(area):
 	area.queue_free()
 	if hp <= 0 and state != STATE.DYING:
 		die(area.direction)
-	else:
+	elif state != STATE.DYING:
 		global.play_hurt()
 		to_attack()
 		if area.confuse:

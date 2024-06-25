@@ -21,9 +21,14 @@
 [ext_resource type="PackedScene" uid="uid://4llmyh5qy3do" path="res://talk_box.tscn" id="19_ym3u2"]
 [ext_resource type="Texture2D" uid="uid://db1uyoload18h" path="res://Tileset_Grass.png" id="20_a4txq"]
 
-[node name="world" type="Node2D"]
+[node name="world" type="Node2D" node_paths=PackedStringArray("initial_dialog")]
 y_sort_enabled = true
 script = ExtResource("1_jcls8")
+camera_limit_left = -40
+camera_limit_top = 0
+camera_limit_right = 280
+camera_limit_bottom = 328
+initial_dialog = NodePath("talkBox")
 
 [node name="enemyAliveChecker" parent="." instance=ExtResource("2_ksogk")]
 
@@ -109,26 +114,26 @@ position = Vector2(120, 24)
 [node name="levelTransition0" parent="." instance=ExtResource("17_01u8b")]
 position = Vector2(136, 344)
 scale = Vector2(20, 1)
-toScene = "world7"
-spawnID = 5
+toScene = "world14"
+spawnID = 1
 
 [node name="levelTransition1" parent="." instance=ExtResource("17_01u8b")]
 z_index = 1
 position = Vector2(104, -8)
 scale = Vector2(20, 1)
-toScene = "world11"
+toScene = "world16"
 
 [node name="hisami" parent="." instance=ExtResource("18_i6vam")]
 position = Vector2(120, 168)
-hp = 1000
+hp = 1500
 damage = 20
 
 [node name="talkBox" parent="." instance=ExtResource("19_ym3u2")]
-message_list_list = Array[String](["You again?|I'm persistent about the things I love. Like grapes!.|And I'm going to be persistent in exterminating you."])
-portrait1_list_list = Array[String](["hea|hen|heg"])
-status1_list_list = Array[String](["2|1|2"])
-portrait2_list_list = Array[String](["hih|hin|hih"])
-status2_list_list = Array[String](["1|2|1"])
+message_list_list = Array[String](["You again?|It's only fair that I get three lives against you."])
+portrait1_list_list = Array[String](["hea|hen"])
+status1_list_list = Array[String](["2|1"])
+portrait2_list_list = Array[String](["hih|hin"])
+status2_list_list = Array[String](["1|2"])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, 136)

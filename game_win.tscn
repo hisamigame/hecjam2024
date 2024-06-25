@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://game_win.gd" id="1_tpiy0"]
 
 [node name="gameWinTrigger" type="Node"]
+process_mode = 1
 script = ExtResource("1_tpiy0")

@@ -414,14 +414,16 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="fairy" type="CharacterBody2D" groups=["enemy", "mobileEnemy"]]
-z_index = 3
+z_index = 2
 y_sort_enabled = true
 collision_layer = 48
 collision_mask = 16
+motion_mode = 1
 script = ExtResource("1_o25xi")
 
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
+z_index = -1
 texture = ExtResource("2_2ic1x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

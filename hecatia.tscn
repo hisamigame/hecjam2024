@@ -1,10 +1,11 @@
-[gd_scene load_steps=53 format=3 uid="uid://b0d5xty6ahvuq"]
+[gd_scene load_steps=57 format=3 uid="uid://b0d5xty6ahvuq"]
 
 [ext_resource type="Script" path="res://hecatia.gd" id="1_r73bk"]
 [ext_resource type="Texture2D" uid="uid://bqseghcm5nr5n" path="res://Shadow.png" id="2_ow7sw"]
 [ext_resource type="Shader" path="res://hecatia_mask.gdshader" id="3_tuctl"]
 [ext_resource type="Texture2D" uid="uid://cabxm8dnqevdk" path="res://hecatia_mask.png" id="4_3avci"]
 [ext_resource type="SpriteFrames" uid="uid://bku2kuagnjp1w" path="res://moon_spriteframes.tres" id="5_jmjd7"]
+[ext_resource type="Texture2D" uid="uid://djukmtu1awntq" path="res://moon_shield.png" id="6_jkpiy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c20hx"]
 resource_local_to_scene = true
@@ -876,6 +877,44 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woix4"]
 size = Vector2(8, 8)
 
+[sub_resource type="Animation" id="Animation_ln5pc"]
+resource_name = "updownetc"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shield:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 6), Vector2(0, 3), Vector2(0, 0), Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_av6nt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shield:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_we08x"]
+_data = {
+"RESET": SubResource("Animation_av6nt"),
+"updownetc": SubResource("Animation_ln5pc")
+}
+
 [node name="hecatia" type="CharacterBody2D"]
 z_index = 2
 y_sort_enabled = true
@@ -893,6 +932,22 @@ material = SubResource("ShaderMaterial_c20hx")
 sprite_frames = ExtResource("5_jmjd7")
 animation = &"down"
 offset = Vector2(0, -8)
+
+[node name="shield" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -6)
+
+[node name="Sprite2DFront" type="Sprite2D" parent="shield"]
+position = Vector2(0, -9)
+texture = ExtResource("6_jkpiy")
+hframes = 2
+
+[node name="Sprite2DBack" type="Sprite2D" parent="shield"]
+z_index = -1
+position = Vector2(0, -9)
+texture = ExtResource("6_jkpiy")
+hframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
@@ -933,6 +988,11 @@ collide_with_bodies = false
 
 [node name="invincibilityTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimationPlayerMoonShield" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_we08x")
+}
 
 [connection signal="timeout" from="bulletTimer" to="." method="_on_bullet_timer_timeout"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

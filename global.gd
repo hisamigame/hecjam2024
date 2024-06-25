@@ -28,7 +28,7 @@ const defaultAtk = 10
 const defaultSpl = 1
 const defaultBmb = 0
 
-const baseBombDMG = 50
+const baseBombDMG = 70
 const bomb_duration = 0.5
 
 var current_music : String = 'NO TITLE THEME YET'
@@ -37,7 +37,7 @@ var spl = [1.0, 1.0, 1.0]
 var atk = [10, 10, 10]
 var maxhp = [20, 20, 20]
 var hp = [20, 20, 20]
-var bombs = 0
+var bombs = 20
 var canbomb = false
 var canchat = true
 
@@ -92,6 +92,10 @@ func stop_buildup():
 func play_hecHurt():
 	if !$hecHurt.playing:
 		$hecHurt.play()
+		
+func play_hecDead():
+	if !$hecDead.playing:
+		$hecDead.play()
 		
 func play_doors():
 	if !$doors.playing:
@@ -164,7 +168,8 @@ func win():
 	change_music('res://title.ogg')
 	global.hide_ui()
 	global.canbomb = false
-	global.world_node().queue_free()
+	if global.world_node() != null:
+		global.world_node().queue_free()
 
 func to_title():
 	$dialogBox.deactivate()
@@ -174,7 +179,8 @@ func to_title():
 	change_music('res://title.ogg')
 	global.hide_ui()
 	global.canbomb = false
-	global.world_node().queue_free()
+	if global.world_node() != null:
+		global.world_node().queue_free()
 
 func start_game():
 	var world = load("res://" + global.current_world + ".tscn")

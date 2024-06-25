@@ -112,7 +112,6 @@ layer_1/tile_data = PackedInt32Array(-131063, 65539, 1, -65529, 131075, 65536)
 
 [node name="stair1" parent="." instance=ExtResource("16_4tnfd")]
 position = Vector2(-440, -184)
-stairtype = 1
 toScene = "world7"
 spawnID = 1
 
@@ -121,7 +120,6 @@ position = Vector2(-440, -168)
 
 [node name="stair2" parent="." instance=ExtResource("16_4tnfd")]
 position = Vector2(-40, -104)
-stairtype = 1
 toScene = "world7"
 spawnID = 2
 
@@ -130,7 +128,6 @@ position = Vector2(-40, -88)
 
 [node name="stair3" parent="." instance=ExtResource("16_4tnfd")]
 position = Vector2(-408, 136)
-stairtype = 1
 toScene = "world7"
 spawnID = 3
 
@@ -139,7 +136,6 @@ position = Vector2(-408, 152)
 
 [node name="stair4" parent="." instance=ExtResource("16_4tnfd")]
 position = Vector2(120, -152)
-stairtype = 1
 toScene = "world7"
 spawnID = 4
 

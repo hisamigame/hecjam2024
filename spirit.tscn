@@ -290,7 +290,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebp0x"]
 size = Vector2(4, 4)
 
-[node name="spirit" type="CharacterBody2D" groups=["enemy"]]
+[node name="spirit" type="CharacterBody2D"]
 z_index = 3
 y_sort_enabled = true
 collision_layer = 32

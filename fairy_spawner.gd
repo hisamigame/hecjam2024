@@ -76,7 +76,10 @@ func die():
 
 func _on_hitbox_area_entered(area):
 	if state == STATE.ALIVE:
-		hp = hp - area.damage
+		if area.instakill:
+			hp = 0
+		else:
+			hp = hp - area.damage
 		area.queue_free()
 		if hp <= 0:
 			die()

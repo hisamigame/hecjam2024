@@ -266,7 +266,7 @@ animations = [{
 }]
 
 [node name="yinyang" groups=["mobileEnemy"] instance=ExtResource("1_njf46")]
-z_index = 1
+z_index = 2
 collision_layer = 48
 motion_mode = 1
 script = ExtResource("2_735lk")
@@ -275,7 +275,7 @@ hp = 100
 damage = 8
 
 [node name="shadow" parent="." index="0"]
-z_index = -3
+z_index = -1
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="." index="1"]

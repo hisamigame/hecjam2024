@@ -512,7 +512,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
 tree_root = SubResource("AnimationNodeStateMachine_nu0dl")
 anim_player = NodePath("../AnimationPlayer")
 parameters/walk/blend_position = Vector2(-0.000975609, 0.991189)

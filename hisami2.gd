@@ -59,6 +59,7 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func die(dir):
+	global.play_death()
 	state = STATE.DYING
 	#process_mode =Node.PROCESS_MODE_DISABLED
 	animationState.travel("die")
@@ -71,6 +72,8 @@ func _on_hitbox_area_entered(area):
 	area.queue_free()
 	if hp <= 0 and state == STATE.NORMAL:
 		die(area.direction)
+	else:
+		global.play_hurt()
 
 
 func _on_animation_tree_animation_finished(anim_name):

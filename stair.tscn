@@ -10,9 +10,6 @@ size = Vector2(8, 8)
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_7yo73")
-stairtype = null
-toScene = null
-spawnID = null
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

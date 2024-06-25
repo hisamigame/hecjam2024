@@ -3,14 +3,12 @@ extends "res://world.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(state)
 	if 'world5' in global.allWorldState:
 		state = global.allWorldState['world5']['state']
 	if state == 1:
 		initial_dialog = null
 		$multitrigger/soundTrigger.queue_free()
 	super()
-	print(state)
 	#if state == 1:
 		#$triggerHolder.switch()
 		#print($triggerHolder.enabled)

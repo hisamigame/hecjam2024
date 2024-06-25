@@ -1,6 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://djksq1vmj73kx"]
+[gd_scene load_steps=13 format=3 uid="uid://djksq1vmj73kx"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_t7ryb"]
+[ext_resource type="Texture2D" uid="uid://cju27cvp572rw" path="res://Bomb_selection_screen_Base_title.png" id="2_l4433"]
+[ext_resource type="FontFile" uid="uid://7g8ueqruyfci" path="res://mago3.ttf" id="3_8lq75"]
+[ext_resource type="Texture2D" uid="uid://da2gmkuwppvu8" path="res://c.png" id="4_yo2go"]
+[ext_resource type="Texture2D" uid="uid://y75lroif6yby" path="res://space.png" id="5_kw8w6"]
+[ext_resource type="Texture2D" uid="uid://dukmxm2ljy0pg" path="res://arrows.png" id="6_2qvjs"]
+[ext_resource type="Texture2D" uid="uid://gx8akkshjifa" path="res://x.png" id="7_y8c5n"]
+[ext_resource type="Texture2D" uid="uid://dwcfvhre5v6fy" path="res://z.png" id="8_27274"]
+[ext_resource type="Texture2D" uid="uid://c7srgjhc2i6v3" path="res://shift.png" id="9_kejn2"]
+
+[sub_resource type="Animation" id="Animation_qp2b0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qmupk"]
+resource_name = "bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-14, -1), Vector2(-14, -11), Vector2(-14, -1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_slfwf"]
+_data = {
+"RESET": SubResource("Animation_qp2b0"),
+"bob": SubResource("Animation_qmupk")
+}
 
 [node name="titleScreen" type="Node2D"]
 script = ExtResource("1_t7ryb")
@@ -8,18 +54,56 @@ script = ExtResource("1_t7ryb")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 256.0
 offset_bottom = 224.0
-color = Color(0.184314, 0.329412, 1, 1)
+color = Color(0.0352941, 0.0352941, 0.0352941, 1)
 
-[node name="Label" type="Label" parent="."]
-offset_left = 34.0
-offset_top = 24.0
-offset_right = 231.0
-offset_bottom = 132.0
-text = "Title screen placeholder
-press space to continue"
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = 75.0
+offset_right = 256.0
+offset_bottom = 251.0
+texture = ExtResource("2_l4433")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 13.0
-offset_top = 135.0
-offset_right = 168.0
-offset_bottom = 210.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_top = -9.0
+offset_right = 256.0
+offset_bottom = 150.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_8lq75")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave][center][rainbow freq=1.0 sat=0.6 val=0.8]Three-body Dungeon[/rainbow][/center][/wave]"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="C" type="Sprite2D" parent="Node2D"]
+position = Vector2(115, 201)
+texture = ExtResource("4_yo2go")
+
+[node name="Space" type="Sprite2D" parent="Node2D"]
+position = Vector2(114, 208)
+texture = ExtResource("5_kw8w6")
+centered = false
+
+[node name="Arrows" type="Sprite2D" parent="Node2D"]
+position = Vector2(201, 192)
+texture = ExtResource("6_2qvjs")
+centered = false
+
+[node name="X" type="Sprite2D" parent="Node2D"]
+position = Vector2(98, 201)
+texture = ExtResource("7_y8c5n")
+
+[node name="Z" type="Sprite2D" parent="Node2D"]
+position = Vector2(82, 201)
+texture = ExtResource("8_27274")
+
+[node name="Shift" type="Sprite2D" parent="Node2D"]
+position = Vector2(52, 201)
+texture = ExtResource("9_kejn2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_slfwf")
+}

@@ -95,7 +95,7 @@ toScene = "world2"
 position = Vector2(120, 168)
 
 [node name="talkBox" parent="junko" instance=ExtResource("23_v4loe")]
-message_list_list = Array[String](["Outsiders have breached our secret stone cherry garden.|How do they even know about this place? Officially, it does not exist.|Because you never stole any stone cherries. Officially.", "I guess I better 'unofficially' purge everyone here.|Give them hell!"])
+message_list_list = Array[String](["There is an intruder in our secret stone cherry garden.|How do they even know about this place? Officially, it does not exist.|Because you never stole any stone cherries. Officially.", "I guess I better 'unofficially' purge everyone here.|Give them hell!"])
 portrait1_list_list = Array[String](["hen|heh|hen", "heh|hen"])
 status1_list_list = Array[String](["1|2|1", "2|1"])
 portrait2_list_list = Array[String](["jua|jun|juh", "jun|juh"])

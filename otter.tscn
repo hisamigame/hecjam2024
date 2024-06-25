@@ -497,6 +497,7 @@ y_sort_enabled = true
 collision_layer = 48
 collision_mask = 16
 script = ExtResource("1_n4w4p")
+hp = 175
 
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)

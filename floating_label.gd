@@ -2,7 +2,7 @@ extends Node2D
 
 
 enum HEC {EARTH, HELL, MOON}
-enum KIND {HP, ATK, SPL, BMB}
+enum KIND {HP, ATK, SPL, BMB, HEALTH}
 
 @export var hell_color: Color
 @export var earth_color: Color
@@ -19,8 +19,12 @@ func set_text(hectype, powerup_kind: KIND, value: int) -> void:
 		_set_label_text("BOMBS", value)
 		
 		$Label.modulate = bomb_color
+	
 	else:
-		_set_label_text(KIND.keys()[powerup_kind], value)
+		if powerup_kind == KIND.HEALTH:
+			_set_label_text("", value)
+		else:
+			_set_label_text(KIND.keys()[powerup_kind], value)
 		
 		match hectype:
 			HEC.EARTH:
