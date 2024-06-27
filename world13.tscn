@@ -84,7 +84,8 @@ position = Vector2(168, -184)
 position = Vector2(-488, -152)
 
 [node name="spawnPoint2" parent="." instance=ExtResource("12_f35ea")]
-position = Vector2(-352, 136)
+position = Vector2(-352, 104)
+direction = Vector2(0, -1)
 
 [node name="powerup1" parent="." instance=ExtResource("14_tw1kv")]
 position = Vector2(-488, 48)
@@ -150,11 +151,6 @@ position = Vector2(-104, -256)
 [node name="button5" parent="buttonHolder2" instance=ExtResource("20_fyale")]
 position = Vector2(-184, -184)
 
-[node name="buttonHolder2_2" parent="." instance=ExtResource("19_yr648")]
-
-[node name="button5" parent="buttonHolder2_2" instance=ExtResource("20_fyale")]
-position = Vector2(-456, -40)
-
 [node name="triggerHolder2" parent="." instance=ExtResource("21_8m2i7")]
 position = Vector2(48, 144)
 enabled = true
@@ -167,7 +163,6 @@ position = Vector2(-520, -112)
 
 [node name="stair" parent="." instance=ExtResource("24_xf0er")]
 position = Vector2(168, -200)
-stairtype = 1
 toScene = "world12"
 spawnID = 1
 
@@ -175,7 +170,6 @@ spawnID = 1
 position = Vector2(-352, 120)
 stairtype = 0
 toScene = "world14"
-spawnID = 0
 
 [node name="beastSpawner0" parent="." instance=ExtResource("15_3nvau")]
 position = Vector2(72, -16)
@@ -204,4 +198,3 @@ layer_1/tile_data = PackedInt32Array(-131071, 131075, 0, -262142, 131075, 0)
 
 [connection signal="all_buttons_pressed" from="buttonHolder1" to="triggerHolder1" method="switch"]
 [connection signal="all_buttons_pressed" from="buttonHolder2" to="triggerHolder2" method="switch"]
-[connection signal="all_buttons_pressed" from="buttonHolder2_2" to="triggerHolder2" method="switch"]

@@ -143,6 +143,7 @@ toScene = "worldSecret2"
 position = Vector2(-32, -112)
 
 [node name="wallSegment2" parent="moongate" instance=ExtResource("19_5ch4l")]
+use_parent_material = true
 position = Vector2(32, -16)
 
 [node name="spawnPoint2" parent="." instance=ExtResource("10_rhfy2")]

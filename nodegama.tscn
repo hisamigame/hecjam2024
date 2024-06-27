@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtf6pgfeqob6j"]
+
+[ext_resource type="Script" path="res://junko.gd" id="1_4txk8"]
+[ext_resource type="Texture2D" uid="uid://0rccmyuammdh" path="res://Sprite_Node-Sheet.png" id="2_at2pu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cluei"]
+atlas = ExtResource("2_at2pu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icurn"]
+atlas = ExtResource("2_at2pu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jj6g6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cluei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icurn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxdnl"]
+size = Vector2(16, 16)
+
+[node name="nodegama" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 4
+script = ExtResource("1_4txk8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+y_sort_enabled = true
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_jj6g6")
+frame_progress = 0.862705
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+shape = SubResource("RectangleShape2D_pxdnl")

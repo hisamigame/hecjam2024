@@ -2,6 +2,6 @@
 
 [ext_resource type="Script" path="res://trigger_holder.gd" id="1_av22f"]
 
-[node name="triggerHolder" type="Node2D"]
+[node name="triggerHolder" type="Node2D" groups=["trigger"]]
 y_sort_enabled = true
 script = ExtResource("1_av22f")

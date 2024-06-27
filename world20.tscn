@@ -29,6 +29,7 @@ camera_limit_top = 0
 camera_limit_right = 280
 camera_limit_bottom = 328
 initial_dialog = NodePath("talkBox")
+music = "res://pat_h_to_yumi.ogg"
 
 [node name="enemyAliveChecker" parent="." instance=ExtResource("2_hgpsh")]
 

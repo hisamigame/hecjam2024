@@ -95,7 +95,7 @@ func bomb(actives, level):
 
 func hell_bomb(level):
 	var obj = hellBomb.instantiate()
-	obj.damage = (1.0 + (global.spl[0]-1)**2 * 0.1) *  (global.baseBombDMG +  0.5* global.baseBombDMG * (level-1))
+	obj.damage = (1.0 + (global.spl[HEC.HELL]-1)**2 * 0.1) *  (global.baseBombDMG +  0.5* global.baseBombDMG * (level-1))
 	obj.position = $hecCamera.cam_position()
 	print(obj.damage)
 	if level == 3:
@@ -225,6 +225,8 @@ func connect_persistent_nodes():
 		node.connect('obj_state_update', _update_world_state)
 	for node in get_tree().get_nodes_in_group('powerup'):
 		node.connect('obj_state_update', _update_world_state)
+	for node in get_tree().get_nodes_in_group('trigger'):
+		node.connect('obj_state_update', _update_world_state)
 
 
 func get_default_world_state():
@@ -235,6 +237,8 @@ func get_default_world_state():
 		world_state[node.name] =node.STATE.ALIVE
 	for node in get_tree().get_nodes_in_group('powerup'):
 		world_state[node.name] =node.STATE.ALIVE
+	for node in get_tree().get_nodes_in_group('trigger'):
+		world_state[node.name] =node.STATE.DEFAULT
 	return world_state
 	
 func set_instance_state(world_state):
@@ -244,6 +248,8 @@ func set_instance_state(world_state):
 	for node in get_tree().get_nodes_in_group('moongate'):
 		node.set_initial_state(world_state[node.name])
 	for node in get_tree().get_nodes_in_group('powerup'):
+		node.set_initial_state(world_state[node.name])
+	for node in get_tree().get_nodes_in_group('trigger'):
 		node.set_initial_state(world_state[node.name])
 
 
